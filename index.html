@@ -1,1866 +1,427 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Abilitie Leadership Academy — Curriculum Map</title>
-<style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Abilitie Leadership Academy — Curriculum Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --navy: #1a2332;
+      --navy-light: #243044;
+      --teal: #00b4d8;
+      --teal-dark: #0096b7;
+      --gold: #f4a261;
+      --white: #ffffff;
+      --off-white: #f0f4f8;
+      --gray-100: #e8edf2;
+      --gray-200: #d1d9e0;
+      --gray-400: #8b99a8;
+      --gray-600: #5a6b7d;
+      --gray-800: #2d3748;
+      --shadow: 0 4px 24px rgba(0,0,0,0.08);
+      --radius: 12px;
+    }
 
-  :root {
-    --navy: #1a2332;
-    --navy-light: #243044;
-    --navy-mid: #2c3e56;
-    --teal: #00b4d8;
-    --teal-dark: #0096b7;
-    --teal-glow: rgba(0,180,216,0.15);
-    --gold: #f4a261;
-    --gold-dark: #e08a3a;
-    --coral: #e76f51;
-    --sage: #2a9d8f;
-    --sage-light: #40b8a8;
-    --white: #ffffff;
-    --off-white: #f0f4f8;
-    --gray-100: #e8edf2;
-    --gray-200: #d1d9e0;
-    --gray-400: #8b99a8;
-    --gray-600: #5a6b7d;
-    --gray-800: #2d3748;
-    --pill-ba: #0096b7;
-    --pill-cf: #e08a3a;
-    --pill-tm: #2a9d8f;
-    --pill-ts: #8b5cf6;
-    --shadow: 0 4px 24px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
-    --radius: 12px;
-    --radius-sm: 8px;
-    --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
-  }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
 
-  * { margin:0; padding:0; box-sizing:border-box; }
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: var(--off-white);
+      color: var(--gray-800);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
 
-  body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-    background: var(--off-white);
-    color: var(--gray-800);
-    line-height: 1.6;
-    overflow-x: hidden;
-  }
+    /* Header */
+    .header {
+      background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 100%);
+      color: var(--white);
+      padding: 24px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
 
-  /* HERO */
-  .hero {
-    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
-    color: var(--white);
-    padding: 60px 40px 50px;
-    text-align: center;
-    position: relative;
-    overflow: hidden;
-  }
-  .hero::before {
-    content: '';
-    position: absolute;
-    top: -50%;
-    left: -25%;
-    width: 150%;
-    height: 200%;
-    background: radial-gradient(ellipse at 30% 50%, rgba(0,180,216,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 30%, rgba(244,162,97,0.06) 0%, transparent 50%);
-    pointer-events: none;
-  }
-  .hero-badge {
-    display: inline-block;
-    font-size: 11px;
-    letter-spacing: 3px;
-    text-transform: uppercase;
-    color: var(--teal);
-    font-weight: 600;
-    margin-bottom: 16px;
-  }
-  .hero h1 {
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: -1px;
-    margin-bottom: 12px;
-    position: relative;
-  }
-  .hero p {
-    font-size: 17px;
-    color: var(--gray-200);
-    max-width: 680px;
-    margin: 0 auto 28px;
-    font-weight: 300;
-    line-height: 1.7;
-  }
-  .hero-meta {
-    display: flex;
-    justify-content: center;
-    gap: 32px;
-    flex-wrap: wrap;
-  }
-  .hero-stat {
-    text-align: center;
-  }
-  .hero-stat .num {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--teal);
-  }
-  .hero-stat .label {
-    font-size: 11px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--gray-400);
-    margin-top: 2px;
-  }
+    .header h1 {
+      font-size: 20px;
+      font-weight: 700;
+    }
 
-  /* NAV TABS */
-  .nav-bar {
-    background: var(--white);
-    border-bottom: 1px solid var(--gray-100);
-    padding: 0 40px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
-  }
-  .nav-inner {
-    max-width: 1320px;
-    margin: 0 auto;
-    display: flex;
-    align-items: center;
-    gap: 4px;
-  }
-  .nav-tab {
-    padding: 16px 24px;
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--gray-400);
-    cursor: pointer;
-    border-bottom: 3px solid transparent;
-    transition: var(--transition);
-    white-space: nowrap;
-    user-select: none;
-  }
-  .nav-tab:hover { color: var(--gray-800); }
-  .nav-tab.active {
-    color: var(--navy);
-    border-bottom-color: var(--teal);
-  }
-  .nav-tab .dot {
-    display: inline-block;
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    margin-right: 8px;
-    vertical-align: middle;
-  }
-  .dot-ba { background: var(--pill-ba); }
-  .dot-cf { background: var(--pill-cf); }
-  .dot-tm { background: var(--pill-tm); }
+    .header-subtitle {
+      font-size: 13px;
+      color: var(--gray-400);
+      margin-top: 2px;
+    }
 
-  /* MAIN CONTENT */
-  .main { max-width: 1320px; margin: 0 auto; padding: 40px 40px 80px; }
+    .header-link {
+      color: var(--teal);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 20px;
+      border: 2px solid var(--teal);
+      border-radius: 8px;
+      transition: all 0.2s;
+    }
 
-  /* VIEW PANELS */
-  .view-panel { display: none; }
-  .view-panel.active { display: block; }
+    .header-link:hover {
+      background: var(--teal);
+      color: var(--navy);
+    }
 
-  /* OVERVIEW GRID */
-  .overview-intro {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  .overview-intro h2 {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--navy);
-    margin-bottom: 8px;
-  }
-  .overview-intro p {
-    font-size: 15px;
-    color: var(--gray-600);
-    max-width: 600px;
-    margin: 0 auto;
-  }
+    /* Main Chat Area */
+    .chat-container {
+      flex: 1;
+      max-width: 800px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
 
-  .grid-wrapper {
-    display: grid;
-    grid-template-columns: 160px 1fr 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 48px;
-  }
-  .grid-header {
-    font-size: 13px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 14px 16px;
-    border-radius: var(--radius-sm);
-    text-align: center;
-    color: var(--white);
-  }
-  .grid-header.ba { background: var(--pill-ba); }
-  .grid-header.cf { background: var(--pill-cf); }
-  .grid-header.tm { background: var(--pill-tm); }
-  .grid-header.corner {
-    background: transparent;
-    color: var(--gray-400);
-    font-size: 11px;
-  }
+    .welcome-message {
+      text-align: center;
+      padding: 48px 24px;
+    }
 
-  .grid-level-label {
-    writing-mode: horizontal-tb;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 12px;
-    border-radius: var(--radius-sm);
-    background: var(--navy);
-    color: var(--white);
-    font-weight: 700;
-    font-size: 13px;
-    text-align: center;
-    letter-spacing: 1px;
-    line-height: 1.3;
-  }
-  .grid-level-label .level-sub {
-    display: block;
-    font-size: 10px;
-    font-weight: 400;
-    opacity: 0.7;
-    margin-top: 4px;
-    letter-spacing: 0.5px;
-  }
+    .welcome-message h2 {
+      font-size: 28px;
+      font-weight: 800;
+      color: var(--navy);
+      margin-bottom: 12px;
+    }
 
-  .grid-cell {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 20px;
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: var(--transition);
-    border: 2px solid transparent;
-    position: relative;
-    overflow: hidden;
-  }
-  .grid-cell:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-lg);
-  }
-  .grid-cell.ba-cell:hover { border-color: var(--pill-ba); }
-  .grid-cell.cf-cell:hover { border-color: var(--pill-cf); }
-  .grid-cell.tm-cell:hover { border-color: var(--pill-tm); }
+    .welcome-message p {
+      color: var(--gray-600);
+      font-size: 16px;
+      max-width: 500px;
+      margin: 0 auto 24px;
+    }
 
-  .cell-sim {
-    font-size: 16px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 6px;
-    line-height: 1.3;
-  }
-  .cell-cases {
-    font-size: 12px;
-    color: var(--gray-600);
-    margin-bottom: 10px;
-    line-height: 1.5;
-  }
-  .cell-framework {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    margin-top: 4px;
-  }
-  .cell-framework.ba { background: rgba(0,150,183,0.1); color: var(--pill-ba); }
-  .cell-framework.cf { background: rgba(224,138,58,0.1); color: var(--pill-cf); }
-  .cell-framework.tm { background: rgba(42,157,143,0.1); color: var(--pill-tm); }
-  .cell-click-hint {
-    font-size: 10px;
-    color: var(--gray-400);
-    margin-top: 10px;
-    text-align: right;
-    font-style: italic;
-  }
+    .suggestions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
+    }
 
-  /* PILLAR DETAIL VIEWS */
-  .pillar-header {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-bottom: 36px;
-  }
-  .pillar-icon {
-    width: 56px;
-    height: 56px;
-    border-radius: 14px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 26px;
-    flex-shrink: 0;
-  }
-  .pillar-icon.ba { background: linear-gradient(135deg, var(--teal) 0%, var(--teal-dark) 100%); }
-  .pillar-icon.cf { background: linear-gradient(135deg, var(--gold) 0%, var(--gold-dark) 100%); }
-  .pillar-icon.tm { background: linear-gradient(135deg, var(--sage) 0%, var(--sage-light) 100%); }
-  .pillar-header h2 {
-    font-size: 28px;
-    font-weight: 800;
-    color: var(--navy);
-  }
-  .pillar-header .pillar-desc {
-    font-size: 14px;
-    color: var(--gray-600);
-    margin-top: 2px;
-  }
+    .suggestion-btn {
+      background: var(--white);
+      border: 1px solid var(--gray-200);
+      padding: 10px 16px;
+      border-radius: 20px;
+      font-size: 13px;
+      color: var(--gray-600);
+      cursor: pointer;
+      transition: all 0.2s;
+    }
 
-  /* LEVEL CARDS */
-  .level-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    margin-bottom: 28px;
-    overflow: hidden;
-    transition: var(--transition);
-  }
-  .level-card:hover { box-shadow: var(--shadow-lg); }
+    .suggestion-btn:hover {
+      border-color: var(--teal);
+      color: var(--teal-dark);
+      background: rgba(0,180,216,0.05);
+    }
 
-  .level-card-header {
-    padding: 24px 28px;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    user-select: none;
-    transition: var(--transition);
-  }
-  .level-card-header:hover { background: var(--off-white); }
-  .level-card-header .left {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  .level-badge {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: var(--navy);
-    color: var(--white);
-    white-space: nowrap;
-  }
-  .level-title {
-    font-size: 20px;
-    font-weight: 700;
-    color: var(--navy);
-  }
-  .level-subtitle {
-    font-size: 13px;
-    color: var(--gray-600);
-    margin-top: 2px;
-  }
-  .expand-icon {
-    font-size: 20px;
-    color: var(--gray-400);
-    transition: var(--transition);
-    flex-shrink: 0;
-  }
-  .level-card.open .expand-icon { transform: rotate(180deg); }
+    /* Messages */
+    .messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px 0;
+    }
 
-  .level-card-body {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
-  }
-  .level-card.open .level-card-body {
-    max-height: 3000px;
-  }
-  .level-card-content {
-    padding: 0 28px 28px;
-  }
+    .message {
+      margin-bottom: 16px;
+      display: flex;
+      gap: 12px;
+    }
 
-  /* PROGRAMS ROW */
-  .programs-row {
-    display: flex;
-    gap: 12px;
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-  }
-  .program-chip {
-    padding: 10px 18px;
-    border-radius: var(--radius-sm);
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--white);
-    display: flex;
-    align-items: center;
-    gap: 8px;
-  }
-  .program-chip.sim { background: var(--navy); }
-  .program-chip.case-chip { background: var(--navy-mid); }
-  .chip-tag {
-    font-size: 9px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    background: rgba(255,255,255,0.2);
-  }
+    .message.user {
+      flex-direction: row-reverse;
+    }
 
-  /* SECTION BLOCKS */
-  .section-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 20px;
-    margin-top: 20px;
-  }
-  .section-block {
-    background: var(--off-white);
-    border-radius: var(--radius-sm);
-    padding: 20px;
-    border-left: 4px solid var(--gray-200);
-  }
-  .section-block.ba-accent { border-left-color: var(--pill-ba); }
-  .section-block.cf-accent { border-left-color: var(--pill-cf); }
-  .section-block.tm-accent { border-left-color: var(--pill-tm); }
-  .section-block.ts-accent { border-left-color: var(--pill-ts); border-color: rgba(139,92,246,0.2); }
+    .message-avatar {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
 
-  .section-block h4 {
-    font-size: 11px;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    color: var(--gray-400);
-    margin-bottom: 12px;
-  }
-  .section-block ul {
-    list-style: none;
-    padding: 0;
-  }
-  .section-block li {
-    font-size: 13px;
-    color: var(--gray-800);
-    padding: 5px 0;
-    padding-left: 16px;
-    position: relative;
-    line-height: 1.5;
-  }
-  .section-block li::before {
-    content: '';
-    position: absolute;
-    left: 0;
-    top: 12px;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gray-200);
-  }
-  .section-block.ba-accent li::before { background: var(--pill-ba); }
-  .section-block.cf-accent li::before { background: var(--pill-cf); }
-  .section-block.tm-accent li::before { background: var(--pill-tm); }
-  .section-block.ts-accent li::before { background: var(--pill-ts); }
+    .message.user .message-avatar {
+      background: var(--teal);
+      color: var(--white);
+    }
 
-  /* LEARNING OBJECTIVES */
-  .objectives-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 8px;
-    margin-top: 16px;
-    margin-bottom: 8px;
-  }
-  .objective-tag {
-    font-size: 12px;
-    padding: 6px 14px;
-    border-radius: 20px;
-    background: var(--gray-100);
-    color: var(--gray-600);
-    font-weight: 500;
-  }
+    .message.assistant .message-avatar {
+      background: var(--navy);
+      color: var(--white);
+    }
 
-  /* AUDIENCE */
-  .audience-badge {
-    display: inline-block;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--gray-600);
-    background: var(--gray-100);
-    padding: 6px 14px;
-    border-radius: 20px;
-    margin-bottom: 16px;
-  }
+    .message-content {
+      background: var(--white);
+      padding: 14px 18px;
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      max-width: 70%;
+      line-height: 1.6;
+    }
 
-  /* PROGRAM EXPLORER VIEW */
-  .prog-filters {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 28px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  .prog-filter-label {
-    font-size: 12px;
-    font-weight: 600;
-    color: var(--gray-400);
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    margin-right: 4px;
-  }
-  .prog-filter-btn {
-    padding: 7px 16px;
-    border-radius: 20px;
-    font-size: 12px;
-    font-weight: 600;
-    cursor: pointer;
-    border: 2px solid var(--gray-200);
-    background: var(--white);
-    color: var(--gray-600);
-    transition: var(--transition);
-    user-select: none;
-  }
-  .prog-filter-btn:hover { border-color: var(--gray-400); color: var(--gray-800); }
-  .prog-filter-btn.active-filter { border-color: var(--navy); background: var(--navy); color: var(--white); }
-  .prog-filter-btn.active-filter.ba-filter { border-color: var(--pill-ba); background: var(--pill-ba); }
-  .prog-filter-btn.active-filter.cf-filter { border-color: var(--pill-cf); background: var(--pill-cf); }
-  .prog-filter-btn.active-filter.tm-filter { border-color: var(--pill-tm); background: var(--pill-tm); }
-  .prog-filter-btn.active-filter.ts-filter { border-color: var(--pill-ts); background: var(--pill-ts); }
+    .message.user .message-content {
+      background: var(--teal);
+      color: var(--white);
+    }
 
-  .prog-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    gap: 16px;
-    margin-bottom: 16px;
-  }
-  .prog-card {
-    background: var(--white);
-    border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    cursor: pointer;
-    transition: var(--transition);
-    border: 2px solid transparent;
-    overflow: hidden;
-  }
-  .prog-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-  .prog-card.prog-selected { border-color: var(--navy); }
-  .prog-card.prog-selected.ba-prog { border-color: var(--pill-ba); }
-  .prog-card.prog-selected.cf-prog { border-color: var(--pill-cf); }
-  .prog-card.prog-selected.tm-prog { border-color: var(--pill-tm); }
-  .prog-card.prog-selected.ts-prog { border-color: var(--pill-ts); }
-  .prog-card.prog-hidden { display: none; }
+    .message-content p { margin-bottom: 12px; }
+    .message-content p:last-child { margin-bottom: 0; }
+    .message-content ul, .message-content ol { margin: 8px 0 8px 20px; }
+    .message-content li { margin-bottom: 4px; }
+    .message-content strong { font-weight: 600; }
+    .message-content code {
+      background: var(--gray-100);
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 13px;
+    }
 
-  .prog-card-top {
-    padding: 18px 20px;
-    display: flex;
-    align-items: flex-start;
-    gap: 14px;
-  }
-  .prog-card-accent {
-    width: 4px;
-    min-height: 50px;
-    border-radius: 2px;
-    flex-shrink: 0;
-    align-self: stretch;
-  }
-  .prog-card-accent.ba-bar { background: var(--pill-ba); }
-  .prog-card-accent.cf-bar { background: var(--pill-cf); }
-  .prog-card-accent.tm-bar { background: var(--pill-tm); }
-  .prog-card-accent.ts-bar { background: var(--pill-ts); }
-  .prog-card-info { flex: 1; }
-  .prog-card-name {
-    font-size: 15px;
-    font-weight: 700;
-    color: var(--navy);
-    line-height: 1.3;
-    margin-bottom: 6px;
-  }
-  .prog-card-meta {
-    display: flex;
-    gap: 8px;
-    flex-wrap: wrap;
-  }
-  .prog-meta-tag {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    padding: 3px 8px;
-    border-radius: 4px;
-  }
-  .prog-meta-tag.type-sim { background: var(--navy); color: var(--white); }
-  .prog-meta-tag.type-case { background: var(--navy-mid); color: var(--white); }
-  .prog-meta-tag.type-ai-case { background: #dc2626; color: var(--white); }
-  .prog-meta-tag.level-tag { background: var(--gray-100); color: var(--gray-600); }
-  .prog-card-toggle {
-    font-size: 18px;
-    color: var(--gray-400);
-    transition: var(--transition);
-    flex-shrink: 0;
-    margin-top: 4px;
-  }
-  .prog-card.prog-selected .prog-card-toggle { transform: rotate(180deg); color: var(--navy); }
+    .typing-indicator {
+      display: flex;
+      gap: 4px;
+      padding: 8px 0;
+    }
 
-  .prog-detail {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
-    background: var(--off-white);
-  }
-  .prog-card.prog-selected .prog-detail { max-height: 2000px; }
-  .prog-detail-inner { padding: 0 20px 20px; }
-  .prog-detail .section-grid { margin-top: 8px; }
+    .typing-indicator span {
+      width: 8px;
+      height: 8px;
+      background: var(--gray-400);
+      border-radius: 50%;
+      animation: typing 1.4s infinite ease-in-out;
+    }
 
-  .prog-empty-state {
-    text-align: center;
-    padding: 48px 20px;
-    color: var(--gray-400);
-    font-size: 15px;
-    display: none;
-  }
+    .typing-indicator span:nth-child(2) { animation-delay: 0.2s; }
+    .typing-indicator span:nth-child(3) { animation-delay: 0.4s; }
 
-  /* AI CASE STYLES */
-  .ai-options-row {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    align-items: center;
-    margin-bottom: 14px;
-  }
-  .ai-options-label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--gray-400);
-    margin-right: 4px;
-  }
-  .ai-option-chip {
-    font-size: 12px;
-    padding: 4px 10px;
-    border-radius: 20px;
-    background: var(--gray-100);
-    color: var(--gray-800);
-    font-weight: 500;
-  }
-  .ai-subcategory {
-    font-size: 11px;
-    padding: 4px 10px;
-    margin-left: 8px;
-    border-radius: 4px;
-    background: rgba(220,38,38,0.08);
-    color: #dc2626;
-    font-weight: 600;
-  }
-  .rubric-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 12px;
-  }
-  .rubric-category {
-    background: var(--white);
-    border: 1px solid var(--gray-100);
-    border-radius: var(--radius-sm);
-    padding: 14px;
-  }
-  .rubric-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 8px;
-  }
-  .rubric-cat-name {
-    font-size: 13px;
-    font-weight: 700;
-    color: var(--teal-dark);
-  }
-  .rubric-pts {
-    font-size: 12px;
-    font-weight: 700;
-    color: var(--white);
-    background: var(--teal-dark);
-    padding: 2px 8px;
-    border-radius: 10px;
-  }
-  .rubric-category ul {
-    list-style: none;
-    padding: 0;
-  }
-  .rubric-category li {
-    font-size: 12px;
-    line-height: 1.5;
-    color: var(--gray-600);
-    padding: 2px 0 2px 14px;
-    position: relative;
-  }
-  .rubric-category li::before {
-    content: '•';
-    position: absolute;
-    left: 2px;
-    color: var(--gray-400);
-  }
+    @keyframes typing {
+      0%, 60%, 100% { transform: translateY(0); }
+      30% { transform: translateY(-4px); }
+    }
 
-  /* Make rubric cat colors follow pillar */
-  .ba-accent .rubric-cat-name { color: var(--pill-ba); }
-  .ba-accent .rubric-pts { background: var(--pill-ba); }
-  .cf-accent .rubric-cat-name { color: var(--pill-cf); }
-  .cf-accent .rubric-pts { background: var(--pill-cf); }
-  .tm-accent .rubric-cat-name { color: var(--pill-tm); }
-  .tm-accent .rubric-pts { background: var(--pill-tm); }
-  .ts-accent .rubric-cat-name { color: var(--pill-ts); }
-  .ts-accent .rubric-pts { background: var(--pill-ts); }
+    /* Input Area */
+    .input-area {
+      padding: 16px 0;
+      border-top: 1px solid var(--gray-100);
+    }
 
-  /* AI Chip styling for pillar sections */
-  .ai-chip { background: #b91c1c; }
-  .ai-chip .chip-tag { background: rgba(255,255,255,0.2); }
+    .input-wrapper {
+      display: flex;
+      gap: 12px;
+      background: var(--white);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding: 8px;
+    }
 
-  /* RESPONSIVE */
-  @media (max-width: 1100px) {
-    .grid-wrapper { grid-template-columns: 120px 1fr 1fr 1fr; gap: 10px; }
-    .section-grid { grid-template-columns: 1fr; }
-  }
-  @media (max-width: 800px) {
-    .hero { padding: 40px 20px 36px; }
-    .hero h1 { font-size: 28px; }
-    .main { padding: 20px 16px 60px; }
-    .grid-wrapper { grid-template-columns: 1fr; gap: 12px; }
-    .grid-header.corner, .grid-level-label { display: none; }
-    .nav-inner { overflow-x: auto; }
-    .section-grid { grid-template-columns: 1fr; }
-    .programs-row { flex-direction: column; }
-  }
-</style>
+    .input-wrapper input {
+      flex: 1;
+      border: none;
+      padding: 12px;
+      font-size: 15px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .send-btn {
+      background: var(--teal);
+      color: var(--white);
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .send-btn:hover {
+      background: var(--teal-dark);
+    }
+
+    .send-btn:disabled {
+      background: var(--gray-400);
+      cursor: not-allowed;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      .header {
+        flex-direction: column;
+        gap: 16px;
+        text-align: center;
+      }
+
+      .message-content {
+        max-width: 85%;
+      }
+
+      .suggestions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-
-<!-- HERO -->
-<div class="hero">
-  <div class="hero-badge">Abilitie Leadership Academy</div>
-  <h1>Curriculum Map</h1>
-  <p>Building leadership capabilities across three timeless business domains — from rising leaders through the executive suite — through team-based simulations with AI insights.</p>
-  <div class="hero-meta">
-    <div class="hero-stat"><div class="num">4</div><div class="label">Pillars</div></div>
-    <div class="hero-stat"><div class="num">3</div><div class="label">Levels</div></div>
-    <div class="hero-stat"><div class="num">9</div><div class="label">Simulations</div></div>
-    <div class="hero-stat"><div class="num">10</div><div class="label">Case Challenges</div></div>
-    <div class="hero-stat"><div class="num">16</div><div class="label">AI Cases</div></div>
-  </div>
-</div>
-
-<!-- NAV -->
-<div class="nav-bar">
-  <div class="nav-inner">
-    <div class="nav-tab active" onclick="showView('overview')">Overview</div>
-    <div class="nav-tab" onclick="showView('programs')">By Program</div>
-    <div class="nav-tab" onclick="showView('ba')"><span class="dot dot-ba"></span>Business Acumen</div>
-    <div class="nav-tab" onclick="showView('cf')"><span class="dot dot-cf"></span>Cross-Functional Decision-Making</div>
-    <div class="nav-tab" onclick="showView('tm')"><span class="dot dot-tm"></span>Team Management</div>
-  </div>
-</div>
-
-<!-- MAIN -->
-<div class="main">
-
-<!-- ============ OVERVIEW ============ -->
-<div class="view-panel active" id="view-overview">
-  <div class="overview-intro">
-    <h2>The Leadership Academy at a Glance</h2>
-    <p>Click any cell below to explore its competencies, mindsets, and tools in detail.</p>
-  </div>
-
-  <div class="grid-wrapper">
-    <!-- Headers -->
-    <div class="grid-header corner"></div>
-    <div class="grid-header ba">Business Acumen</div>
-    <div class="grid-header cf">Cross-Functional Decision-Making</div>
-    <div class="grid-header tm">Team Management</div>
-
-    <!-- RISING LEADER ROW -->
-    <div class="grid-level-label">Rising Leader<span class="level-sub">Aspiring &amp; New Leaders</span></div>
-
-    <div class="grid-cell ba-cell" onclick="showView('ba'); openLevel('ba-rising');">
-      <div class="cell-sim">Income Challenge</div>
-      <div class="cell-cases">+ Analyzing Profit Drivers<br>+ Managing Profitability</div>
-      <div class="cell-framework ba">Levers of Value</div>
-      <div class="cell-click-hint">Click to explore →</div>
-    </div>
-    <div class="grid-cell cf-cell" onclick="showView('cf'); openLevel('cf-rising');">
-      <div class="cell-sim">Influence Challenge</div>
-      <div class="cell-cases">+ Shifting Mindsets &amp; Behaviors<br>+ Influencing Without Authority</div>
-      <div class="cell-framework cf">From Idea to Action</div>
-      <div class="cell-click-hint">Click to explore →</div>
-    </div>
-    <div class="grid-cell tm-cell" onclick="showView('tm'); openLevel('tm-rising');">
-      <div class="cell-sim">Management Challenge</div>
-      <div class="cell-cases">+ Enabling Peak Performance<br>+ Navigating Critical Conversations</div>
-      <div class="cell-framework tm">Pillars of Trust</div>
-      <div class="cell-click-hint">Click to explore →</div>
-    </div>
-
-    <!-- EXPERIENCED LEADER ROW -->
-    <div class="grid-level-label">Experienced Leader<span class="level-sub">Directors &amp; Senior Managers</span></div>
-
-    <div class="grid-cell ba-cell" onclick="showView('ba'); openLevel('ba-exp');">
-      <div class="cell-sim">Business Challenge</div>
-      <div class="cell-cases">+ Balancing Growth &amp; Risk</div>
-      <div class="cell-framework ba">Levers of Value (Advanced)</div>
-      <div class="cell-click-hint">Click to explore →</div>
-    </div>
-    <div class="grid-cell cf-cell" onclick="showView('cf'); openLevel('cf-exp');">
-      <div class="cell-sim">Enterprise Challenge</div>
-      <div class="cell-cases">+ Creating Strategic Alignment<br>+ Strategic Problem Solving</div>
-      <div class="cell-framework cf">Decision Making Framework</div>
-      <div class="cell-click-hint">Click to explore →</div>
-    </div>
-    <div class="grid-cell tm-cell" onclick="showView('tm'); openLevel('tm-exp');">
-      <div class="cell-sim">Director Challenge</div>
-      <div class="cell-cases">+ Leading in Times of Change</div>
-      <div class="cell-framework tm">Levers of Leadership</div>
-      <div class="cell-click-hint">Click to explore →</div>
-    </div>
-
-    <!-- EXECUTIVE ROW -->
-    <div class="grid-level-label">Executive Leader<span class="level-sub">VPs &amp; C-Suite</span></div>
-
-    <div class="grid-cell ba-cell" onclick="showView('ba'); openLevel('ba-exec');">
-      <div class="cell-sim">Finance Challenge</div>
-      <div class="cell-cases">+ Generating Financial Insights</div>
-      <div class="cell-framework ba">ROIC &amp; Capital Efficiency</div>
-      <div class="cell-click-hint">Click to explore →</div>
-    </div>
-    <div class="grid-cell cf-cell" onclick="showView('cf'); openLevel('cf-exec');">
-      <div class="cell-sim">Executive Challenge</div>
-      <div class="cell-cases">+ Board Strategy &amp; Presentation</div>
-      <div class="cell-framework cf">Cynefin Framework</div>
-      <div class="cell-click-hint">Click to explore →</div>
-    </div>
-    <div class="grid-cell tm-cell" onclick="showView('tm'); openLevel('tm-exec');">
-      <div class="cell-sim">Executive Summit</div>
-      <div class="cell-cases">+ Enterprise Talent Strategy</div>
-      <div class="cell-framework tm">Enterprise Leadership</div>
-      <div class="cell-click-hint">Click to explore →</div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ BY PROGRAM ============ -->
-<div class="view-panel" id="view-programs">
-  <div class="overview-intro" style="margin-bottom:24px;">
-    <h2>Explore by Program</h2>
-    <p>Toggle any simulation or case challenge to see its competencies, mindsets, and tools &amp; frameworks.</p>
-  </div>
-
-  <div class="prog-filters">
-    <span class="prog-filter-label">Type:</span>
-    <div class="prog-filter-btn active-filter" onclick="toggleProgFilter('type','all',this)">All</div>
-    <div class="prog-filter-btn" onclick="toggleProgFilter('type','sim',this)">Simulations</div>
-    <div class="prog-filter-btn" onclick="toggleProgFilter('type','case',this)">Case Challenges</div>
-    <div class="prog-filter-btn" onclick="toggleProgFilter('type','ai-case',this)">AI Cases</div>
-    <span class="prog-filter-label" style="margin-left:16px;">Pillar:</span>
-    <div class="prog-filter-btn active-filter" onclick="toggleProgFilter('pillar','all',this)">All</div>
-    <div class="prog-filter-btn ba-filter" onclick="toggleProgFilter('pillar','ba',this)">Business Acumen</div>
-    <div class="prog-filter-btn cf-filter" onclick="toggleProgFilter('pillar','cf',this)">Cross-Functional</div>
-    <div class="prog-filter-btn tm-filter" onclick="toggleProgFilter('pillar','tm',this)">Team Mgmt</div>
-    <div class="prog-filter-btn ts-filter" onclick="toggleProgFilter('pillar','ts',this)">Talent Selection</div>
-    <span class="prog-filter-label" style="margin-left:16px;">Level:</span>
-    <div class="prog-filter-btn active-filter" onclick="toggleProgFilter('level','all',this)">All</div>
-    <div class="prog-filter-btn" onclick="toggleProgFilter('level','rising',this)">Rising</div>
-    <div class="prog-filter-btn" onclick="toggleProgFilter('level','experienced',this)">Experienced</div>
-    <div class="prog-filter-btn" onclick="toggleProgFilter('level','executive',this)">Executive</div>
-  </div>
-
-  <div class="prog-empty-state" id="prog-empty">No programs match your current filters.</div>
-  <div class="prog-grid" id="prog-grid"></div>
-</div>
-
-<!-- ============ BUSINESS ACUMEN ============ -->
-<div class="view-panel" id="view-ba">
-  <div class="pillar-header">
-    <div class="pillar-icon ba">📊</div>
+  <header class="header">
     <div>
-      <h2>Business Acumen</h2>
-      <div class="pillar-desc">Making sound financial decisions that create sustainable, measurable value for all stakeholders</div>
+      <h1>Abilitie Leadership Academy</h1>
+      <div class="header-subtitle">Curriculum Assistant</div>
     </div>
-  </div>
+    <a href="curriculum.html" class="header-link">View Full Curriculum</a>
+  </header>
 
-  <!-- RISING -->
-  <div class="level-card" id="ba-rising">
-    <div class="level-card-header" onclick="toggleCard('ba-rising')">
-      <div class="left">
-        <span class="level-badge">Level 1</span>
-        <div><div class="level-title">Rising Leader</div><div class="level-subtitle">Income Challenge + Analyzing Profit Drivers + Managing Profitability</div></div>
+  <div class="chat-container">
+    <div class="messages" id="messages">
+      <div class="welcome-message" id="welcome">
+        <h2>Ask me anything about our curriculum</h2>
+        <p>I can help you understand our simulations, case challenges, competencies, frameworks, and learning outcomes.</p>
+        <div class="suggestions">
+          <button class="suggestion-btn" onclick="askQuestion('What simulations do you offer for rising leaders?')">Simulations for rising leaders</button>
+          <button class="suggestion-btn" onclick="askQuestion('Tell me about the Business Acumen pillar')">Business Acumen pillar</button>
+          <button class="suggestion-btn" onclick="askQuestion('What frameworks are used in Team Management?')">Team Management frameworks</button>
+          <button class="suggestion-btn" onclick="askQuestion('Compare the different leadership levels')">Compare leadership levels</button>
+        </div>
       </div>
-      <span class="expand-icon">▾</span>
     </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: Aspiring, new, and developing leaders</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Income Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Analyzing Profit Drivers (2 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Managing Profitability (2 hrs)</div>
-        </div>
 
-        <div class="section-grid">
-          <div class="section-block ba-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Read and interpret income statements and basic financial statements</li>
-              <li>Decode the profit model of a business — revenue, cost of sales, gross profit, operating expenses</li>
-              <li>Conduct breakeven analysis to understand the impact of pricing and cost decisions</li>
-              <li>Evaluate market opportunities holistically using demand and cost structure data</li>
-              <li>Analyze profit drivers: pricing, volume, cost structure, and margin</li>
-              <li>Articulate financial insights using business language to defend strategic recommendations</li>
-              <li>Model basic cash flows and connect financial performance to strategic decisions</li>
-            </ul>
-          </div>
-          <div class="section-block ba-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>Value creation thinking:</strong> Every decision either creates or destroys value for stakeholders</li>
-              <li><strong>Tradeoff awareness:</strong> Growth, profitability, and risk are always in tension — managing the balance is the job</li>
-              <li><strong>Financial curiosity:</strong> Numbers tell a story; learning to read that story empowers better decisions</li>
-              <li><strong>Long-term orientation:</strong> Short-term wins shouldn't come at the expense of sustainable performance</li>
-              <li><strong>Competitive awareness:</strong> Always benchmark decisions against market dynamics and competitor behavior</li>
-            </ul>
-          </div>
-          <div class="section-block ba-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>The Levers of Value:</strong> Growth × Profitability × Risk = Shareholder Value</li>
-              <li><strong>Income Statement / P&amp;L:</strong> Sales → Cost of Sales → Gross Profit → Operating Expenses → Net Profit</li>
-              <li><strong>Breakeven Analysis:</strong> Fixed costs ÷ (Price − Variable Cost) = Breakeven volume</li>
-              <li><strong>Cost Structure Comparison:</strong> Built facility vs. Contract facility tradeoff analysis</li>
-              <li><strong>Pricing &amp; Volume Strategy:</strong> High-volume vs. high-margin positioning</li>
-              <li><strong>Financial Spreadsheets &amp; Inquiry:</strong> Using data tables to model scenarios and interpret outcomes</li>
-              <li><strong>NPV Introduction:</strong> Time value of money basics and connecting finance to strategy</li>
-            </ul>
-          </div>
-        </div>
+    <div class="input-area">
+      <div class="input-wrapper">
+        <input type="text" id="user-input" placeholder="Ask about simulations, competencies, frameworks..." onkeypress="handleKeyPress(event)">
+        <button class="send-btn" id="send-btn" onclick="sendMessage()">Send</button>
       </div>
     </div>
   </div>
 
-  <!-- EXPERIENCED -->
-  <div class="level-card" id="ba-exp">
-    <div class="level-card-header" onclick="toggleCard('ba-exp')">
-      <div class="left">
-        <span class="level-badge">Level 2</span>
-        <div><div class="level-title">Experienced Leader</div><div class="level-subtitle">Business Challenge + Balancing Growth &amp; Risk</div></div>
-      </div>
-      <span class="expand-icon">▾</span>
-    </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: Non-financial directors and senior managers</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Business Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Balancing Growth &amp; Risk (2 hrs)</div>
-        </div>
+  <script>
+    const messagesContainer = document.getElementById('messages');
+    const userInput = document.getElementById('user-input');
+    const sendBtn = document.getElementById('send-btn');
+    const welcome = document.getElementById('welcome');
 
-        <div class="section-grid">
-          <div class="section-block ba-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Analyze growth and performance using key financial indicators (revenue growth, margins, profitability trends)</li>
-              <li>Evaluate resource allocation and long-term tradeoffs using data-driven analysis</li>
-              <li>Project the impact of strategic decisions over multiple time periods</li>
-              <li>Communicate financial recommendations using business language and financial logic</li>
-              <li>Conduct strategic planning across multiple business units and expansion opportunities</li>
-              <li>Interpret financial statements across income, cash flow, and balance sheet</li>
-              <li>Model cash flows over time and apply time value of money (NPV) to investment decisions</li>
-              <li>Manage the complete value creation cycle — from sales and operations to new business units</li>
-            </ul>
-          </div>
-          <div class="section-block ba-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>Enterprise value lens:</strong> Every function contributes to the total value equation — think beyond your silo</li>
-              <li><strong>Risk as a value lever:</strong> De-risking a business is a hidden but powerful way to create value</li>
-              <li><strong>Cash flow discipline:</strong> Profits don't equal cash — managing working capital and cash conversion is critical</li>
-              <li><strong>Growth with guardrails:</strong> Growth above expectations drives value, but only when paired with profitability</li>
-              <li><strong>Strategic patience:</strong> Long-term investments may hurt short-term metrics but create lasting competitive advantage</li>
-              <li><strong>Expansion judgment:</strong> Knowing when and how to enter new markets is as important as operational excellence</li>
-            </ul>
-          </div>
-          <div class="section-block ba-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>The Levers of Value (Advanced):</strong> Growth + Profitability + Risk → Future Cash Flows → Value</li>
-              <li><strong>Three Financial Statements:</strong> Income Statement, Cash Flow Statement, Balance Sheet — and how they interrelate</li>
-              <li><strong>Net Present Value (NPV):</strong> Discounting future cash flows to evaluate investment decisions</li>
-              <li><strong>Cost Structure Analysis:</strong> Fixed vs. variable costs, facility investment decisions, operational leverage</li>
-              <li><strong>Cash Flow Modeling:</strong> Cash from operations vs. investing vs. financing; "Profits ≠ Cash"</li>
-              <li><strong>Expansion Strategy Framework:</strong> Market sizing, R&amp;D investment thresholds, build vs. contract decisions</li>
-              <li><strong>Competitive Analysis:</strong> Benchmarking pricing, margins, and strategy against competitors</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
+    let conversationHistory = [];
 
-  <!-- EXECUTIVE -->
-  <div class="level-card" id="ba-exec">
-    <div class="level-card-header" onclick="toggleCard('ba-exec')">
-      <div class="left">
-        <span class="level-badge">Level 3</span>
-        <div><div class="level-title">Executive Leader</div><div class="level-subtitle">Finance Challenge (Finance Summit) + Generating Financial Insights</div></div>
-      </div>
-      <span class="expand-icon">▾</span>
-    </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: Senior executives and financial decision-makers</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Finance Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Generating Financial Insights (2 hrs)</div>
-        </div>
-
-        <div class="section-grid">
-          <div class="section-block ba-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Conduct strategic investment analysis using ratio analysis and return metrics</li>
-              <li>Calculate and interpret Return on Invested Capital (ROIC) and its component drivers</li>
-              <li>Evaluate the relationship between ROIC, cost of capital, and value creation</li>
-              <li>Analyze capital efficiency: how much capital is needed to generate a dollar in revenue or profit</li>
-              <li>Diagnose enterprise performance using the ROIC "tree" — deconstructing returns into margin, turnover, and expense drivers</li>
-              <li>Make long-term investment decisions with ambiguous and incomplete data sets</li>
-              <li>Manage working capital to optimize cash flow (receivables, payables, inventory)</li>
-              <li>Communicate financial strategy and value creation narratives to boards and investors</li>
-            </ul>
-          </div>
-          <div class="section-block ba-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>Capital efficiency as discipline:</strong> It's not just about profit — it's about how much capital it takes to generate that profit</li>
-              <li><strong>Investor perspective:</strong> Think like an owner — what would make you invest in this company?</li>
-              <li><strong>Sustainable business thinking:</strong> Value serves all stakeholders: shareholders, employees, customers, society, and the environment</li>
-              <li><strong>ROIC &gt; Revenue:</strong> Scale alone doesn't create value; returns relative to invested capital determine whether growth is worthwhile</li>
-              <li><strong>Risk-adjusted returns:</strong> Factor uncertainty and cost of capital into every strategic bet</li>
-              <li><strong>Financial storytelling:</strong> Numbers become powerful when woven into a compelling strategic narrative</li>
-            </ul>
-          </div>
-          <div class="section-block ba-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>ROIC (Return on Invested Capital):</strong> NOPAT ÷ Invested Capital (Fixed Assets + Working Capital)</li>
-              <li><strong>The ROIC Tree:</strong> Decomposing returns into Gross Margin, OpEx/Sales, Capital Turnover, Working Capital/Sales</li>
-              <li><strong>Cost of Capital:</strong> Time value of money, present value of future cash flows, discount rate analysis</li>
-              <li><strong>ROIC vs. Cost of Capital:</strong> Value is created only when ROIC exceeds the cost of capital</li>
-              <li><strong>Value Driver Framework:</strong> Growth + Profitability + Capital Efficiency → Future Cash Flows → Value</li>
-              <li><strong>Working Capital Management:</strong> Receivables, payables, and inventory optimization as levers of cash flow</li>
-              <li><strong>Ratio Analysis:</strong> Gross margin, operating margin, capital turnover, expense ratios for benchmarking</li>
-              <li><strong>Strategic Business Planning:</strong> Integrating financial analysis with market positioning and growth strategy</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ CROSS-FUNCTIONAL DECISION-MAKING ============ -->
-<div class="view-panel" id="view-cf">
-  <div class="pillar-header">
-    <div class="pillar-icon cf">🔀</div>
-    <div>
-      <h2>Cross-Functional Decision-Making</h2>
-      <div class="pillar-desc">Shaping resilient organizations that execute present strategy while adapting to change</div>
-    </div>
-  </div>
-
-  <!-- RISING -->
-  <div class="level-card" id="cf-rising">
-    <div class="level-card-header" onclick="toggleCard('cf-rising')">
-      <div class="left">
-        <span class="level-badge">Level 1</span>
-        <div><div class="level-title">Rising Leader</div><div class="level-subtitle">Influence Challenge + Shifting Mindsets &amp; Behaviors + Influencing Without Authority</div></div>
-      </div>
-      <span class="expand-icon">▾</span>
-    </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: Aspiring, new, and developing leaders</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Influence Challenge (4–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Shifting Mindsets &amp; Behaviors (2 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Influencing Without Authority (2 hrs)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Hold The Line? (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> A Change Will Do You Good. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> I'm Not Here To Make Friends. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Spread Your Wings and Fly. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> The Fault Line. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> I'm Not Convinced. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Scope Springs Eternal. (15–20 min)</div>
-        </div>
-
-        <div class="section-grid">
-          <div class="section-block cf-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Identify stakeholder interests and separate surface positions from underlying motivations</li>
-              <li>Map stakeholders strategically across internal and external networks</li>
-              <li>Build alignment through influence without relying on formal authority</li>
-              <li>Design and execute an influence strategy using both expressive and receptive tactics</li>
-              <li>Diagnose power dynamics and leverage reciprocity in professional relationships</li>
-              <li>Adapt communication approach to match stakeholder preferences and contexts</li>
-              <li>Translate concerns, resistance, and skepticism into shared messaging and alignment</li>
-              <li>Build credibility and trust across peer relationships to advance ideas</li>
-            </ul>
-          </div>
-          <div class="section-block cf-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>The Platinum Rule:</strong> Influence others as they want to be influenced, not as you would want to be</li>
-              <li><strong>Positions vs. interests:</strong> What people say they want often masks what they truly need — surface the deeper interests</li>
-              <li><strong>Influence as investment:</strong> Influence is built over time through trust and reciprocity, not exercised in a moment</li>
-              <li><strong>Alignment ≠ Agreement:</strong> You don't need everyone to agree — you need them to align around a shared direction</li>
-              <li><strong>WIIFM (What's In It For Me):</strong> Frame your ask in terms of what the other person values, not what you need</li>
-              <li><strong>Widen the universe:</strong> The stakeholders you need to influence may not be the obvious ones — look beyond your immediate circle</li>
-            </ul>
-          </div>
-          <div class="section-block cf-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>From Idea to Action:</strong> Interests → Relationships → Approach (the three pillars of influence)</li>
-              <li><strong>Positions vs. Interests Analysis:</strong> Questions to surface deeper motivations behind stated positions</li>
-              <li><strong>Stakeholder Universe Map:</strong> Internal (boss, peers, direct reports) and External (partners, vendors, regulators, public)</li>
-              <li><strong>Expressive vs. Receptive Tactics:</strong> Tell, Sell, Negotiate, Inspire (expressive) vs. Inquire, Listen, Empathize, Facilitate (receptive)</li>
-              <li><strong>Reciprocity Matrix:</strong> Proactive (Gift, Appeal) vs. Reactive (Return the Favor, Tit-for-Tat)</li>
-              <li><strong>Shared Interests Mapping:</strong> Venn diagram of My Interests, Their Interests, Our Shared Interests</li>
-              <li><strong>WIIFM Framework:</strong> What's In It For Me — framing influence through the other person's lens</li>
-              <li><strong>Thought Challenging:</strong> Identifying and reframing limiting beliefs that block alignment</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EXPERIENCED -->
-  <div class="level-card" id="cf-exp">
-    <div class="level-card-header" onclick="toggleCard('cf-exp')">
-      <div class="left">
-        <span class="level-badge">Level 2</span>
-        <div><div class="level-title">Experienced Leader</div><div class="level-subtitle">Enterprise Challenge + Creating Strategic Alignment + Strategic Problem Solving</div></div>
-      </div>
-      <span class="expand-icon">▾</span>
-    </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: Directors and senior managers</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Enterprise Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Creating Strategic Alignment (2 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Strategic Problem Solving (2 hrs)</div>
-        </div>
-
-        <div class="section-grid">
-          <div class="section-block cf-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Translate strategy into cross-functional action across multiple departments</li>
-              <li>Make strategic decisions under conditions of ambiguity and uncertainty</li>
-              <li>Communicate and collaborate across functional silos to influence outcomes</li>
-              <li>Identify leadership blind spots that affect execution quality</li>
-              <li>Assess strategic fit and navigate senior stakeholder dynamics to recommend a path forward</li>
-              <li>Analyze core competencies to guide strategic positioning and brand decisions</li>
-              <li>Conduct root cause analysis and assess risk systematically under pressure</li>
-              <li>Design decision-making processes that mitigate bias and improve outcomes</li>
-            </ul>
-          </div>
-          <div class="section-block cf-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>Process over content:</strong> The quality of HOW you decide (53%) matters more than WHAT you decide (8%) — per McKinsey research</li>
-              <li><strong>The Content Trap:</strong> Teams that focus only on the "what" of decisions and ignore the "how" consistently underperform</li>
-              <li><strong>Bias awareness:</strong> Pattern-recognition, action-oriented, stability, interest, social, and hierarchy biases all distort decisions</li>
-              <li><strong>Enterprise thinking:</strong> Function-level optimization often sub-optimizes the enterprise — think across boundaries</li>
-              <li><strong>VUCA readiness:</strong> Build slack, experiment, delegate, and treat failure as learning in volatile environments</li>
-              <li><strong>Intentional process ownership:</strong> Anyone can take ownership of the decision-making process regardless of hierarchy</li>
-            </ul>
-          </div>
-          <div class="section-block cf-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>Decision-Making Framework:</strong> Define (Identify Decision Points) → Deliberate (Gather Info, Identify Options) → Deliver (Execute Aligned Decisions)</li>
-              <li><strong>Decision Models Spectrum:</strong> Sole Decider → Majority Vote → Consensus → Delegate/Empower (tradeoffs: speed, legitimacy, accountability)</li>
-              <li><strong>VUCA Framework:</strong> Volatility, Uncertainty, Complexity, Ambiguity — with tailored responses for each</li>
-              <li><strong>Risk Assessment Matrix:</strong> Likelihood × Impact scoring to prioritize risks and opportunities</li>
-              <li><strong>Root Cause Analysis (Fishbone Diagram):</strong> Structured technique to diagnose problems beyond surface symptoms</li>
-              <li><strong>Decision Matrix:</strong> Weighted scoring of options across multiple criteria</li>
-              <li><strong>Core Competencies Analysis:</strong> Five diagnostic questions to evaluate strategic fit</li>
-              <li><strong>Brand Positioning Statements:</strong> Articulating strategic differentiation for new initiatives</li>
-              <li><strong>Bias Mitigation Structures:</strong> Devil's advocate, role rotation, time-boxing, and diversity in team composition</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EXECUTIVE -->
-  <div class="level-card" id="cf-exec">
-    <div class="level-card-header" onclick="toggleCard('cf-exec')">
-      <div class="left">
-        <span class="level-badge">Level 3</span>
-        <div><div class="level-title">Executive Leader</div><div class="level-subtitle">Executive Challenge (Executive Summit)</div></div>
-      </div>
-      <span class="expand-icon">▾</span>
-    </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: Senior executives and cross-functional leaders</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Executive Challenge (6–8 hrs)</div>
-        </div>
-
-        <div class="section-grid">
-          <div class="section-block cf-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Develop and execute a coherent business strategy across multiple functions simultaneously</li>
-              <li>Manage cross-functional resource allocation — talent, capital, and time — under real constraints</li>
-              <li>Navigate complex organizational dynamics with competing priorities, stakeholders, and information asymmetries</li>
-              <li>Recognize and mitigate personal and collective leadership blind spots</li>
-              <li>Respond decisively to unexpected events (VUCA) while maintaining strategic coherence</li>
-              <li>Build and present executive-level strategic narratives (storytelling, data visualization, board presentations)</li>
-              <li>Manage talent as a strategic asset — hiring, developing, and retaining key people in a competitive environment</li>
-              <li>Align departments under a unified strategy while managing functional tensions and competing KPIs</li>
-            </ul>
-          </div>
-          <div class="section-block cf-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>Cynefin thinking:</strong> Different situations (simple, complicated, complex, chaotic) demand fundamentally different decision approaches</li>
-              <li><strong>Strategy ↔ Execution loop:</strong> "Without strategy, execution is aimless. Without execution, strategy is useless." — Morris Chang</li>
-              <li><strong>Complex adaptive systems:</strong> In complex domains, probe-sense-respond replaces plan-execute — experimentation is strategy</li>
-              <li><strong>Process legitimacy:</strong> Agreeing on the process of decision-making brings legitimacy to any outcome</li>
-              <li><strong>Emergent leadership:</strong> Open up discussion, set barriers, stimulate attractors, encourage dissent, and monitor for emergence</li>
-              <li><strong>Cross-functional empathy:</strong> Every C-suite role sees the business through a different lens — understanding those lenses is the executive's job</li>
-            </ul>
-          </div>
-          <div class="section-block cf-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>Cynefin Framework:</strong> Simple (best practices) → Complicated (analysis) → Complex (experiments) → Chaotic (act fast)</li>
-              <li><strong>Executive Decision Process:</strong> Define → Deliberate → Deliver with intentional process design and role clarity</li>
-              <li><strong>Bias Recognition Toolkit:</strong> Pattern-recognition, action-oriented, stability, interest, social, expertise, and hierarchy biases</li>
-              <li><strong>Structured Decision Roles:</strong> Idea generator, Decider, Facilitator, Timekeeper, Agenda setter, Implementer</li>
-              <li><strong>Executive Storytelling Framework:</strong> Purpose → Audience → Situation; three clear points; A/V sync</li>
-              <li><strong>Expected Value Analysis:</strong> Probability-weighted assessment of strategic options (e.g., BioSky acquisition model)</li>
-              <li><strong>VUCA Response Strategies:</strong> Slack/preparation (volatility), analysis (uncertainty), experimentation (complexity), simplify/add expertise (ambiguity)</li>
-              <li><strong>Board Presentation Design:</strong> Action headings, data-driven slides, compelling "so what" on every slide</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ============ TEAM MANAGEMENT ============ -->
-<div class="view-panel" id="view-tm">
-  <div class="pillar-header">
-    <div class="pillar-icon tm">👥</div>
-    <div>
-      <h2>Team Management</h2>
-      <div class="pillar-desc">Cultivating individuals to deliver results now while coaching them towards higher future performance</div>
-    </div>
-  </div>
-
-  <!-- RISING -->
-  <div class="level-card" id="tm-rising">
-    <div class="level-card-header" onclick="toggleCard('tm-rising')">
-      <div class="left">
-        <span class="level-badge">Level 1</span>
-        <div><div class="level-title">Rising Leader</div><div class="level-subtitle">Management Challenge + Enabling Peak Performance + Navigating Critical Conversations</div></div>
-      </div>
-      <span class="expand-icon">▾</span>
-    </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: Aspiring, new, and developing people managers</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Management Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Enabling Peak Performance (2 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Navigating Critical Conversations (2 hrs)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Get the Message? (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Close the Door. Have a Seat. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> It's a Slippery Slope. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Welcome Aboard! (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> I've Got Good News! (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Blindsided. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Why Not Me? (15–20 min)</div>
-        </div>
-
-        <div class="section-grid">
-          <div class="section-block tm-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Set clear, explicit expectations collaboratively (Say → Ask → Create)</li>
-              <li>Evaluate both capabilities and confidence levels for each team member</li>
-              <li>Identify and enable individual motivators for each direct report</li>
-              <li>Deliver structured feedback using the SBI framework (Situation-Behavior-Impact)</li>
-              <li>Coach for growth — guiding development conversations that connect to motivators</li>
-              <li>Navigate critical and difficult conversations with empathy and clarity</li>
-              <li>Practice active listening and focused presence as a management discipline</li>
-              <li>Balance delivering results with growing capabilities — the dual mandate of management</li>
-            </ul>
-          </div>
-          <div class="section-block tm-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>Trust as foundation:</strong> Everything — expectations, feedback, coaching, presence — is built on a foundation of trust</li>
-              <li><strong>Everyone is different:</strong> Your employees are unlikely to be motivated by the same things that drive you — invest in understanding each person</li>
-              <li><strong>Coaching over compliance:</strong> "In our offices we have way too much compliance and way too little engagement" — Daniel Pink</li>
-              <li><strong>Make the implicit explicit:</strong> Unspoken expectations are unmet expectations — always clarify what "good" looks like</li>
-              <li><strong>Feedback is a gift:</strong> People value self-improvement more than self-esteem — don't avoid hard conversations</li>
-              <li><strong>Presence is the #1 skill:</strong> Experienced managers say the most impactful thing they do every day is ask questions and listen actively</li>
-              <li><strong>Intent vs. Impact:</strong> Always close the gap between the message you intend to send and the impact actually received</li>
-            </ul>
-          </div>
-          <div class="section-block tm-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>The Pillars of Trust:</strong> Set Clear Expectations → Enable Motivators → Provide Feedback &amp; Coach → Be Present</li>
-              <li><strong>SBI + Intent Framework:</strong> Situation → Behavior → Impact → Intent (structured feedback model)</li>
-              <li><strong>8 Motivators Model:</strong> Achievement, Security, Recognition, Mastery, Companionship, Position/Status, Autonomy, Purpose</li>
-              <li><strong>GROW Coaching Model:</strong> Goal → Reality → Options → Way Forward</li>
-              <li><strong>SMART Goals:</strong> Specific, Measurable, Achievable, Relevant, Time-bound</li>
-              <li><strong>Personal Motivators Assessment:</strong> Self-ranking exercise to identify your own and your team's motivator profiles</li>
-              <li><strong>Conversation Preparation Worksheet:</strong> Structured pre-meeting planning covering motivators, intent, structure, and follow-up</li>
-              <li><strong>Development Plan Template:</strong> Identification of developmental areas → Commitments → Action items with timelines</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EXPERIENCED -->
-  <div class="level-card" id="tm-exp">
-    <div class="level-card-header" onclick="toggleCard('tm-exp')">
-      <div class="left">
-        <span class="level-badge">Level 2</span>
-        <div><div class="level-title">Experienced Leader</div><div class="level-subtitle">Director Challenge + Leading in Times of Change</div></div>
-      </div>
-      <span class="expand-icon">▾</span>
-    </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: Leaders of multiple teams; functional or department heads</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Director Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Leading in Times of Change (2 hrs)</div>
-        </div>
-
-        <div class="section-grid">
-          <div class="section-block tm-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Empower managers to drive performance — lead through people, not around them</li>
-              <li>Align multiple teams across competing priorities, constraints, and incentive structures</li>
-              <li>Build leadership culture and strengthen the organizational talent pipeline</li>
-              <li>Navigate organizational change with deliberate people and team decisions</li>
-              <li>Make tough organizational calls — assess fit holistically and lead change with intent</li>
-              <li>Prioritize and delegate strategically across a portfolio of initiatives (launch, business-as-usual, innovation)</li>
-              <li>Diagnose and develop managers with varying growth areas (micromanagement, conflict avoidance, resistance to change)</li>
-              <li>Select and develop successors — building bench strength for the organization's future</li>
-            </ul>
-          </div>
-          <div class="section-block tm-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>Force multiplier:</strong> Your job is no longer to do the work — it's to multiply the capability and output of your leaders</li>
-              <li><strong>Leader-of-leaders identity:</strong> The shift from managing individuals to managing managers requires a fundamentally different approach</li>
-              <li><strong>First Team thinking:</strong> Your first team is your peer group of leaders, not the team that reports to you — enterprise alignment starts at the top</li>
-              <li><strong>Enterprise over function:</strong> Optimizing your department at the expense of the organization is a failure of leadership</li>
-              <li><strong>Culture is a lever:</strong> Culture isn't a byproduct — it's a strategic lever that can be intentionally shaped to drive results</li>
-              <li><strong>Change as leadership:</strong> Change is not something that happens to you — it's something you lead with intent, empathy, and conviction</li>
-            </ul>
-          </div>
-          <div class="section-block tm-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>Levers of Leadership:</strong> Results Multiplier + Culture Multiplier + Alignment Multiplier</li>
-              <li><strong>Blake Mouton Grid:</strong> Mapping leadership style across Concern for Results vs. Concern for People</li>
-              <li><strong>First Team Concept:</strong> Prioritizing peer leadership alignment before cascading to your own teams</li>
-              <li><strong>Delegation &amp; Prioritization Framework:</strong> Strategic time allocation across coaching, aligning, and driving execution</li>
-              <li><strong>Manager Development Profiles:</strong> Identifying and addressing distinct manager archetypes and growth areas</li>
-              <li><strong>Change Leadership Model:</strong> Assess organizational fit → Communicate with intent → Manage resistance → Sustain momentum</li>
-              <li><strong>Successor Planning:</strong> Identifying, developing, and selecting leaders for the organization's next chapter</li>
-              <li><strong>Initiative Portfolio Management:</strong> Balancing "must-do" launches, steady-state operations, and innovation bets</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EXECUTIVE -->
-  <div class="level-card" id="tm-exec">
-    <div class="level-card-header" onclick="toggleCard('tm-exec')">
-      <div class="left">
-        <span class="level-badge">Level 3</span>
-        <div><div class="level-title">Executive Leader</div><div class="level-subtitle">Executive Summit — Enterprise Talent &amp; Organizational Strategy</div></div>
-      </div>
-      <span class="expand-icon">▾</span>
-    </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: VPs, C-Suite, and enterprise leaders</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Executive Challenge — Talent Track (6–8 hrs)</div>
-        </div>
-
-        <div class="section-grid">
-          <div class="section-block tm-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Manage talent as a strategic asset — hiring, developing, and retaining key people in a competitive market where talent can be "hired away"</li>
-              <li>Design and sustain high-performance organizational culture across multiple functions and geographies</li>
-              <li>Balance people investment against financial constraints — headcount, compensation, and development as strategic levers</li>
-              <li>Develop cross-functional team capability by rotating talent through diverse roles and functions</li>
-              <li>Navigate executive-level people decisions: restructuring, role design, and leadership transitions</li>
-              <li>Build organizational resilience through bench strength, succession planning, and knowledge management</li>
-              <li>Cascade strategic vision through leadership layers — ensuring alignment from board room to front line</li>
-            </ul>
-          </div>
-          <div class="section-block tm-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>Talent as competitive advantage:</strong> In the Executive Challenge, virtual employees can be hired away by competitors — talent management is make-or-break</li>
-              <li><strong>Organizational architect:</strong> At the executive level, you design the system in which others lead — structure, incentives, and culture are your tools</li>
-              <li><strong>Legacy thinking:</strong> The leaders you develop and the culture you build are your lasting contribution — outliving any single strategy</li>
-              <li><strong>Enterprise stewardship:</strong> You are a steward of the organization's human capital, not just its financial capital</li>
-              <li><strong>Systems over heroics:</strong> Sustainable performance comes from building great systems, not from individual heroic efforts</li>
-            </ul>
-          </div>
-          <div class="section-block tm-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>Enterprise Leadership Model:</strong> Integration of talent, strategy, and execution at the C-suite level</li>
-              <li><strong>Strategic Talent Management:</strong> Talent as a competitive asset — hiring, development, retention, and succession as executive priorities</li>
-              <li><strong>Role Rotation Strategy:</strong> Cross-functional role assignments to build broad enterprise perspective in emerging leaders</li>
-              <li><strong>Organizational Culture Levers:</strong> Intentional culture design through structure, incentives, rituals, and leadership behavior</li>
-              <li><strong>Executive Presentation &amp; Influence:</strong> Storytelling, data-driven slides, and board-level communication for people strategy</li>
-              <li><strong>Stakeholder Value Model:</strong> Balancing value for shareholders, employees, customers, society, and environment</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-</div><!-- /main -->
-
-<script>
-const NAV_MAP = { overview: 0, programs: 1, ba: 2, cf: 3, tm: 4 };
-
-function showView(id) {
-  document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('view-' + id).classList.add('active');
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  const tabs = document.querySelectorAll('.nav-tab');
-  if (NAV_MAP[id] !== undefined) tabs[NAV_MAP[id]].classList.add('active');
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-}
-
-function toggleCard(id) {
-  document.getElementById(id).classList.toggle('open');
-}
-
-function openLevel(id) {
-  setTimeout(() => {
-    const el = document.getElementById(id);
-    if (el && !el.classList.contains('open')) {
-      el.classList.add('open');
-      setTimeout(() => el.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
-    }
-  }, 100);
-}
-
-/* ========== PROGRAM EXPLORER DATA ========== */
-const PROGRAMS = [
-  /* ---- BA SIMULATIONS ---- */
-  { id:"income-challenge", name:"Income Challenge", type:"sim", pillar:"ba", level:"rising", duration:"6\u20138 hrs", framework:"Levers of Value",
-    competencies:["Read and interpret income statements and basic financial statements","Decode the profit model: revenue, cost of sales, gross profit, operating expenses","Conduct breakeven analysis for pricing and cost decisions","Evaluate market opportunities using demand and cost structure data","Analyze profit drivers: pricing, volume, cost structure, and margin","Articulate financial insights using business language","Model basic cash flows and connect financial performance to strategy"],
-    mindsets:["Value creation thinking: Every decision creates or destroys value","Tradeoff awareness: Growth, profitability, and risk are always in tension","Financial curiosity: Numbers tell a story that empowers better decisions","Long-term orientation: Short-term wins shouldn\u2019t undermine sustainability","Competitive awareness: Benchmark against market dynamics and competitors"],
-    tools:["The Levers of Value: Growth \u00d7 Profitability \u00d7 Risk = Shareholder Value","Income Statement / P&L: Sales \u2192 Cost of Sales \u2192 Gross Profit \u2192 Net Profit","Breakeven Analysis: Fixed costs \u00f7 (Price \u2212 Variable Cost)","Cost Structure Comparison: Built vs. contract facility tradeoffs","Pricing & Volume Strategy: High-volume vs. high-margin positioning","NPV Introduction: Time value of money basics"]},
-  { id:"business-challenge", name:"Business Challenge", type:"sim", pillar:"ba", level:"experienced", duration:"6\u20138 hrs", framework:"Levers of Value (Advanced)",
-    competencies:["Analyze growth and performance using key financial indicators","Evaluate resource allocation and long-term tradeoffs with data","Project the impact of strategic decisions over multiple periods","Communicate financial recommendations using financial logic","Conduct strategic planning across multiple business units","Interpret income, cash flow, and balance sheet statements","Apply time value of money (NPV) to investment decisions","Manage the complete value creation cycle"],
-    mindsets:["Enterprise value lens: Think beyond your silo","Risk as a value lever: De-risking is a powerful way to create value","Cash flow discipline: Profits don\u2019t equal cash","Growth with guardrails: Growth paired with profitability","Strategic patience: Long-term investments create lasting advantage","Expansion judgment: Knowing when to enter new markets"],
-    tools:["Levers of Value (Advanced): Growth + Profitability + Risk \u2192 Value","Three Financial Statements and how they interrelate","Net Present Value (NPV): Discounting future cash flows","Cost Structure Analysis: Fixed vs. variable, operational leverage","Cash Flow Modeling: Operations vs. investing vs. financing","Expansion Strategy: Market sizing, R&D thresholds, build vs. contract","Competitive Analysis: Benchmarking pricing, margins, strategy"]},
-  { id:"finance-challenge", name:"Finance Challenge", type:"sim", pillar:"ba", level:"executive", duration:"6\u20138 hrs", framework:"ROIC & Capital Efficiency",
-    competencies:["Conduct strategic investment analysis using ratio analysis","Calculate and interpret ROIC and its component drivers","Evaluate ROIC vs. cost of capital for value creation","Analyze capital efficiency: capital needed per dollar of revenue","Diagnose enterprise performance using the ROIC tree","Make long-term investment decisions with ambiguous data","Manage working capital for cash flow optimization","Communicate financial strategy to boards and investors"],
-    mindsets:["Capital efficiency as discipline: How much capital generates that profit?","Investor perspective: Think like an owner","Sustainable business thinking: Value serves all stakeholders","ROIC > Revenue: Returns relative to invested capital determine value","Risk-adjusted returns: Factor uncertainty into every strategic bet","Financial storytelling: Numbers woven into strategic narrative"],
-    tools:["ROIC: NOPAT \u00f7 Invested Capital","The ROIC Tree: Gross Margin, OpEx/Sales, Capital Turnover decomposition","Cost of Capital: Present value, discount rate analysis","ROIC vs. Cost of Capital: Value created when ROIC exceeds cost of capital","Value Driver Framework: Growth + Profitability + Capital Efficiency","Working Capital Management: Receivables, payables, inventory levers","Ratio Analysis: Margins, turnover, expense ratios for benchmarking"]},
-  /* ---- CF SIMULATIONS ---- */
-  { id:"influence-challenge", name:"Influence Challenge", type:"sim", pillar:"cf", level:"rising", duration:"4\u20138 hrs", framework:"From Idea to Action",
-    competencies:["Identify stakeholder interests vs. surface positions","Map stakeholders across internal and external networks","Build alignment through influence without formal authority","Design influence strategy using expressive and receptive tactics","Diagnose power dynamics and leverage reciprocity","Adapt communication to stakeholder preferences","Translate resistance into shared messaging","Build credibility and trust across peer relationships"],
-    mindsets:["The Platinum Rule: Influence others as they want to be influenced","Positions vs. interests: Surface deeper needs behind stated wants","Influence as investment: Built over time, not exercised in a moment","Alignment \u2260 Agreement: Shared direction, not unanimous consent","WIIFM: Frame asks in terms of what the other person values","Widen the universe: Look beyond your immediate circle"],
-    tools:["From Idea to Action: Interests \u2192 Relationships \u2192 Approach","Positions vs. Interests Analysis: Surfacing deeper motivations","Stakeholder Universe Map: Internal and external mapping","Expressive vs. Receptive Tactics: Tell/Sell/Negotiate/Inspire vs. Inquire/Listen/Empathize/Facilitate","Reciprocity Matrix: Proactive vs. Reactive strategies","Shared Interests Mapping: Venn diagram approach","WIIFM Framework: Framing through the other person\u2019s lens"]},
-  { id:"enterprise-challenge", name:"Enterprise Challenge", type:"sim", pillar:"cf", level:"experienced", duration:"6\u20138 hrs", framework:"Decision Making Framework",
-    competencies:["Translate strategy into cross-functional action","Make strategic decisions under ambiguity and uncertainty","Communicate and collaborate across functional silos","Identify leadership blind spots affecting execution","Navigate senior stakeholder dynamics","Conduct root cause analysis and assess risk systematically","Design decision-making processes that mitigate bias","Analyze core competencies for strategic positioning"],
-    mindsets:["Process over content: HOW you decide (53%) > WHAT (8%) per McKinsey","The Content Trap: Ignoring process leads to underperformance","Bias awareness: Seven types of cognitive and social biases","Enterprise thinking: Function-level optimization sub-optimizes the enterprise","VUCA readiness: Build slack, experiment, delegate, treat failure as learning","Intentional process ownership: Anyone can own the process regardless of hierarchy"],
-    tools:["Decision-Making Framework: Define \u2192 Deliberate \u2192 Deliver","Decision Models Spectrum: Sole Decider \u2192 Vote \u2192 Consensus \u2192 Delegate","VUCA Framework: Tailored responses per dimension","Risk Assessment Matrix: Likelihood \u00d7 Impact scoring","Root Cause Analysis (Fishbone Diagram)","Core Competencies Analysis: Five diagnostic questions","Bias Mitigation: Devil\u2019s advocate, role rotation, time-boxing"]},
-  { id:"executive-challenge", name:"Executive Challenge", type:"sim", pillar:"cf", level:"executive", duration:"6\u20138 hrs", framework:"Cynefin Framework",
-    competencies:["Develop and execute a coherent strategy across multiple functions","Manage cross-functional resource allocation under real constraints","Navigate complex organizational dynamics and information asymmetries","Recognize and mitigate personal and collective leadership blind spots","Respond decisively to VUCA events while maintaining strategic coherence","Build executive-level strategic narratives and board presentations","Manage talent as a strategic asset in a competitive environment","Align departments under unified strategy amid competing KPIs"],
-    mindsets:["Cynefin thinking: Different situations demand different decision approaches","Strategy \u2194 Execution loop: Neither is useful without the other","Complex adaptive systems: Probe-sense-respond replaces plan-execute","Process legitimacy: Agreeing on process legitimizes any outcome","Emergent leadership: Stimulate attractors, encourage dissent, monitor emergence","Cross-functional empathy: Every C-suite role sees through a different lens"],
-    tools:["Cynefin Framework: Simple \u2192 Complicated \u2192 Complex \u2192 Chaotic","Executive Decision Process: Define \u2192 Deliberate \u2192 Deliver","Bias Recognition Toolkit: Seven types of leadership bias","Structured Decision Roles: Generator, Decider, Facilitator, Timekeeper, Implementer","Executive Storytelling: Purpose \u2192 Audience \u2192 Situation; A/V sync","Expected Value Analysis: Probability-weighted strategic assessment","VUCA Response Strategies: Tailored approaches per dimension"]},
-  /* ---- TM SIMULATIONS ---- */
-  { id:"management-challenge", name:"Management Challenge", type:"sim", pillar:"tm", level:"rising", duration:"6\u20138 hrs", framework:"Pillars of Trust",
-    competencies:["Set clear, explicit expectations collaboratively (Say \u2192 Ask \u2192 Create)","Evaluate both capabilities and confidence levels for each team member","Identify and enable individual motivators for each direct report","Deliver structured feedback using SBI (Situation-Behavior-Impact)","Coach for growth connecting development to individual motivators","Navigate critical and difficult conversations with empathy","Practice active listening and focused presence as a discipline","Balance delivering results with growing capabilities"],
-    mindsets:["Trust as foundation: Everything is built on trust","Everyone is different: Invest in understanding each person\u2019s drivers","Coaching over compliance: Engagement > compliance (Daniel Pink)","Make the implicit explicit: Unspoken expectations = unmet expectations","Feedback is a gift: People value self-improvement over self-esteem","Presence is the #1 skill: Ask questions and listen actively every day","Intent vs. Impact: Close the gap between intended and received message"],
-    tools:["Pillars of Trust: Set Expectations \u2192 Enable Motivators \u2192 Feedback & Coach \u2192 Be Present","SBI + Intent Framework: Situation \u2192 Behavior \u2192 Impact \u2192 Intent","8 Motivators Model: Achievement, Security, Recognition, Mastery, Companionship, Status, Autonomy, Purpose","Personal Motivators Assessment: Self and team ranking exercise","Conversation Preparation Worksheet: Structured pre-meeting planning","Development Plan Template: Areas \u2192 Commitments \u2192 Action items"]},
-  { id:"director-challenge", name:"Director Challenge", type:"sim", pillar:"tm", level:"experienced", duration:"6\u20138 hrs", framework:"Levers of Leadership",
-    competencies:["Empower managers to drive performance through people, not around them","Align multiple teams across competing priorities and incentive structures","Build leadership culture and strengthen the talent pipeline","Navigate organizational change with deliberate people decisions","Make tough organizational calls: assess fit holistically, lead with intent","Prioritize and delegate across a portfolio of initiatives","Diagnose and develop managers with varying growth areas","Select and develop successors for organizational bench strength"],
-    mindsets:["Force multiplier: Multiply the capability of your leaders","Leader-of-leaders identity: Managing managers is fundamentally different","First Team thinking: Your peer group is your first team","Enterprise over function: Optimizing your dept at org\u2019s expense is failure","Culture is a lever: Intentionally shaped to drive results","Change as leadership: Led with intent, empathy, and conviction"],
-    tools:["Levers of Leadership: Results Multiplier + Culture Multiplier + Alignment Multiplier","Blake Mouton Grid: Concern for Results vs. Concern for People","First Team Concept: Prioritizing peer leadership alignment","Manager Development Profiles: Distinct archetypes and growth areas","Change Leadership Model: Assess \u2192 Communicate \u2192 Manage resistance \u2192 Sustain","Successor Planning: Identifying, developing, selecting next-gen leaders","Initiative Portfolio Management: Must-do, steady-state, and innovation bets"]},
-  /* ---- BA CASE CHALLENGES ---- */
-  { id:"analyzing-profit-drivers", name:"Analyzing Profit Drivers", type:"case", pillar:"ba", level:"rising", duration:"2 hrs", framework:"Levers of Value",
-    competencies:["Review financial statements to understand business performance","Decode the profit model of a business","Identify the key drivers of profitability","Communicate financial insights clearly to stakeholders"],
-    mindsets:["Curiosity about numbers: Financial statements tell a story worth understanding","Every role impacts profit: Regardless of function, your decisions affect the bottom line","Data over instinct: Grounding recommendations in financial evidence builds credibility"],
-    tools:["Income Statement Analysis: Revenue, COGS, Gross Profit, Operating Expenses, Net Income","Profit Driver Identification: Parsing which levers most impact profitability","Financial Communication: Translating numbers into actionable business language"]},
-  { id:"managing-profitability", name:"Managing Profitability", type:"case", pillar:"ba", level:"rising", duration:"2 hrs", framework:"Levers of Value",
-    competencies:["Evaluate opportunities holistically considering market demand and cost structures","Analyze the financial impact of strategic choices","Defend strategic recommendations with financial logic","Balance short-term profitability with long-term positioning"],
-    mindsets:["Holistic evaluation: Every opportunity has revenue potential AND cost implications","Strategic ownership: Even non-financial managers should own the P&L impact of their decisions","Defend with data: Strong recommendations are backed by financial reasoning, not opinion"],
-    tools:["Cost-Volume-Profit Analysis: Understanding how changes in volume, price, and costs affect profit","Market Demand Assessment: Evaluating customer demand against cost of delivery","Strategic Recommendation Framework: Structuring and defending business cases"]},
-  { id:"balancing-growth-risk", name:"Balancing Growth & Risk", type:"case", pillar:"ba", level:"experienced", duration:"2 hrs", framework:"NPV & Cash Flow Modeling",
-    competencies:["Model cash flows over time to evaluate strategic options","Apply time value of money to long-term investment decisions","Connect financial analysis to strategic decision-making","Evaluate the tradeoffs between growth opportunities and risk exposure"],
-    mindsets:["Time value awareness: A dollar today is worth more than a dollar tomorrow","Growth is not free: Every growth initiative carries risk and capital cost","Finance as strategy: Financial modeling is a strategic tool, not just an accounting exercise"],
-    tools:["Cash Flow Modeling: Projecting cash inflows and outflows over multiple periods","Net Present Value (NPV): Discounting future cash flows to evaluate investment viability","Risk-Return Tradeoff Analysis: Mapping growth potential against risk exposure","Scenario Planning: Modeling best-case, base-case, and worst-case outcomes"]},
-  { id:"generating-financial-insights", name:"Generating Financial Insights", type:"case", pillar:"ba", level:"executive", duration:"2 hrs", framework:"ROIC & Capital Efficiency",
-    competencies:["Diagnose enterprise performance using financial ratios and return metrics","Generate actionable insights from complex financial data","Communicate financial strategy to senior leadership and boards","Identify value creation opportunities through capital efficiency analysis"],
-    mindsets:["Insight over information: Raw data is useless without interpretation and narrative","Capital discipline: Great companies obsess over returns, not just revenue","Financial fluency as leadership: Executives who speak finance lead with authority"],
-    tools:["Financial Ratio Analysis: Profitability, efficiency, and leverage ratios","ROIC Decomposition: Breaking returns into operational and capital components","Executive Financial Narrative: Structuring insights for board-level communication","Benchmarking: Comparing performance against industry and competitor standards"]},
-  /* ---- CF CASE CHALLENGES ---- */
-  { id:"shifting-mindsets", name:"Shifting Mindsets & Behaviors", type:"case", pillar:"cf", level:"rising", duration:"2 hrs", framework:"From Idea to Action",
-    competencies:["Identify stakeholder interests and what drives their positions","Build alignment through influence by connecting to shared goals","Translate stakeholder concerns into shared messaging","Navigate resistance by reframing conversations around mutual benefit"],
-    mindsets:["Empathy first: Understanding why someone holds a position is more important than debating the position itself","Reframing as a skill: Resistance often dissolves when concerns are acknowledged and reframed","Shared language: Alignment happens faster when you speak to shared interests, not competing agendas"],
-    tools:["Stakeholder Interest Mapping: Identifying underlying motivations behind stated positions","Reframing Techniques: Turning objections into shared opportunities","Influence Through Alignment: Connecting your ask to what the stakeholder already values","Shared Messaging Template: Crafting language that resonates across perspectives"]},
-  { id:"influencing-without-authority", name:"Influencing Without Authority", type:"case", pillar:"cf", level:"rising", duration:"2 hrs", framework:"From Idea to Action",
-    competencies:["Diagnose power dynamics in complex stakeholder environments","Map stakeholders strategically to identify influence pathways","Design an influence strategy that doesn\u2019t rely on hierarchy","Practice reciprocity tactics to advance ideas"],
-    mindsets:["Authority is overrated: The most effective influencers rarely rely on positional power","Reciprocity is currency: Giving before asking builds the trust needed to influence","Strategic patience: Influence campaigns play out over time, not in a single conversation"],
-    tools:["Power Dynamics Analysis: Mapping formal and informal influence in an organization","Stakeholder Strategy Map: Identifying allies, blockers, and swing stakeholders","Influence Strategy Canvas: Planning approach, timing, and tactics","Reciprocity Playbook: Proactive and reactive reciprocity techniques"]},
-  { id:"creating-strategic-alignment", name:"Creating Strategic Alignment", type:"case", pillar:"cf", level:"experienced", duration:"2 hrs", framework:"Decision Making Framework",
-    competencies:["Assess strategic fit between opportunities and organizational capabilities","Navigate senior stakeholder dynamics with competing priorities","Recommend a clear path forward with cross-functional buy-in","Analyze core competencies to guide strategic positioning"],
-    mindsets:["Alignment is a process: It requires deliberate effort, not just good intentions","Strategic fit matters: Not every opportunity is the right opportunity","First Team orientation: Align with peers before cascading to your teams"],
-    tools:["Strategic Fit Assessment: Evaluating opportunities against core competencies","Stakeholder Alignment Map: Identifying where alignment exists and where gaps remain","Cross-Functional Decision Framework: Structuring recommendations for enterprise buy-in","Core Competencies Diagnostic: Five questions to evaluate strategic positioning"]},
-  { id:"strategic-problem-solving", name:"Strategic Problem Solving", type:"case", pillar:"cf", level:"experienced", duration:"2 hrs", framework:"Root Cause Analysis",
-    competencies:["Conduct structured root cause analysis under time pressure","Assess risk systematically across multiple dimensions","Evaluate options using data-driven decision criteria","Communicate recommendations with clarity and conviction"],
-    mindsets:["Symptoms \u2260 causes: Solving the wrong problem well is still failure","Structured thinking under pressure: Frameworks prevent panic-driven decisions","Risk is multidimensional: Financial, reputational, operational, and strategic risks must all be weighed"],
-    tools:["Fishbone (Ishikawa) Diagram: Structured root cause identification","Risk Assessment Matrix: Likelihood \u00d7 Impact prioritization","Decision Matrix: Weighted criteria scoring for option evaluation","Recommendation Structure: Problem \u2192 Analysis \u2192 Options \u2192 Recommendation \u2192 Action"]},
-  /* ---- TM CASE CHALLENGES ---- */
-  { id:"enabling-peak-performance", name:"Enabling Peak Performance", type:"case", pillar:"tm", level:"rising", duration:"2 hrs", framework:"Pillars of Trust",
-    competencies:["Set clear expectations that build trust, alignment, and accountability","Deliver effective feedback using the SBI framework","Coach for growth by connecting feedback to individual motivators","Create a safe space for honest, productive conversations"],
-    mindsets:["Expectations are a two-way street: Setting expectations is collaborative, not directive","Feedback builds trust: Avoiding hard conversations erodes trust faster than having them","Growth mindset in coaching: Every person can develop if given the right support and clarity"],
-    tools:["Expectation Setting Framework: Say \u2192 Ask \u2192 Create","SBI Feedback Model: Situation \u2192 Behavior \u2192 Impact","Motivator-Linked Coaching: Tying development to what drives the individual","Performance-Trust Matrix: Mapping where each team member stands"]},
-  { id:"navigating-critical-conversations", name:"Navigating Critical Conversations", type:"case", pillar:"tm", level:"rising", duration:"2 hrs", framework:"Pillars of Trust",
-    competencies:["Guide difficult development conversations under pressure","Communicate clearly and empathetically in high-stakes situations","Rebuild alignment and trust after performance issues or conflict","Prepare for and structure critical conversations deliberately"],
-    mindsets:["Preparation prevents escalation: The best critical conversations are thoroughly planned","Intent \u2260 impact: Understanding the gap between your intent and their experience is the key","Follow-through is everything: A single conversation means nothing without consistent follow-up"],
-    tools:["Conversation Preparation Worksheet: Motivators, intent, structure, desired outcomes","SBI + Intent Model: Adding intent exploration to the feedback framework","Active Listening Techniques: Paraphrasing, clarifying, and reflecting back","Follow-Up Protocol: Next steps, timelines, and accountability commitments"]},
-  { id:"leading-in-times-of-change", name:"Leading in Times of Change", type:"case", pillar:"tm", level:"experienced", duration:"2 hrs", framework:"Levers of Leadership",
-    competencies:["Make tough organizational calls with conviction and empathy","Assess organizational and individual fit holistically during transitions","Lead change with intent, not just reaction","Navigate resistance and uncertainty while maintaining team morale"],
-    mindsets:["Change is leadership: You don\u2019t manage change \u2014 you lead it","Tough calls build trust: Avoiding hard decisions erodes credibility faster than making them","Empathy and conviction coexist: You can be direct AND compassionate simultaneously"],
-    tools:["Change Leadership Model: Assess \u2192 Communicate \u2192 Manage resistance \u2192 Sustain","Organizational Fit Assessment: Holistic evaluation of people, roles, and readiness","Resistance Mapping: Identifying sources and patterns of resistance to change","Communication Planning: Structuring change messages for clarity and impact"]},
-  /* ---- TM AI CASES ---- */
-  /* TM - Kickoff */
-  { id:"ai-get-the-message", name:"Get the Message?", type:"ai-case", pillar:"tm", level:"rising", duration:"15\u201320 min", subcategory:"Kickoff",
-    modality:"Ending Options",
-    options:["Create a communications policy for the team","Discuss at team meeting","Let the situation evolve naturally","Advise Jamie on your own plan"],
-    rubric:[
-      {category:"Diagnosing the Problem", points:30, criteria:["Ask clarifying questions to fully understand the surface-level issue Jamie presented (20 pts)","Help Jamie to reflect on their goals as a manager (10 pts)"]},
-      {category:"Balancing Perspectives", points:30, criteria:["Demonstrate awareness of the various factors Jamie is trying to balance (20 pts)","Explore trade-offs between productivity, team morale, and individual autonomy (10 pts)"]},
-      {category:"Exploring Solutions", points:40, criteria:["Offer suggestions to help address the problem as complications were revealed (20 pts)","Ask questions to help Jamie think through the leadership challenge (20 pts)"]}
-    ]},
-  /* TM - Enabling Peak Performance */
-  { id:"ai-close-the-door", name:"Close the Door. Have a Seat.", type:"ai-case", pillar:"tm", level:"rising", duration:"15\u201320 min", subcategory:"Enabling Peak Performance",
-    modality:"Starting Options",
-    options:["Approach John informally","Approach John after a team meeting","Set a formal meeting"],
-    rubric:[
-      {category:"Specificity of Feedback", points:25, criteria:["Cite the specific examples of John failing to engage the audience and cutting off their questions (25 pts)"]},
-      {category:"Communicating the Impact on the Team", points:25, criteria:["Clearly state the potential negative impact of John\u2019s behavior on other team members (20 pts)","Highlight the importance of fully listening rather than interrupting others (5 pts)"]},
-      {category:"Communicating the Impact on Career Advancement", points:30, criteria:["Discuss how the ability to present engagingly is vital for leadership roles (20 pts)","Connect openness to questions and concerns with potential for career advancement (10 pts)"]},
-      {category:"Overcoming Barriers and Maintaining Trust", points:20, criteria:["Use constructive, non-confrontational language (10 pts)","Specifically ask John to share his perspective (5 pts)","End the conversation on a positive, encouraging note (5 pts)"]}
-    ]},
-  { id:"ai-slippery-slope", name:"It\u2019s a Slippery Slope.", type:"ai-case", pillar:"tm", level:"rising", duration:"15\u201320 min", subcategory:"Enabling Peak Performance",
-    modality:"Ending Options",
-    options:["Send Peter with clear expectations","Say no to the conference","Transition Peter\u2019s key clients","Suggest a formal intervention"],
-    rubric:[
-      {category:"Facilitating Self-Reflection", points:25, criteria:["Guide Peter to recognize the pattern in his own behavior (15 pts)","Ask probing questions rather than making accusations (10 pts)"]},
-      {category:"Brainstorming Solutions", points:30, criteria:["Explore multiple options for addressing the situation (15 pts)","Involve Peter in generating solutions (15 pts)"]},
-      {category:"Committing to a Path Forward", points:30, criteria:["Establish clear next steps and accountability measures (15 pts)","Ensure mutual agreement on the plan (15 pts)"]},
-      {category:"Addressing Humor and Distractions", points:15, criteria:["Redirect when Peter uses humor to deflect (10 pts)","Keep the conversation focused on the core issue (5 pts)"]}
-    ]},
-  { id:"ai-welcome-aboard", name:"Welcome Aboard!", type:"ai-case", pillar:"tm", level:"rising", duration:"15\u201320 min", subcategory:"Enabling Peak Performance",
-    modality:"Ending Options",
-    options:["Work on the project together","Have Kim just be an observer","Set up weekly check-ins","Ask Kim to create a draft"],
-    rubric:[
-      {category:"Clarity of Project Goals", points:60, criteria:["Clearly articulate specific objectives and deliverables (15 pts)","Provide context on how the project aligns with team/company goals (15 pts)","Outline the timeline for completion including milestones (15 pts)","Clearly define how success will be measured (15 pts)"]},
-      {category:"Building Employee Confidence and Trust", points:40, criteria:["Express confidence in Kim\u2019s abilities (10 pts)","Offer personal support to bolster confidence (5 pts)","Give Kim opportunity to share concerns or questions (15 pts)","Address Kim\u2019s questions and concerns appropriately (10 pts)"]}
-    ]},
-  /* TM - Navigating Critical Conversations */
-  { id:"ai-good-news", name:"I\u2019ve Got Good News!", type:"ai-case", pillar:"tm", level:"rising", duration:"15\u201320 min", subcategory:"Navigating Critical Conversations",
-    modality:"Ending Options",
-    options:["Nominate Tanya for GTE","Lead Community Impact","Knowledge Management Project"],
-    rubric:[
-      {category:"Understanding Employee\u2019s Motivation", points:30, criteria:["Ask open-ended questions to explore Tanya\u2019s concerns about opportunities (10 pts)","Ask open-ended questions to explore motivations, career goals and aspirations (20 pts)"]},
-      {category:"Demonstrating Empathy", points:25, criteria:["Express empathy towards Tanya\u2019s feelings and apprehensions (10 pts)","Use reflective listening to demonstrate understanding of Tanya\u2019s perspective (15 pts)"]},
-      {category:"Aligning Tasks with Motivators", points:45, criteria:["Present ways opportunities align with Tanya\u2019s motivators and goals (20 pts)","Ask Tanya for input on growth opportunities that appeal to her (15 pts)","Express commitment to continued support and open communication (10 pts)"]}
-    ]},
-  { id:"ai-blindsided", name:"Blindsided.", type:"ai-case", pillar:"tm", level:"rising", duration:"15\u201320 min", subcategory:"Navigating Critical Conversations",
-    modality:"Ending Options",
-    options:["Tell Jennifer moving on is best","Craft a more engaging role","Offer 10% pay increase","Offer executive coach opportunity"],
-    rubric:[
-      {category:"Exploring Motivations", points:40, criteria:["Ask open-ended questions to understand underlying factors (5 pts per question, max 20 pts)","Ask deeper questions to uncover Jennifer\u2019s motivations (5 pts per question, max 20 pts)"]},
-      {category:"Identifying Changes to Improve Engagement", points:30, criteria:["Seek Jennifer\u2019s input on aspects she finds lacking or dissatisfying (10 pts)","Appear open to discuss potential changes to improve engagement (10 pts)","Explore growth, development, or advancement opportunities (10 pts)"]},
-      {category:"Building Trust and Rapport", points:30, criteria:["Rephrase and validate what Jennifer shared (10 pts)","Ask powerful questions to surface deeper motivations (10 pts)","Demonstrate genuine concern for Jennifer\u2019s well-being (10 pts)"]}
-    ]},
-  { id:"ai-why-not-me", name:"Why Not Me?", type:"ai-case", pillar:"tm", level:"rising", duration:"15\u201320 min", subcategory:"Navigating Critical Conversations",
-    modality:"Ending Options",
-    options:["Make Dante aware of Karl\u2019s concerns","Set up periodic check-ins","Let Dante handle things from here","Prepare for disruption"],
-    rubric:[
-      {category:"Acknowledging Karl\u2019s Feelings", points:10, criteria:["Validate Karl\u2019s feelings of frustration about being passed over (5 pts)","Express empathy and understanding towards Karl\u2019s situation (5 pts)"]},
-      {category:"Clarifying Expectations and Performance Criteria", points:70, criteria:["Provide clarity on the promotion process and criteria (20 pts)","Offer specific feedback highlighting strengths and areas for improvement (20 pts)","Discuss actionable steps to enhance skills for future opportunities (15 pts)","Provide reassurance and encouragement, emphasizing value to team (15 pts)"]},
-      {category:"Mitigating Potential Conflict with New Manager", points:20, criteria:["Encourage open communication and collaboration with Dante (10 pts)","Offer strategies for navigating the transition positively (10 pts)"]}
-    ]},
-  /* ---- CF AI CASES ---- */
-  /* CF - Kickoff */
-  { id:"ai-hold-the-line", name:"Hold The Line?", type:"ai-case", pillar:"cf", level:"rising", duration:"15\u201320 min", subcategory:"Kickoff",
-    modality:"Ending Options",
-    options:["Change your Plan","Champion your own plan"],
-    rubric:[
-      {category:"Relationship Building and Trust", points:40, criteria:["Demonstrate understanding of Bill\u2019s perspective and concerns (10 pts)","Acknowledge Bill\u2019s ideas and show respect for his experience (10 pts)","Position yourself as a credible, long-term reciprocal partner (20 pts)"]},
-      {category:"Aligning with Bill\u2019s Priorities", points:20, criteria:["Align approach with Bill\u2019s priorities: productivity, retention, efficiency, bottom line (20 pts)"]},
-      {category:"Persuasive Communication", points:40, criteria:["Communicate discussion intent directly and clearly (20 pts)","Outline comprehensive wellness program with supporting rationale (10 pts)","Frame change as a business imperative (10 pts)"]}
-    ]},
-  /* CF - Shifting Mindsets */
-  { id:"ai-change-will-do-you-good", name:"A Change Will Do You Good.", type:"ai-case", pillar:"cf", level:"rising", duration:"15\u201320 min", subcategory:"Shifting Mindsets",
-    modality:"Ending Options",
-    options:["Ask for Marcela\u2019s feedback","Give Marcela time to acclimate","Have Marcela train the team","Remove Marcela from your team"],
-    rubric:[
-      {category:"Understanding the Source of Resistance", points:20, criteria:["Ask probing questions to uncover underlying factors driving resistance (15 pts)","Demonstrate empathy towards Marcela\u2019s apprehensions about the change (5 pts)"]},
-      {category:"Articulating Benefits of Change", points:50, criteria:["Clearly outline how the change will benefit Marcela\u2019s role and responsibilities (25 pts)","Emphasize specific ways the change contributes to professional growth (25 pts)"]},
-      {category:"Overcoming Sarcasm and Cynicism", points:30, criteria:["Maintain calm and composed demeanor despite sarcastic remarks (15 pts)","Use humor or lightheartedness to disarm cynicism (5 pts)","Address sarcasm directly but tactfully, steering back to productive dialogue (10 pts)"]}
-    ]},
-  { id:"ai-not-here-to-make-friends", name:"I\u2019m Not Here To Make Friends.", type:"ai-case", pillar:"cf", level:"rising", duration:"15\u201320 min", subcategory:"Shifting Mindsets",
-    modality:"Starting Options",
-    options:["\u201cLet me share some feedback...\u201d","\u201cLet Me Tell You How Great You Are...\u201d"],
-    rubric:[
-      {category:"Understanding Employee\u2019s Motivation", points:25, criteria:["Ask open-ended questions to explore Blaine\u2019s core motivators (10 pts)","Explore circumstances behind Blaine\u2019s motivators (5 pts)","Demonstrate genuine interest in understanding Blaine\u2019s perspective (10 pts)"]},
-      {category:"Demonstrating Empathy", points:10, criteria:["Express empathy towards Blaine\u2019s rationale (5 pts)","Convey understanding of Blaine\u2019s current situation (5 pts)"]},
-      {category:"Tying Desired Behaviors to Core Motivators", points:65, criteria:["Explain how collaboration helps Blaine reach higher achievement and status (25 pts)","Explain how poor behavior risks damaging achievement and status (25 pts)","Address feedback from Product (5 pts)","Address feedback from Deal Desk (5 pts)","Address feedback from Sales Associate (5 pts)"]}
-    ]},
-  { id:"ai-spread-your-wings", name:"Spread Your Wings and Fly.", type:"ai-case", pillar:"cf", level:"rising", duration:"15\u201320 min", subcategory:"Shifting Mindsets",
-    modality:"Ending Options",
-    options:["Stay active in Marcus\u2019s decision-making","Gradually delegate more","Challenge Marcus to take more ownership","Ask if he wants his old role"],
-    rubric:[
-      {category:"Building Confidence in Decision-Making", points:25, criteria:["Acknowledge Marcus\u2019s past successes and capabilities (5 pts)","Ask Marcus to reflect on what drives his lack of confidence (5 pts)","Challenge Marcus to question negative thoughts about readiness (15 pts)"]},
-      {category:"Empowering Marcus to Handle Issues Independently", points:60, criteria:["Communicate importance of taking ownership of decisions (15 pts)","Provide guidance on when to involve manager vs. handle alone (10 pts)","Specify he was right to include manager in budget decision (10 pts)","Specify he should decide on Susan\u2019s PTO on his own (5 pts)","Specify he should discuss Rick\u2019s pay increase rationale himself (10 pts)","Offer support and encouragement, emphasizing capabilities (5 pts)","Encourage brainstorming solutions to common issues (5 pts)"]},
-      {category:"Building Trust and Rapport", points:15, criteria:["Use supportive, non-judgmental language (5 pts)","Acknowledge concerns without dismissing them (5 pts)","End on a positive note expressing confidence in Marcus (5 pts)"]}
-    ]},
-  /* CF - Influencing Without Authority */
-  { id:"ai-fault-line", name:"The Fault Line.", type:"ai-case", pillar:"cf", level:"rising", duration:"15\u201320 min", subcategory:"Influencing Without Authority",
-    modality:"Ending Options",
-    options:["Follow up with Sam to gain buy-in","No follow-up is necessary","Invite Sam to help create a plan","Inform leadership about Sam\u2019s resistance"],
-    rubric:[
-      {category:"Surfacing Deeper Interests", points:25, criteria:["Ask questions to understand reasons for Sam\u2019s opposition (5 pts)","Validate Sam\u2019s perspective (5 pts)","Uncover Sam\u2019s deeper interest in preserving company culture (15 pts)"]},
-      {category:"Articulating Shared Interest in Culture Preservation", points:20, criteria:["State own commitment to preserving company culture (10 pts)","Emphasize importance of culture to company success or personally (10 pts)"]},
-      {category:"Aligning Benefits of Merger with Shared Interests", points:35, criteria:["Explain how the merger can support culture preservation (20 pts)","Provide concrete examples or plans for maintaining culture post-merger (15 pts)"]},
-      {category:"Shifting Sam\u2019s Stance", points:20, criteria:["Sam indicates willingness to rethink attitude toward the merger (20 pts)"]}
-    ]},
-  { id:"ai-not-convinced", name:"I\u2019m Not Convinced.", type:"ai-case", pillar:"cf", level:"rising", duration:"15\u201320 min", subcategory:"Influencing Without Authority",
-    modality:"Ending Options",
-    options:["Proceed confidently","Follow up with Grace on her concerns","Seek support elsewhere"],
-    rubric:[
-      {category:"Establishing Credibility and Trust", points:10, criteria:["Demonstrate honesty and transparency in communication (5 pts)","Show interest in collaborative discussion rather than just asking for support (5 pts)"]},
-      {category:"Using Expressive Influence Techniques", points:35, criteria:["Clearly articulate project significance and potential impact (10 pts)","Highlight how supporting project aligns with Grace\u2019s goals (10 pts)","Provide concrete examples or evidence of project benefits (15 pts)"]},
-      {category:"Using Receptive Influence Techniques", points:35, criteria:["Demonstrate interest in Grace\u2019s perspective (15 pts)","Listen to concerns and address them effectively (10 pts)","Offer solutions or compromises to mitigate concerns (10 pts)"]},
-      {category:"Overall Outcome", points:20, criteria:["Grace agrees to support the project (20 pts)"]}
-    ]},
-  { id:"ai-scope-springs-eternal", name:"Scope Springs Eternal.", type:"ai-case", pillar:"cf", level:"rising", duration:"15\u201320 min", subcategory:"Influencing Without Authority",
-    modality:"Starting Options",
-    options:["\u201cWe\u2019ve Got a Skills Gap...\u201d","\u201cCan we talk about Bonnie\u2019s request?\u201d","Bring up both issues","\u201cFirst, the Good News...\u201d"],
-    rubric:[
-      {category:"Solution-Focused Communication", points:25, criteria:["Present own ideas for solving challenges without being prompted (15 pts)","Demonstrate flexibility in exploring alternatives (5 pts)","Focus on solutions rather than obstacles (5 pts)"]},
-      {category:"Managing Expectations", points:25, criteria:["Clearly explain impact of challenges on project timeline and quality (15 pts)","Anticipate potential concerns or objections from Mei (5 pts)","Engage in discussion on proactive strategies and contingency plans (5 pts)"]},
-      {category:"Effective Communication", points:10, criteria:["Use clear and concise language tying project success to organizational goals (5 pts)","Address challenges constructively rather than complaining (5 pts)"]},
-      {category:"Securing Mei\u2019s Support", points:40, criteria:["Mei supports solution to address the skill gap (20 pts)","Mei supports solution to Bonnie\u2019s AI feature request (20 pts)"]}
-    ]},
-  /* ---- TALENT SELECTION AI CASES ---- */
-  { id:"ai-good-enough", name:"Is Good Enough... Enough?", type:"ai-case", pillar:"ts", level:"rising", duration:"15\u201320 min", subcategory:"Talent Selection",
-    modality:"Ending Options",
-    options:["Hire Emma","Hire Liam","Leave the role open"],
-    rubric:[
-      {category:"Objective Decision-Making", points:30, criteria:["Consider unconscious biases in candidate evaluation (20 pts)","Challenge assumptions about what constitutes an \u2018ideal\u2019 candidate (10 pts)"]},
-      {category:"Talent Selection & Strategic Fit", points:30, criteria:["Evaluate how each candidate aligns with team and organizational goals (15 pts)","Consider both short-term performance needs and long-term development (15 pts)"]},
-      {category:"Impact on Team Performance & Culture", points:30, criteria:["Think beyond this hire to consider impact on morale, collaboration, and culture (10 pts)","Discuss strategies for onboarding and supporting the new hire (10 pts)","Think about how this hire fosters growth, engagement, diversity and innovation (10 pts)"]}
-    ]},
-  { id:"ai-secret-ingredient", name:"The Secret Ingredient.", type:"ai-case", pillar:"ts", level:"rising", duration:"15\u201320 min", subcategory:"Talent Selection",
-    modality:"Ending Options",
-    options:["Hire Daniel","Hire Aditi","Hire Mateus"],
-    rubric:[
-      {category:"Managing Today for Tomorrow", points:50, criteria:["Address balancing short-term needs against building a sustainable Insights function (25 pts)","Discuss tradeoffs of hiring one candidate versus the others (25 pts)"]},
-      {category:"Growth Mindset", points:30, criteria:["Consider which candidate promotes curiosity, adaptability, and continuous learning (10 pts)","Explore which candidate cultivates a culture of experimentation and iteration (10 pts)","Assess which candidate strengthens team through diverse skills and perspectives (10 pts)"]},
-      {category:"Positioning for High Performance Teams", points:20, criteria:["Think beyond the hire to attracting, integrating, and developing talent (10 pts)","Address how company can position itself as employer of choice for external talent (10 pts)"]}
-    ]}
-];
-
-/* ========== RENDER PROGRAM CARDS ========== */
-const pillarLabels = { ba: "Business Acumen", cf: "Cross-Functional", tm: "Team Management", ts: "Talent Selection" };
-const levelLabels = { rising: "Rising Leader", experienced: "Experienced Leader", executive: "Executive Leader" };
-const accentClass = { ba: "ba-accent", cf: "cf-accent", tm: "tm-accent", ts: "ts-accent" };
-
-function renderPrograms() {
-  const grid = document.getElementById("prog-grid");
-  grid.innerHTML = "";
-  PROGRAMS.forEach(p => {
-    const card = document.createElement("div");
-    card.className = `prog-card ${p.pillar}-prog`;
-    card.dataset.type = p.type;
-    card.dataset.pillar = p.pillar;
-    card.dataset.level = p.level;
-    card.id = "prog-" + p.id;
-    card.onclick = () => toggleProgCard(p.id);
-
-    const listHtml = (items) => items.map(i => {
-      const ci = i.indexOf(":");
-      if (ci > 0 && ci < 50) return `<li><strong>${i.substring(0,ci+1)}</strong>${i.substring(ci+1)}</li>`;
-      return `<li>${i}</li>`;
-    }).join("");
-
-    let detailInner;
-    if (p.rubric) {
-      // AI Case rendering
-      const optionsHtml = p.options ? p.options.map(o => `<span class="ai-option-chip">${o}</span>`).join("") : "";
-      const rubricHtml = p.rubric.map(r => `
-        <div class="rubric-category ${accentClass[p.pillar] || 'ts-accent'}">
-          <div class="rubric-header"><span class="rubric-cat-name">${r.category}</span><span class="rubric-pts">${r.points} pts</span></div>
-          <ul>${r.criteria.map(c => `<li>${c}</li>`).join("")}</ul>
-        </div>`).join("");
-      detailInner = `
-        <div style="margin-bottom:12px;">
-          <span class="cell-framework ${p.pillar}" style="font-size:11px;padding:5px 12px;">${p.modality}</span>
-          ${p.subcategory ? `<span class="ai-subcategory">${p.subcategory}</span>` : ""}
-        </div>
-        ${p.options ? `<div class="ai-options-row"><span class="ai-options-label">Options:</span>${optionsHtml}</div>` : ""}
-        <div class="rubric-grid">${rubricHtml}</div>`;
-    } else {
-      // Original sim/case rendering
-      detailInner = `
-        <div style="margin-bottom:8px;">
-          <span class="cell-framework ${p.pillar}" style="font-size:11px;padding:5px 12px;">Key Framework: ${p.framework}</span>
-        </div>
-        <div class="section-grid">
-          <div class="section-block ${accentClass[p.pillar]}"><h4>Competencies</h4><ul>${listHtml(p.competencies)}</ul></div>
-          <div class="section-block ${accentClass[p.pillar]}"><h4>Mindsets</h4><ul>${listHtml(p.mindsets)}</ul></div>
-          <div class="section-block ${accentClass[p.pillar]}"><h4>Tools &amp; Frameworks</h4><ul>${listHtml(p.tools)}</ul></div>
-        </div>`;
+    function askQuestion(question) {
+      userInput.value = question;
+      sendMessage();
     }
 
-    const typeLabel = p.type === "sim" ? "Simulation" : p.type === "case" ? "Case Challenge" : "AI Case";
-
-    card.innerHTML = `
-      <div class="prog-card-top">
-        <div class="prog-card-accent ${p.pillar}-bar"></div>
-        <div class="prog-card-info">
-          <div class="prog-card-name">${p.name}</div>
-          <div class="prog-card-meta">
-            <span class="prog-meta-tag type-${p.type}">${typeLabel}</span>
-            <span class="prog-meta-tag level-tag">${levelLabels[p.level]}</span>
-            <span class="prog-meta-tag level-tag">${p.duration}</span>
-          </div>
-        </div>
-        <span class="prog-card-toggle">\u25BE</span>
-      </div>
-      <div class="prog-detail">
-        <div class="prog-detail-inner">
-          ${detailInner}
-        </div>
-      </div>`;
-    grid.appendChild(card);
-  });
-}
-
-function toggleProgCard(id) {
-  const el = document.getElementById("prog-" + id);
-  if (el) el.classList.toggle("prog-selected");
-}
-
-/* ========== FILTERS ========== */
-let activeFilters = { type: "all", pillar: "all", level: "all" };
-
-function toggleProgFilter(category, value, btn) {
-  activeFilters[category] = value;
-  // Update button states for this category
-  const siblings = btn.parentElement.querySelectorAll(`.prog-filter-btn`);
-  // Find all buttons in the same category group
-  let inGroup = false;
-  const allBtns = document.querySelectorAll(".prog-filters .prog-filter-btn");
-  const labels = document.querySelectorAll(".prog-filters .prog-filter-label");
-  let groupStart = -1;
-  let groupEnd = allBtns.length;
-
-  // Find the label before this button to scope the group
-  allBtns.forEach((b, i) => {
-    if (b === btn) {
-      // Walk backward to find the preceding label
-      groupStart = i;
+    function handleKeyPress(e) {
+      if (e.key === 'Enter') sendMessage();
     }
-  });
 
-  // Simple approach: reset all in same row, then activate clicked
-  const filterRow = btn.closest(".prog-filters");
-  const categoryBtns = [];
-  let foundLabel = false;
-  filterRow.childNodes.forEach(node => {
-    if (node.classList && node.classList.contains("prog-filter-label")) {
-      const txt = node.textContent.trim().toLowerCase();
-      foundLabel = (category === "type" && txt.includes("type")) ||
-                   (category === "pillar" && txt.includes("pillar")) ||
-                   (category === "level" && txt.includes("level"));
-      if (foundLabel) categoryBtns.length = 0;
+    async function sendMessage() {
+      const message = userInput.value.trim();
+      if (!message) return;
+
+      // Hide welcome message
+      if (welcome) welcome.style.display = 'none';
+
+      // Add user message
+      addMessage(message, 'user');
+      userInput.value = '';
+      sendBtn.disabled = true;
+
+      // Add typing indicator
+      const typingId = addTypingIndicator();
+
+      try {
+        const response = await fetch('/api/chat', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            message,
+            history: conversationHistory
+          })
+        });
+
+        const data = await response.json();
+        removeTypingIndicator(typingId);
+
+        if (data.error) {
+          addMessage('Sorry, something went wrong. Please try again.', 'assistant');
+        } else {
+          addMessage(data.response, 'assistant');
+          conversationHistory.push({ role: 'user', content: message });
+          conversationHistory.push({ role: 'assistant', content: data.response });
+        }
+      } catch (error) {
+        removeTypingIndicator(typingId);
+        addMessage('Sorry, I could not connect to the server. Please try again.', 'assistant');
+      }
+
+      sendBtn.disabled = false;
+      userInput.focus();
     }
-    if (node.classList && node.classList.contains("prog-filter-btn") && foundLabel) {
-      categoryBtns.push(node);
+
+    function addMessage(content, role) {
+      const messageDiv = document.createElement('div');
+      messageDiv.className = `message ${role}`;
+
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = role === 'user' ? 'You' : 'AI';
+
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'message-content';
+      contentDiv.innerHTML = formatMessage(content);
+
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(contentDiv);
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
     }
-    if (node.classList && node.classList.contains("prog-filter-label") && categoryBtns.length > 0 && !foundLabel) {
-      // hit next group label, stop
+
+    function formatMessage(text) {
+      // Convert markdown-like formatting to HTML
+      return text
+        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+        .replace(/\n\n/g, '</p><p>')
+        .replace(/\n- /g, '</p><ul><li>')
+        .replace(/\n\d\. /g, '</p><ol><li>')
+        .replace(/<\/li>(?=<li>)/g, '</li>')
+        .split('\n').join('<br>')
+        .replace(/^/, '<p>').replace(/$/, '</p>');
     }
-  });
 
-  categoryBtns.forEach(b => b.classList.remove("active-filter"));
-  btn.classList.add("active-filter");
+    function addTypingIndicator() {
+      const id = 'typing-' + Date.now();
+      const messageDiv = document.createElement('div');
+      messageDiv.className = 'message assistant';
+      messageDiv.id = id;
 
-  applyFilters();
-}
+      const avatar = document.createElement('div');
+      avatar.className = 'message-avatar';
+      avatar.textContent = 'AI';
 
-function applyFilters() {
-  const cards = document.querySelectorAll(".prog-card");
-  let visible = 0;
-  cards.forEach(card => {
-    const matchType = activeFilters.type === "all" || card.dataset.type === activeFilters.type;
-    const matchPillar = activeFilters.pillar === "all" || card.dataset.pillar === activeFilters.pillar;
-    const matchLevel = activeFilters.level === "all" || card.dataset.level === activeFilters.level;
-    if (matchType && matchPillar && matchLevel) {
-      card.classList.remove("prog-hidden");
-      visible++;
-    } else {
-      card.classList.add("prog-hidden");
-      card.classList.remove("prog-selected");
+      const contentDiv = document.createElement('div');
+      contentDiv.className = 'message-content';
+      contentDiv.innerHTML = '<div class="typing-indicator"><span></span><span></span><span></span></div>';
+
+      messageDiv.appendChild(avatar);
+      messageDiv.appendChild(contentDiv);
+      messagesContainer.appendChild(messageDiv);
+      messagesContainer.scrollTop = messagesContainer.scrollHeight;
+      return id;
     }
-  });
-  document.getElementById("prog-empty").style.display = visible === 0 ? "block" : "none";
-}
 
-// Initialize
-renderPrograms();
-</script>
+    function removeTypingIndicator(id) {
+      const el = document.getElementById(id);
+      if (el) el.remove();
+    }
+  </script>
 </body>
 </html>
