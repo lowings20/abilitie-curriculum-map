@@ -221,8 +221,10 @@
 
     .message-content p { margin-bottom: 8px; }
     .message-content p:last-child { margin-bottom: 0; }
-    .message-content ul, .message-content ol { margin: 6px 0 6px 16px; font-size: 12px; }
-    .message-content li { margin-bottom: 3px; }
+    .message-content h3 { font-size: 14px; font-weight: 700; margin: 12px 0 6px; color: var(--navy); }
+    .message-content h4 { font-size: 13px; font-weight: 600; margin: 10px 0 4px; color: var(--teal-dark); }
+    .message-content ul { margin: 4px 0 8px 16px; font-size: 12px; }
+    .message-content li { margin-bottom: 4px; line-height: 1.4; }
     .message-content strong { font-weight: 600; }
 
     .typing-indicator {
@@ -435,11 +437,43 @@
     }
 
     function formatMessage(text) {
-      return text
-        .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
-        .replace(/\n\n/g, '</p><p>')
-        .split('\n').join('<br>')
-        .replace(/^/, '<p>').replace(/$/, '</p>');
+      // Process line by line
+      const lines = text.split('\n');
+      let html = '';
+      let inList = false;
+
+      for (let i = 0; i < lines.length; i++) {
+        let line = lines[i];
+
+        // Bold
+        line = line.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+        // Headers
+        if (line.startsWith('## ')) {
+          if (inList) { html += '</ul>'; inList = false; }
+          html += `<h4>${line.substring(3)}</h4>`;
+        } else if (line.startsWith('# ')) {
+          if (inList) { html += '</ul>'; inList = false; }
+          html += `<h3>${line.substring(2)}</h3>`;
+        }
+        // Bullet points (handle -, *, •)
+        else if (line.match(/^\s*[-*•]\s+/)) {
+          if (!inList) { html += '<ul>'; inList = true; }
+          html += `<li>${line.replace(/^\s*[-*•]\s+/, '')}</li>`;
+        }
+        // Empty line
+        else if (line.trim() === '') {
+          if (inList) { html += '</ul>'; inList = false; }
+        }
+        // Regular paragraph
+        else {
+          if (inList) { html += '</ul>'; inList = false; }
+          html += `<p>${line}</p>`;
+        }
+      }
+
+      if (inList) html += '</ul>';
+      return html || '<p>' + text + '</p>';
     }
 
     function addTypingIndicator() {
