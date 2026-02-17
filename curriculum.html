@@ -545,7 +545,11 @@
     overflow: hidden;
   }
   .prog-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); }
-  .prog-card.prog-selected { border-color: var(--navy); }
+  .prog-card.prog-selected {
+    border-color: var(--navy);
+    width: 100%;
+    flex-basis: 100%;
+  }
   .prog-card.prog-selected.ba-prog { border-color: var(--pill-ba); }
   .prog-card.prog-selected.cf-prog { border-color: var(--pill-cf); }
   .prog-card.prog-selected.tm-prog { border-color: var(--pill-tm); }
