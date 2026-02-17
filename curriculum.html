@@ -923,11 +923,10 @@
   <h1>Curriculum Map</h1>
   <p>Building leadership capabilities across three timeless business domains — from rising leaders through the executive suite — through team-based simulations with AI insights.</p>
   <div class="hero-meta">
-    <div class="hero-stat"><div class="num">4</div><div class="label">Pillars</div></div>
+    <div class="hero-stat"><div class="num">3</div><div class="label">Pillars</div></div>
     <div class="hero-stat"><div class="num">3</div><div class="label">Levels</div></div>
-    <div class="hero-stat"><div class="num">9</div><div class="label">Simulations</div></div>
-    <div class="hero-stat"><div class="num">10</div><div class="label">Case Challenges</div></div>
-    <div class="hero-stat"><div class="num">16</div><div class="label">AI Cases</div></div>
+    <div class="hero-stat"><div class="num">8</div><div class="label">Simulations</div></div>
+    <div class="hero-stat"><div class="num">8</div><div class="label">Case Challenges</div></div>
   </div>
 </div>
 
@@ -2078,6 +2077,133 @@ function applyFilters() {
 
 // Initialize
 renderPrograms();
+
+
+// ============ COMPARE PROGRAMS ============
+let programA = [];
+let programB = [];
+
+function initCompare() {
+  renderCompareItems();
+  renderProgramColumns();
+}
+
+function filterCompareItems() {
+  renderCompareItems();
+}
+
+function renderCompareItems() {
+  const filter = document.getElementById('compare-filter').value;
+  const container = document.getElementById('compare-items-list');
+  
+  if (!container) return;
+  
+  let items = programs.filter(p => {
+    if (filter === 'sim') return p.type === 'sim';
+    if (filter === 'case') return p.type === 'case';
+    return true;
+  });
+
+  container.innerHTML = items.map(p => `
+    <div class="compare-item ${p.pillar}" onclick="showAddDialog('${p.id}')">
+      <div class="item-name">${p.name}</div>
+      <div class="item-meta">${p.type === 'sim' ? 'Simulation' : 'Case'} • ${p.level} • ${p.duration}</div>
+    </div>
+  `).join('');
+}
+
+function showAddDialog(id) {
+  const choice = confirm('Add to Program A?\n\nOK = Program A\nCancel = Program B');
+  addItem(id, choice ? 'a' : 'b');
+}
+
+function addItem(id, prog) {
+  const arr = prog === 'a' ? programA : programB;
+  if (!arr.includes(id)) {
+    arr.push(id);
+    renderProgramColumns();
+  }
+}
+
+function removeItem(prog, id) {
+  if (prog === 'a') {
+    programA = programA.filter(x => x !== id);
+  } else {
+    programB = programB.filter(x => x !== id);
+  }
+  renderProgramColumns();
+}
+
+function clearProgram(prog) {
+  if (prog === 'a') programA = [];
+  else programB = [];
+  renderProgramColumns();
+}
+
+function renderProgramColumns() {
+  renderColumn('a', programA);
+  renderColumn('b', programB);
+}
+
+function renderColumn(prog, items) {
+  const itemsEl = document.getElementById('program-' + prog + '-items');
+  const emptyEl = document.getElementById('program-' + prog + '-empty');
+  const statsEl = document.getElementById('program-' + prog + '-stats');
+  
+  if (!itemsEl) return;
+
+  if (items.length === 0) {
+    itemsEl.innerHTML = '';
+    emptyEl.style.display = 'block';
+    statsEl.style.display = 'none';
+    return;
+  }
+
+  emptyEl.style.display = 'none';
+  statsEl.style.display = 'block';
+
+  const pItems = items.map(id => programs.find(x => x.id === id)).filter(Boolean);
+
+  itemsEl.innerHTML = pItems.map(p => `
+    <div class="program-item ${p.pillar}">
+      <span>${p.name} <small style="color:var(--gray-400)">(${p.duration})</small></span>
+      <button class="remove-btn" onclick="removeItem('${prog}', '${p.id}')">×</button>
+    </div>
+  `).join('');
+
+  // Stats
+  let minHrs = 0, maxHrs = 0;
+  pItems.forEach(p => {
+    const m = p.duration.match(/(\d+)(?:[–-](\d+))?/);
+    if (m) { minHrs += +m[1]; maxHrs += +(m[2]||m[1]); }
+  });
+
+  const comps = [...new Set(pItems.flatMap(p => p.competencies || []))];
+  const minds = [...new Set(pItems.flatMap(p => p.mindsets || []))];
+  const pillars = [...new Set(pItems.map(p => p.pillar))].map(x => ({ba:'BA',cf:'CF',tm:'TM'}[x]||x)).join(', ');
+  const levels = [...new Set(pItems.map(p => p.level))].map(l => l[0].toUpperCase()+l.slice(1)).join(', ');
+
+  statsEl.innerHTML = `
+    <div class="stat-row"><span class="stat-label">Seat Time</span><span class="stat-value highlight">${minHrs===maxHrs?minHrs:minHrs+'–'+maxHrs} hrs</span></div>
+    <div class="stat-row"><span class="stat-label">Programs</span><span class="stat-value">${pItems.filter(p=>p.type==='sim').length} sims, ${pItems.filter(p=>p.type==='case').length} cases</span></div>
+    <div class="stat-row"><span class="stat-label">Pillars</span><span class="stat-value">${pillars||'—'}</span></div>
+    <div class="stat-row"><span class="stat-label">Levels</span><span class="stat-value">${levels||'—'}</span></div>
+    <div class="stat-row"><span class="stat-label">Competencies</span><span class="stat-value">${comps.length}</span></div>
+    <div class="stat-row"><span class="stat-label">Mindsets</span><span class="stat-value">${minds.length}</span></div>
+    <div class="competency-list">
+      <h4>Competencies</h4>
+      <ul>${comps.slice(0,8).map(c=>'<li>'+c+'</li>').join('')}${comps.length>8?'<li style="color:var(--gray-400)">+'+(comps.length-8)+' more</li>':''}</ul>
+    </div>
+  `;
+}
+
+// Hook into showView
+const _origShowView = showView;
+showView = function(v) {
+  _origShowView(v);
+  if (v === 'compare') initCompare();
+};
+
 </script>
 </body>
 </html>
