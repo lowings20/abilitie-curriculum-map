@@ -2098,7 +2098,7 @@ function renderCompareItems() {
   
   if (!container) return;
   
-  let items = programs.filter(p => {
+  let items = PROGRAMS.filter(p => {
     if (filter === 'sim') return p.type === 'sim';
     if (filter === 'case') return p.type === 'case';
     return true;
@@ -2162,7 +2162,7 @@ function renderColumn(prog, items) {
   emptyEl.style.display = 'none';
   statsEl.style.display = 'block';
 
-  const pItems = items.map(id => programs.find(x => x.id === id)).filter(Boolean);
+  const pItems = items.map(id => PROGRAMS.find(x => x.id === id)).filter(Boolean);
 
   itemsEl.innerHTML = pItems.map(p => `
     <div class="program-item ${p.pillar}">
