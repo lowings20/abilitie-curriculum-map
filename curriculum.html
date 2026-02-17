@@ -719,6 +719,182 @@
   .ai-chip { background: #b91c1c; }
   .ai-chip .chip-tag { background: rgba(255,255,255,0.2); }
 
+
+  /* COMPARE VIEW */
+  .compare-container {
+    display: grid;
+    grid-template-columns: 280px 1fr 1fr;
+    gap: 24px;
+    min-height: 600px;
+  }
+  .compare-sidebar {
+    background: var(--white);
+    border-radius: var(--radius);
+    padding: 20px;
+    box-shadow: var(--shadow);
+    max-height: 80vh;
+    overflow-y: auto;
+    position: sticky;
+    top: 100px;
+  }
+  .compare-sidebar h3 {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 16px;
+  }
+  .compare-item {
+    padding: 12px;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s;
+    font-size: 13px;
+  }
+  .compare-item:hover {
+    border-color: var(--teal);
+    background: rgba(0,180,216,0.05);
+  }
+  .compare-item .item-name {
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .compare-item .item-meta {
+    font-size: 11px;
+    color: var(--gray-500);
+  }
+  .compare-item.ba { border-left: 3px solid var(--pill-ba); }
+  .compare-item.cf { border-left: 3px solid var(--pill-cf); }
+  .compare-item.tm { border-left: 3px solid var(--pill-tm); }
+
+  .program-column {
+    background: var(--white);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .program-header {
+    background: var(--navy);
+    color: white;
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .program-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+  }
+  .program-header .clear-btn {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+  .program-header .clear-btn:hover {
+    background: rgba(255,255,255,0.3);
+  }
+  .program-body {
+    padding: 20px;
+    min-height: 300px;
+  }
+  .program-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: var(--gray-400);
+    font-size: 14px;
+  }
+  .program-items {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 20px;
+  }
+  .program-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: var(--gray-50);
+    border-radius: 6px;
+    font-size: 13px;
+  }
+  .program-item.ba { border-left: 3px solid var(--pill-ba); }
+  .program-item.cf { border-left: 3px solid var(--pill-cf); }
+  .program-item.tm { border-left: 3px solid var(--pill-tm); }
+  .program-item .remove-btn {
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    cursor: pointer;
+    font-size: 16px;
+  }
+  .program-item .remove-btn:hover {
+    color: var(--coral);
+  }
+
+  .program-stats {
+    border-top: 1px solid var(--gray-200);
+    padding-top: 16px;
+  }
+  .stat-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    font-size: 13px;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .stat-row:last-child { border-bottom: none; }
+  .stat-label { color: var(--gray-600); }
+  .stat-value { font-weight: 700; color: var(--navy); }
+  .stat-value.highlight { color: var(--teal-dark); }
+
+  .competency-list {
+    margin-top: 16px;
+    max-height: 200px;
+    overflow-y: auto;
+  }
+  .competency-list h4 {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-400);
+    margin-bottom: 8px;
+  }
+  .competency-list ul {
+    list-style: none;
+    padding: 0;
+  }
+  .competency-list li {
+    font-size: 12px;
+    color: var(--gray-600);
+    padding: 4px 0;
+    padding-left: 12px;
+    position: relative;
+  }
+  .competency-list li::before {
+    content: "•";
+    position: absolute;
+    left: 0;
+    color: var(--teal);
+  }
+
+  @media (max-width: 1100px) {
+    .compare-container {
+      grid-template-columns: 1fr;
+    }
+    .compare-sidebar {
+      position: static;
+      max-height: none;
+    }
+  }
+
   /* RESPONSIVE */
   @media (max-width: 1100px) {
     .grid-wrapper { grid-template-columns: 120px 1fr 1fr 1fr; gap: 10px; }
@@ -763,6 +939,7 @@
     <div class="nav-tab" onclick="showView('ba')"><span class="dot dot-ba"></span>Business Acumen</div>
     <div class="nav-tab" onclick="showView('cf')"><span class="dot dot-cf"></span>Cross-Functional Decision-Making</div>
     <div class="nav-tab" onclick="showView('tm')"><span class="dot dot-tm"></span>Team Management</div>
+    <div class="nav-tab" onclick="showView('compare')" style="margin-left:auto;background:var(--navy);color:white;border-radius:6px;padding:10px 20px;">⚖️ Compare Programs</div>
   </div>
 </div>
 
@@ -836,6 +1013,53 @@
     </div>
   </div>
 </div>
+
+<!-- ============ COMPARE PROGRAMS ============ -->
+<div class="view-panel" id="view-compare">
+  <div class="overview-intro" style="margin-bottom:24px;">
+    <h2>Compare Programs</h2>
+    <p>Build two programs side-by-side and compare seat time, competencies, and coverage.</p>
+  </div>
+
+  <div class="compare-container">
+    <div class="compare-sidebar">
+      <h3>Add to Program</h3>
+      <div class="filter-group" style="margin-bottom:16px;">
+        <select id="compare-filter" onchange="filterCompareItems()" style="width:100%;padding:8px;border:1px solid var(--gray-200);border-radius:6px;font-size:13px;">
+          <option value="all">All Items</option>
+          <option value="sim">Simulations Only</option>
+          <option value="case">Case Challenges Only</option>
+        </select>
+      </div>
+      <div id="compare-items-list"></div>
+    </div>
+
+    <div class="program-column" id="program-a">
+      <div class="program-header" style="background:var(--teal-dark);">
+        <h3>Program A</h3>
+        <button class="clear-btn" onclick="clearProgram('a')">Clear All</button>
+      </div>
+      <div class="program-body">
+        <div class="program-items" id="program-a-items"></div>
+        <div class="program-empty" id="program-a-empty">Click items on the left to add to Program A</div>
+        <div class="program-stats" id="program-a-stats" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="program-column" id="program-b">
+      <div class="program-header" style="background:var(--gold);">
+        <h3>Program B</h3>
+        <button class="clear-btn" onclick="clearProgram('b')">Clear All</button>
+      </div>
+      <div class="program-body">
+        <div class="program-items" id="program-b-items"></div>
+        <div class="program-empty" id="program-b-empty">Click items on the left to add to Program B</div>
+        <div class="program-stats" id="program-b-stats" style="display:none;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
 <!-- ============ BY PROGRAM ============ -->
 <div class="view-panel" id="view-programs">
