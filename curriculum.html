@@ -378,6 +378,7 @@
   }
   .level-card.open .level-card-body {
     max-height: 3000px;
+    overflow-y: auto;
   }
   .level-card-content {
     padding: 0 28px 28px;
@@ -608,7 +609,7 @@
     transition: max-height 0.5s cubic-bezier(0.4,0,0.2,1);
     background: var(--off-white);
   }
-  .prog-card.prog-selected .prog-detail { max-height: 2000px; }
+  .prog-card.prog-selected .prog-detail { max-height: 2000px; overflow-y: auto; }
   .prog-detail-inner { padding: 0 20px 20px; }
   .prog-detail .section-grid { margin-top: 8px; }
 
@@ -718,6 +719,9 @@
   /* RESPONSIVE */
   @media (max-width: 1100px) {
     .grid-wrapper { grid-template-columns: 120px 1fr 1fr 1fr; gap: 10px; }
+    .section-grid { grid-template-columns: 1fr 1fr; }
+  }
+  @media (max-width: 900px) {
     .section-grid { grid-template-columns: 1fr; }
   }
   @media (max-width: 800px) {
