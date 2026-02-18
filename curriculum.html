@@ -816,95 +816,24 @@
   /* COMPARE VIEW */
   .compare-container {
     display: grid;
-    grid-template-columns: 320px 1fr 1fr;
-    gap: 24px;
-    min-height: 600px;
-  }
-  .compare-sidebar {
-    background: var(--white);
-    border-radius: var(--radius);
-    padding: 20px;
-    box-shadow: var(--shadow);
-    max-height: 80vh;
-    overflow-y: auto;
-    position: sticky;
-    top: 100px;
-  }
-  .compare-sidebar h3 {
-    font-size: 14px;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 16px;
-  }
-  .compare-search {
-    width: 100%;
-    padding: 10px 12px;
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
-    font-size: 13px;
-    margin-bottom: 12px;
-    transition: border-color 0.2s;
-  }
-  .compare-search:focus {
-    outline: none;
-    border-color: var(--teal);
-  }
-  .compare-filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
-    margin-bottom: 16px;
-  }
-  .filter-toggle {
-    padding: 6px 12px;
-    border: 1px solid var(--gray-200);
-    border-radius: 20px;
-    background: var(--white);
-    font-size: 11px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.2s;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-  }
-  .filter-toggle:hover {
-    border-color: var(--teal);
-  }
-  .filter-toggle.active {
-    background: var(--teal);
-    color: white;
-    border-color: var(--teal);
-  }
-  .filter-toggle.active.ba { background: var(--pill-ba); border-color: var(--pill-ba); }
-  .filter-toggle.active.cf { background: var(--pill-cf); border-color: var(--pill-cf); }
-  .filter-toggle.active.tm { background: var(--pill-tm); border-color: var(--pill-tm); }
-  .filter-divider {
-    width: 1px;
-    background: var(--gray-200);
-    margin: 0 4px;
+    grid-template-columns: 1fr 1fr auto;
+    gap: 20px;
+    min-height: 500px;
   }
   .compare-item {
     padding: 12px;
     border: 1px solid var(--gray-200);
     border-radius: 8px;
     margin-bottom: 8px;
-    cursor: grab;
-    transition: all 0.2s;
     font-size: 13px;
-    user-select: none;
-  }
-  .compare-item:hover {
-    border-color: var(--teal);
-    background: rgba(0,180,216,0.05);
-  }
-  .compare-item.dragging {
-    opacity: 0.5;
-    cursor: grabbing;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
   .compare-item .item-name {
     font-weight: 600;
     color: var(--navy);
-    margin-bottom: 4px;
+    margin-bottom: 2px;
   }
   .compare-item .item-meta {
     font-size: 11px;
@@ -913,42 +842,60 @@
   .compare-item.ba { border-left: 3px solid var(--pill-ba); }
   .compare-item.cf { border-left: 3px solid var(--pill-cf); }
   .compare-item.tm { border-left: 3px solid var(--pill-tm); }
+  .compare-item .remove-item {
+    background: none;
+    border: none;
+    color: var(--gray-400);
+    cursor: pointer;
+    font-size: 16px;
+    padding: 4px 8px;
+    border-radius: 4px;
+  }
+  .compare-item .remove-item:hover {
+    background: var(--gray-100);
+    color: var(--coral);
+  }
 
   .program-column {
     background: var(--white);
     border-radius: var(--radius);
     box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: box-shadow 0.2s;
-  }
-  .program-column.drag-over {
-    box-shadow: 0 0 0 3px var(--teal), var(--shadow);
-  }
-  .preset-selector {
+    overflow: visible;
     display: flex;
-    gap: 8px;
-    margin-bottom: 16px;
-    flex-wrap: wrap;
+    flex-direction: column;
   }
-  .preset-btn {
-    padding: 8px 14px;
-    border: 1px solid var(--gray-200);
-    border-radius: 6px;
-    background: var(--white);
-    font-size: 12px;
-    font-weight: 600;
+  .program-column-c {
+    width: 48px;
+    transition: width 0.3s ease;
+    overflow: hidden;
+  }
+  .program-column-c.expanded {
+    width: 350px;
+  }
+  .program-column-c .program-header {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    padding: 20px 12px;
     cursor: pointer;
-    transition: all 0.2s;
-    color: var(--navy);
+    justify-content: flex-start;
+    gap: 12px;
   }
-  .preset-btn:hover {
-    border-color: var(--teal);
-    background: rgba(0,180,216,0.05);
+  .program-column-c.expanded .program-header {
+    writing-mode: horizontal-tb;
+    padding: 16px 20px;
   }
-  .preset-btn.active {
-    background: var(--navy);
-    color: white;
-    border-color: var(--navy);
+  .program-column-c .expand-indicator {
+    font-size: 12px;
+    opacity: 0.7;
+  }
+  .program-column-c.expanded .expand-indicator {
+    display: none;
+  }
+  .program-column-c .program-body {
+    display: none;
+  }
+  .program-column-c.expanded .program-body {
+    display: block;
   }
   .program-header {
     background: var(--navy);
@@ -977,29 +924,89 @@
   .program-body {
     padding: 20px;
     min-height: 300px;
+    flex: 1;
+  }
+  .add-buttons {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .add-btn-wrapper {
+    position: relative;
+  }
+  .add-btn {
+    padding: 10px 16px;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    background: var(--white);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--navy);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .add-btn:hover {
+    border-color: var(--teal);
+    background: rgba(0,180,216,0.05);
+  }
+  .add-btn .arrow {
+    font-size: 10px;
+    transition: transform 0.2s;
+  }
+  .add-btn-wrapper.open .add-btn .arrow {
+    transform: rotate(180deg);
+  }
+  .add-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 4px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    box-shadow: var(--shadow-lg);
+    min-width: 220px;
+    max-height: 300px;
+    overflow-y: auto;
+    z-index: 1000;
+    display: none;
+  }
+  .add-btn-wrapper.open .add-dropdown {
+    display: block;
+  }
+  .add-dropdown-item {
+    padding: 10px 14px;
+    cursor: pointer;
+    font-size: 13px;
+    border-bottom: 1px solid var(--gray-100);
+    transition: background 0.15s;
+  }
+  .add-dropdown-item:last-child {
+    border-bottom: none;
+  }
+  .add-dropdown-item:hover {
+    background: rgba(0,180,216,0.06);
+  }
+  .add-dropdown-item .item-name {
+    font-weight: 600;
+    color: var(--navy);
+  }
+  .add-dropdown-item .item-meta {
+    font-size: 11px;
+    color: var(--gray-500);
+    margin-top: 2px;
   }
   .program-empty {
     text-align: center;
-    padding: 24px 16px;
-    color: var(--gray-500);
-    font-size: 14px;
-  }
-  .empty-intro {
-    font-size: 14px;
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 12px;
-  }
-  .empty-presets {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    margin-bottom: 16px;
-  }
-  .empty-or {
-    font-size: 12px;
+    padding: 40px 16px;
     color: var(--gray-400);
+    font-size: 14px;
+    font-style: italic;
+  }
   }
   .preset-btn.open-btn {
     background: var(--teal);
@@ -1150,11 +1157,14 @@
 
   @media (max-width: 1100px) {
     .compare-container {
-      grid-template-columns: 1fr;
+      grid-template-columns: 1fr 1fr;
     }
-    .compare-sidebar {
-      position: static;
-      max-height: none;
+    .program-column-c {
+      grid-column: span 2;
+      width: 100%;
+    }
+    .program-column-c .program-header {
+      writing-mode: horizontal-tb;
     }
   }
 
@@ -1924,49 +1934,86 @@
 <div class="view-panel" id="view-compare">
   <div class="overview-intro" style="margin-bottom:24px;">
     <h2>Compare Programs</h2>
-    <p>Build two programs side-by-side and compare seat time, competencies, and coverage. Drag items from the left into Program A or B.</p>
+    <p>Build and compare programs side-by-side. Add presets, simulations, or case challenges to each program.</p>
   </div>
 
   <div class="compare-container">
-    <div class="compare-sidebar">
-      <h3>Drag to Add</h3>
-      <input type="text" id="compare-search" class="compare-search" placeholder="Search simulations & cases..." oninput="filterCompareItems()">
-      <div class="compare-filters">
-        <button class="filter-toggle active" data-filter="type" data-value="all" onclick="toggleFilter(this)">All</button>
-        <button class="filter-toggle" data-filter="type" data-value="sim" onclick="toggleFilter(this)">Sims</button>
-        <button class="filter-toggle" data-filter="type" data-value="case" onclick="toggleFilter(this)">Cases</button>
-        <div class="filter-divider"></div>
-        <button class="filter-toggle ba" data-filter="pillar" data-value="ba" onclick="toggleFilter(this)">BA</button>
-        <button class="filter-toggle cf" data-filter="pillar" data-value="cf" onclick="toggleFilter(this)">CF</button>
-        <button class="filter-toggle tm" data-filter="pillar" data-value="tm" onclick="toggleFilter(this)">TM</button>
-        <div class="filter-divider"></div>
-        <button class="filter-toggle" data-filter="level" data-value="rising" onclick="toggleFilter(this)">Rising</button>
-        <button class="filter-toggle" data-filter="level" data-value="experienced" onclick="toggleFilter(this)">Exp</button>
-      </div>
-      <div id="compare-items-list"></div>
-    </div>
-
-    <div class="program-column" id="program-a" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'a')">
+    <div class="program-column" id="program-a">
       <div class="program-header" style="background:var(--teal-dark);">
         <h3>Program A</h3>
         <button class="clear-btn" onclick="clearProgram('a')">Clear All</button>
       </div>
       <div class="program-body">
+        <div class="add-buttons">
+          <div class="add-btn-wrapper" id="add-program-a">
+            <button class="add-btn" onclick="toggleAddDropdown('add-program-a')">+ Add Program <span class="arrow">▼</span></button>
+            <div class="add-dropdown" id="dropdown-program-a"></div>
+          </div>
+          <div class="add-btn-wrapper" id="add-sim-a">
+            <button class="add-btn" onclick="toggleAddDropdown('add-sim-a')">+ Add Simulation <span class="arrow">▼</span></button>
+            <div class="add-dropdown" id="dropdown-sim-a"></div>
+          </div>
+          <div class="add-btn-wrapper" id="add-case-a">
+            <button class="add-btn" onclick="toggleAddDropdown('add-case-a')">+ Add Case <span class="arrow">▼</span></button>
+            <div class="add-dropdown" id="dropdown-case-a"></div>
+          </div>
+        </div>
         <div class="program-items" id="program-a-items"></div>
-        <div class="program-empty" id="program-a-empty"></div>
+        <div class="program-empty" id="program-a-empty">Add items above to build your program</div>
         <div class="program-stats" id="program-a-stats" style="display:none;"></div>
       </div>
     </div>
 
-    <div class="program-column" id="program-b" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'b')">
+    <div class="program-column" id="program-b">
       <div class="program-header" style="background:var(--gold);">
         <h3>Program B</h3>
         <button class="clear-btn" onclick="clearProgram('b')">Clear All</button>
       </div>
       <div class="program-body">
+        <div class="add-buttons">
+          <div class="add-btn-wrapper" id="add-program-b">
+            <button class="add-btn" onclick="toggleAddDropdown('add-program-b')">+ Add Program <span class="arrow">▼</span></button>
+            <div class="add-dropdown" id="dropdown-program-b"></div>
+          </div>
+          <div class="add-btn-wrapper" id="add-sim-b">
+            <button class="add-btn" onclick="toggleAddDropdown('add-sim-b')">+ Add Simulation <span class="arrow">▼</span></button>
+            <div class="add-dropdown" id="dropdown-sim-b"></div>
+          </div>
+          <div class="add-btn-wrapper" id="add-case-b">
+            <button class="add-btn" onclick="toggleAddDropdown('add-case-b')">+ Add Case <span class="arrow">▼</span></button>
+            <div class="add-dropdown" id="dropdown-case-b"></div>
+          </div>
+        </div>
         <div class="program-items" id="program-b-items"></div>
-        <div class="program-empty" id="program-b-empty"></div>
+        <div class="program-empty" id="program-b-empty">Add items above to build your program</div>
         <div class="program-stats" id="program-b-stats" style="display:none;"></div>
+      </div>
+    </div>
+
+    <div class="program-column program-column-c" id="program-c" onclick="toggleProgramC(event)">
+      <div class="program-header" style="background:var(--sage);">
+        <h3>Program C</h3>
+        <span class="expand-indicator">◀</span>
+        <button class="clear-btn" onclick="clearProgram('c'); event.stopPropagation();">Clear All</button>
+      </div>
+      <div class="program-body">
+        <div class="add-buttons">
+          <div class="add-btn-wrapper" id="add-program-c">
+            <button class="add-btn" onclick="toggleAddDropdown('add-program-c'); event.stopPropagation();">+ Add Program <span class="arrow">▼</span></button>
+            <div class="add-dropdown" id="dropdown-program-c"></div>
+          </div>
+          <div class="add-btn-wrapper" id="add-sim-c">
+            <button class="add-btn" onclick="toggleAddDropdown('add-sim-c'); event.stopPropagation();">+ Add Simulation <span class="arrow">▼</span></button>
+            <div class="add-dropdown" id="dropdown-sim-c"></div>
+          </div>
+          <div class="add-btn-wrapper" id="add-case-c">
+            <button class="add-btn" onclick="toggleAddDropdown('add-case-c'); event.stopPropagation();">+ Add Case <span class="arrow">▼</span></button>
+            <div class="add-dropdown" id="dropdown-case-c"></div>
+          </div>
+        </div>
+        <div class="program-items" id="program-c-items"></div>
+        <div class="program-empty" id="program-c-empty">Add items above to build your program</div>
+        <div class="program-stats" id="program-c-stats" style="display:none;"></div>
       </div>
     </div>
   </div>
@@ -3182,10 +3229,7 @@ renderPrograms();
 // ============ COMPARE PROGRAMS ============
 let programA = [];
 let programB = [];
-let programAStarted = false;
-let programBStarted = false;
-let compareFilters = { type: 'all', pillar: [], level: [] };
-let draggedItemId = null;
+let programC = [];
 
 // Preset programs based on Abilitie Portfolio
 const PRESETS = {
@@ -3202,183 +3246,139 @@ const PRESETS = {
             'director-challenge', 'leading-in-times-of-change']
   },
   'accelerator-income': {
-    name: 'Income Challenge Accelerator',
+    name: 'Income Accelerator',
     items: ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability']
   },
   'accelerator-business': {
-    name: 'Business Challenge Accelerator',
+    name: 'Business Accelerator',
     items: ['business-challenge', 'balancing-growth-risk']
   },
   'accelerator-influence': {
-    name: 'Influence Challenge Accelerator',
+    name: 'Influence Accelerator',
     items: ['influence-challenge', 'shifting-mindsets', 'influencing-without-authority']
   },
   'accelerator-enterprise': {
-    name: 'Enterprise Challenge Accelerator',
+    name: 'Enterprise Accelerator',
     items: ['enterprise-challenge', 'creating-strategic-alignment']
   },
   'accelerator-management': {
-    name: 'Management Challenge Accelerator',
+    name: 'Management Accelerator',
     items: ['management-challenge', 'enabling-peak-performance', 'navigating-critical-conversations']
   },
   'accelerator-director': {
-    name: 'Director Challenge Accelerator',
+    name: 'Director Accelerator',
     items: ['director-challenge', 'leading-in-times-of-change']
   }
 };
 
 function initCompare() {
-  compareFilters = { type: 'all', pillar: [], level: [] };
-  // Reset filter toggles
-  document.querySelectorAll('.compare-filters .filter-toggle').forEach(btn => {
-    if (btn.dataset.filter === 'type' && btn.dataset.value === 'all') {
-      btn.classList.add('active');
-    } else if (btn.dataset.filter === 'type') {
-      btn.classList.remove('active');
-    } else {
-      btn.classList.remove('active');
-    }
-  });
-  renderCompareItems();
+  populateDropdowns();
   renderProgramColumns();
 }
 
-function toggleFilter(btn) {
-  const filterType = btn.dataset.filter;
-  const value = btn.dataset.value;
-
-  if (filterType === 'type') {
-    // Type filters are exclusive (all/sim/case)
-    document.querySelectorAll('.filter-toggle[data-filter="type"]').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
-    compareFilters.type = value;
-  } else {
-    // Pillar and level filters are toggleable
-    btn.classList.toggle('active');
-    const arr = compareFilters[filterType];
-    if (arr.includes(value)) {
-      compareFilters[filterType] = arr.filter(v => v !== value);
-    } else {
-      arr.push(value);
+function populateDropdowns() {
+  ['a', 'b', 'c'].forEach(prog => {
+    // Program presets dropdown
+    const programDropdown = document.getElementById('dropdown-program-' + prog);
+    if (programDropdown) {
+      programDropdown.innerHTML = Object.entries(PRESETS).map(([id, preset]) => `
+        <div class="add-dropdown-item" onclick="loadPreset('${id}', '${prog}')">
+          <div class="item-name">${preset.name}</div>
+          <div class="item-meta">${preset.items.length} items</div>
+        </div>
+      `).join('');
     }
-  }
-  renderCompareItems();
-}
 
-function filterCompareItems() {
-  renderCompareItems();
-}
+    // Simulations dropdown
+    const simDropdown = document.getElementById('dropdown-sim-' + prog);
+    if (simDropdown) {
+      const sims = PROGRAMS.filter(p => p.type === 'sim');
+      simDropdown.innerHTML = sims.map(p => `
+        <div class="add-dropdown-item" onclick="addItem('${p.id}', '${prog}')">
+          <div class="item-name">${p.name}</div>
+          <div class="item-meta">${p.duration} • ${p.level}</div>
+        </div>
+      `).join('');
+    }
 
-function renderCompareItems() {
-  const searchEl = document.getElementById('compare-search');
-  const searchTerm = searchEl ? searchEl.value.toLowerCase() : '';
-  const container = document.getElementById('compare-items-list');
-
-  if (!container) return;
-
-  let items = PROGRAMS.filter(p => {
-    // Type filter
-    if (compareFilters.type === 'sim' && p.type !== 'sim') return false;
-    if (compareFilters.type === 'case' && p.type !== 'case') return false;
-
-    // Pillar filter (if any selected)
-    if (compareFilters.pillar.length > 0 && !compareFilters.pillar.includes(p.pillar)) return false;
-
-    // Level filter (if any selected)
-    if (compareFilters.level.length > 0 && !compareFilters.level.includes(p.level)) return false;
-
-    // Search filter
-    if (searchTerm && !p.name.toLowerCase().includes(searchTerm)) return false;
-
-    return true;
+    // Cases dropdown
+    const caseDropdown = document.getElementById('dropdown-case-' + prog);
+    if (caseDropdown) {
+      const cases = PROGRAMS.filter(p => p.type === 'case');
+      caseDropdown.innerHTML = cases.map(p => `
+        <div class="add-dropdown-item" onclick="addItem('${p.id}', '${prog}')">
+          <div class="item-name">${p.name}</div>
+          <div class="item-meta">${p.duration} • ${p.level}</div>
+        </div>
+      `).join('');
+    }
   });
-
-  container.innerHTML = items.map(p => `
-    <div class="compare-item ${p.pillar}" draggable="true" data-id="${p.id}"
-         ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)">
-      <div class="item-name">${p.name}</div>
-      <div class="item-meta">${p.type === 'sim' ? 'Simulation' : 'Case'} • ${p.level} • ${p.duration}</div>
-    </div>
-  `).join('');
 }
 
-// Drag and drop handlers
-function handleDragStart(e) {
-  draggedItemId = e.target.dataset.id;
-  e.target.classList.add('dragging');
-  e.dataTransfer.effectAllowed = 'copy';
-  e.dataTransfer.setData('text/plain', draggedItemId);
-}
+function toggleAddDropdown(wrapperId) {
+  const wrapper = document.getElementById(wrapperId);
+  const wasOpen = wrapper.classList.contains('open');
 
-function handleDragEnd(e) {
-  e.target.classList.remove('dragging');
-  draggedItemId = null;
-}
+  // Close all dropdowns first
+  document.querySelectorAll('.add-btn-wrapper').forEach(w => w.classList.remove('open'));
 
-function handleDragOver(e) {
-  e.preventDefault();
-  e.dataTransfer.dropEffect = 'copy';
-  e.currentTarget.classList.add('drag-over');
-}
-
-function handleDragLeave(e) {
-  e.currentTarget.classList.remove('drag-over');
-}
-
-function handleDrop(e, prog) {
-  e.preventDefault();
-  e.currentTarget.classList.remove('drag-over');
-  const id = e.dataTransfer.getData('text/plain') || draggedItemId;
-  if (id) {
-    addItem(id, prog);
+  // Toggle the clicked one
+  if (!wasOpen) {
+    wrapper.classList.add('open');
   }
+}
+
+// Close dropdowns when clicking outside
+document.addEventListener('click', function(e) {
+  if (!e.target.closest('.add-btn-wrapper')) {
+    document.querySelectorAll('.add-btn-wrapper').forEach(w => w.classList.remove('open'));
+  }
+});
+
+function toggleProgramC(e) {
+  // Don't toggle if clicking on buttons or dropdowns inside
+  if (e.target.closest('.add-btn-wrapper') || e.target.closest('.clear-btn') || e.target.closest('.remove-item')) {
+    return;
+  }
+  const col = document.getElementById('program-c');
+  col.classList.toggle('expanded');
 }
 
 function loadPreset(presetId, targetProg) {
-  // Mark program as started
-  if (targetProg === 'a') {
-    programAStarted = true;
-  } else {
-    programBStarted = true;
-  }
-
-  // Handle 'open' - just initialize empty program ready for drag/drop
-  if (presetId === 'open') {
-    if (targetProg === 'a') {
-      programA = [];
-    } else {
-      programB = [];
-    }
-    renderProgramColumns();
-    return;
-  }
-
   const preset = PRESETS[presetId];
   if (!preset) return;
 
-  // Load into specified program
   if (targetProg === 'a') {
     programA = [...preset.items];
-  } else {
+  } else if (targetProg === 'b') {
     programB = [...preset.items];
+  } else {
+    programC = [...preset.items];
   }
 
+  // Close dropdown
+  document.querySelectorAll('.add-btn-wrapper').forEach(w => w.classList.remove('open'));
   renderProgramColumns();
 }
 
 function addItem(id, prog) {
-  const arr = prog === 'a' ? programA : programB;
+  const arr = prog === 'a' ? programA : prog === 'b' ? programB : programC;
   if (!arr.includes(id)) {
     arr.push(id);
+    // Close dropdown
+    document.querySelectorAll('.add-btn-wrapper').forEach(w => w.classList.remove('open'));
     renderProgramColumns();
   }
 }
 
-function removeItem(prog, id) {
+function removeItem(prog, id, e) {
+  if (e) e.stopPropagation();
   if (prog === 'a') {
     programA = programA.filter(x => x !== id);
-  } else {
+  } else if (prog === 'b') {
     programB = programB.filter(x => x !== id);
+  } else {
+    programC = programC.filter(x => x !== id);
   }
   renderProgramColumns();
 }
@@ -3386,10 +3386,10 @@ function removeItem(prog, id) {
 function clearProgram(prog) {
   if (prog === 'a') {
     programA = [];
-    programAStarted = false;
-  } else {
+  } else if (prog === 'b') {
     programB = [];
-    programBStarted = false;
+  } else {
+    programC = [];
   }
   renderProgramColumns();
 }
@@ -3397,46 +3397,19 @@ function clearProgram(prog) {
 function renderProgramColumns() {
   renderColumn('a', programA);
   renderColumn('b', programB);
-}
-
-function getPresetButtonsHTML(prog) {
-  return `
-    <div class="empty-intro">Start with:</div>
-    <div class="empty-presets">
-      <button class="preset-btn open-btn" onclick="loadPreset('open', '${prog}')">Open</button>
-      <span class="empty-or">or choose a preset below</span>
-    </div>
-    <div class="preset-grid">
-      <button class="preset-btn" onclick="loadPreset('flagship-rising', '${prog}')">Flagship Rising</button>
-      <button class="preset-btn" onclick="loadPreset('flagship-experienced', '${prog}')">Flagship Experienced</button>
-      <button class="preset-btn" onclick="loadPreset('accelerator-income', '${prog}')">Income Accelerator</button>
-      <button class="preset-btn" onclick="loadPreset('accelerator-business', '${prog}')">Business Accelerator</button>
-      <button class="preset-btn" onclick="loadPreset('accelerator-influence', '${prog}')">Influence Accelerator</button>
-      <button class="preset-btn" onclick="loadPreset('accelerator-enterprise', '${prog}')">Enterprise Accelerator</button>
-      <button class="preset-btn" onclick="loadPreset('accelerator-management', '${prog}')">Management Accelerator</button>
-      <button class="preset-btn" onclick="loadPreset('accelerator-director', '${prog}')">Director Accelerator</button>
-    </div>
-  `;
+  renderColumn('c', programC);
 }
 
 function renderColumn(prog, items) {
   const itemsEl = document.getElementById('program-' + prog + '-items');
   const emptyEl = document.getElementById('program-' + prog + '-empty');
   const statsEl = document.getElementById('program-' + prog + '-stats');
-  const isStarted = prog === 'a' ? programAStarted : programBStarted;
 
   if (!itemsEl) return;
 
   if (items.length === 0) {
     itemsEl.innerHTML = '';
     statsEl.style.display = 'none';
-    if (isStarted) {
-      // Program started but empty - show drag hint
-      emptyEl.innerHTML = '<div class="empty-drag-hint">Drag items here from the left</div>';
-    } else {
-      // Show preset buttons
-      emptyEl.innerHTML = getPresetButtonsHTML(prog);
-    }
     emptyEl.style.display = 'block';
     return;
   }
@@ -3447,9 +3420,12 @@ function renderColumn(prog, items) {
   const pItems = items.map(id => PROGRAMS.find(x => x.id === id)).filter(Boolean);
 
   itemsEl.innerHTML = pItems.map(p => `
-    <div class="program-item ${p.pillar}">
-      <span>${p.name} <small style="color:var(--gray-400)">(${p.duration})</small></span>
-      <button class="remove-btn" onclick="removeItem('${prog}', '${p.id}')">×</button>
+    <div class="compare-item ${p.pillar}">
+      <div>
+        <div class="item-name">${p.name}</div>
+        <div class="item-meta">${p.duration}</div>
+      </div>
+      <button class="remove-item" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
     </div>
   `).join('');
 
