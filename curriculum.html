@@ -3558,42 +3558,42 @@ function renderColumn(prog, items) {
 
   function makeListItem(text, sources) {
     const sourceText = sources.join(', ');
-    return \`<li class="hoverable-item" data-sources="\${sourceText.replace(/"/g, '&quot;')}">\${text}<span class="source-tooltip">From: \${sourceText}</span></li>\`;
+    return `<li class="hoverable-item" data-sources="${sourceText.replace(/"/g, '&quot;')}">${text}<span class="source-tooltip">From: ${sourceText}</span></li>`;
   }
 
-  statsEl.innerHTML = \`
-    <div class="stat-row"><span class="stat-label">Seat Time</span><span class="stat-value highlight">\${minHrs===maxHrs?minHrs:minHrs+'–'+maxHrs} hrs</span></div>
+  statsEl.innerHTML = `
+    <div class="stat-row"><span class="stat-label">Seat Time</span><span class="stat-value highlight">${minHrs===maxHrs?minHrs:minHrs+'–'+maxHrs} hrs</span></div>
 
     <div class="collapsible-section" onclick="this.classList.toggle('expanded')">
       <div class="collapsible-header">
-        <h4>Competencies <span class="collapsible-count">(\${comps.length})</span></h4>
+        <h4>Competencies <span class="collapsible-count">(${comps.length})</span></h4>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="collapsible-content">
-        <ul>\${comps.map(c => makeListItem(c, compMap[c])).join('')}</ul>
+        <ul>${comps.map(c => makeListItem(c, compMap[c])).join('')}</ul>
       </div>
     </div>
 
     <div class="collapsible-section mindsets-section" onclick="this.classList.toggle('expanded')">
       <div class="collapsible-header">
-        <h4>Mindsets <span class="collapsible-count">(\${minds.length})</span></h4>
+        <h4>Mindsets <span class="collapsible-count">(${minds.length})</span></h4>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="collapsible-content">
-        <ul>\${minds.map(m => makeListItem(m, mindMap[m])).join('')}</ul>
+        <ul>${minds.map(m => makeListItem(m, mindMap[m])).join('')}</ul>
       </div>
     </div>
 
     <div class="collapsible-section frameworks-section" onclick="this.classList.toggle('expanded')">
       <div class="collapsible-header">
-        <h4>Tools & Frameworks <span class="collapsible-count">(\${frameworks.length})</span></h4>
+        <h4>Tools & Frameworks <span class="collapsible-count">(${frameworks.length})</span></h4>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="collapsible-content">
-        <ul>\${frameworks.map(f => makeListItem(f, toolMap[f])).join('')}</ul>
+        <ul>${frameworks.map(f => makeListItem(f, toolMap[f])).join('')}</ul>
       </div>
     </div>
-  \`;
+  `;
 }
 
 // Hook into showView
