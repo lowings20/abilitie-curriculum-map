@@ -170,12 +170,14 @@
     margin-left: 20px;
   }
   .nav-main-btn {
-    padding: 16px 24px;
+    padding: 12px 24px;
+    margin: 8px 4px;
     font-size: 14px;
     font-weight: 600;
     background: var(--white);
     color: var(--navy);
-    border: none;
+    border: 2px solid var(--gray-200);
+    border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
@@ -183,14 +185,15 @@
     justify-content: center;
     gap: 8px;
     flex: 1;
-    border-bottom: 3px solid transparent;
   }
   .nav-main-btn:hover {
     background: var(--gray-100);
+    border-color: var(--teal);
     color: var(--teal-dark);
   }
   .nav-main-btn.active {
-    border-bottom-color: var(--teal);
+    border-color: var(--teal);
+    background: rgba(0,180,216,0.08);
     color: var(--teal-dark);
   }
   .nav-dropdown {
@@ -1373,6 +1376,80 @@
     font-size: 14px;
     font-weight: 600;
   }
+
+  /* At a Glance Grid */
+  .landing-glance {
+    margin-top: 60px;
+    padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .landing-glance h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--white);
+    margin-bottom: 24px;
+    text-align: center;
+  }
+  .glance-grid {
+    display: grid;
+    grid-template-columns: 100px repeat(3, 1fr);
+    gap: 8px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .glance-corner {
+    background: transparent;
+  }
+  .glance-header {
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-align: center;
+    color: white;
+  }
+  .glance-header.ba { background: var(--pill-ba); }
+  .glance-header.cf { background: var(--pill-cf); }
+  .glance-header.tm { background: var(--pill-tm); }
+  .glance-level {
+    padding: 12px 8px;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--teal);
+    text-align: right;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  .glance-cell {
+    background: rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 14px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+  .glance-cell:hover {
+    background: rgba(255,255,255,0.15);
+    border-color: var(--teal);
+    transform: translateY(-2px);
+  }
+  .glance-cell.empty {
+    background: transparent;
+    border: 1px dashed rgba(255,255,255,0.1);
+    cursor: default;
+  }
+  .glance-cell.empty:hover {
+    transform: none;
+    border-color: rgba(255,255,255,0.1);
+  }
+
   @media (max-width: 800px) {
     .landing-cards {
       grid-template-columns: 1fr;
@@ -1521,13 +1598,6 @@
     <div class="landing-badge">Abilitie Leadership Academy</div>
     <h1>Curriculum Map</h1>
 
-    <div class="landing-stats">
-      <div class="landing-stat"><div class="num">3</div><div class="label">Pillars</div></div>
-      <div class="landing-stat"><div class="num">3</div><div class="label">Levels</div></div>
-      <div class="landing-stat"><div class="num">8</div><div class="label">Simulations</div></div>
-      <div class="landing-stat"><div class="num">9</div><div class="label">Case Challenges</div></div>
-    </div>
-
     <div class="landing-ways">
       <h2>Three ways to use this tool</h2>
       <p>Choose how you'd like to explore the Abilitie curriculum</p>
@@ -1553,6 +1623,32 @@
           <p>Build and compare programs side-by-side to see total seat time, competency coverage, and learning outcomes.</p>
           <div class="card-arrow">Start comparing →</div>
         </div>
+      </div>
+    </div>
+
+    <!-- At a Glance Grid -->
+    <div class="landing-glance">
+      <h2>The Leadership Academy at a Glance</h2>
+      <div class="glance-grid">
+        <div class="glance-corner"></div>
+        <div class="glance-header ba">Business Acumen</div>
+        <div class="glance-header cf">Cross-Functional</div>
+        <div class="glance-header tm">Team Management</div>
+
+        <div class="glance-level">Executive</div>
+        <div class="glance-cell" onclick="enterApp('ba')">Finance Challenge</div>
+        <div class="glance-cell" onclick="enterApp('cf')">Executive Challenge</div>
+        <div class="glance-cell empty"></div>
+
+        <div class="glance-level">Experienced</div>
+        <div class="glance-cell" onclick="enterApp('ba')">Business Challenge</div>
+        <div class="glance-cell" onclick="enterApp('cf')">Enterprise Challenge</div>
+        <div class="glance-cell" onclick="enterApp('tm')">Director Challenge</div>
+
+        <div class="glance-level">Rising</div>
+        <div class="glance-cell" onclick="enterApp('ba')">Income Challenge</div>
+        <div class="glance-cell" onclick="enterApp('cf')">Influence Challenge</div>
+        <div class="glance-cell" onclick="enterApp('tm')">Management Challenge</div>
       </div>
     </div>
   </div>
