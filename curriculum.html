@@ -1083,12 +1083,189 @@
     .section-grid { grid-template-columns: 1fr; }
     .programs-row { flex-direction: column; }
   }
+
+  /* LANDING PAGE */
+  .landing-page {
+    background: linear-gradient(135deg, var(--navy) 0%, var(--navy-light) 50%, var(--navy-mid) 100%);
+    min-height: 100vh;
+    color: var(--white);
+    position: relative;
+    overflow: hidden;
+  }
+  .landing-page::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -25%;
+    width: 150%;
+    height: 200%;
+    background: radial-gradient(ellipse at 30% 50%, rgba(0,180,216,0.08) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(244,162,97,0.06) 0%, transparent 50%);
+    pointer-events: none;
+  }
+  .landing-content {
+    position: relative;
+    z-index: 1;
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 60px 40px;
+    text-align: center;
+  }
+  .landing-badge {
+    display: inline-block;
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--teal);
+    font-weight: 600;
+    margin-bottom: 16px;
+  }
+  .landing-content h1 {
+    font-size: 48px;
+    font-weight: 800;
+    margin-bottom: 16px;
+    letter-spacing: -1px;
+  }
+  .landing-content > p {
+    font-size: 16px;
+    color: rgba(255,255,255,0.7);
+    max-width: 600px;
+    margin: 0 auto 40px;
+    line-height: 1.7;
+  }
+  .landing-stats {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 50px;
+  }
+  .landing-stat .num {
+    font-size: 36px;
+    font-weight: 800;
+    color: var(--teal);
+  }
+  .landing-stat .label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: rgba(255,255,255,0.5);
+  }
+  .landing-ways {
+    margin-top: 50px;
+  }
+  .landing-ways h2 {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+  .landing-ways > p {
+    font-size: 14px;
+    color: rgba(255,255,255,0.6);
+    margin-bottom: 30px;
+  }
+  .landing-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+  }
+  .landing-card {
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 16px;
+    padding: 30px 24px;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-align: left;
+  }
+  .landing-card:hover {
+    background: rgba(255,255,255,0.1);
+    border-color: var(--teal);
+    transform: translateY(-4px);
+  }
+  .landing-card-icon {
+    font-size: 32px;
+    margin-bottom: 16px;
+  }
+  .landing-card h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    color: var(--white);
+  }
+  .landing-card p {
+    font-size: 13px;
+    color: rgba(255,255,255,0.6);
+    line-height: 1.6;
+  }
+  .landing-card .card-arrow {
+    margin-top: 16px;
+    color: var(--teal);
+    font-size: 14px;
+    font-weight: 600;
+  }
+  @media (max-width: 800px) {
+    .landing-cards {
+      grid-template-columns: 1fr;
+    }
+    .landing-content h1 {
+      font-size: 32px;
+    }
+    .landing-stats {
+      flex-wrap: wrap;
+      gap: 24px;
+    }
+  }
 </style>
 </head>
 <body>
 
+<!-- LANDING PAGE -->
+<div class="landing-page" id="landing-page">
+  <div class="landing-content">
+    <div class="landing-badge">Abilitie Leadership Academy</div>
+    <h1>Curriculum Map</h1>
+    <p>Building leadership capabilities across three timeless business domains — from rising leaders through the executive suite — through team-based simulations with AI insights.</p>
+
+    <div class="landing-stats">
+      <div class="landing-stat"><div class="num">3</div><div class="label">Pillars</div></div>
+      <div class="landing-stat"><div class="num">3</div><div class="label">Levels</div></div>
+      <div class="landing-stat"><div class="num">8</div><div class="label">Simulations</div></div>
+      <div class="landing-stat"><div class="num">9</div><div class="label">Case Challenges</div></div>
+    </div>
+
+    <div class="landing-ways">
+      <h2>Three ways to use this tool</h2>
+      <p>Choose how you'd like to explore the Abilitie curriculum</p>
+
+      <div class="landing-cards">
+        <div class="landing-card" onclick="enterApp('overview')">
+          <div class="landing-card-icon">💬</div>
+          <h3>Ask Questions</h3>
+          <p>Ask questions about our curriculum using AI-powered search and get instant answers about competencies, programs, and more.</p>
+          <div class="card-arrow">Start asking →</div>
+        </div>
+
+        <div class="landing-card" onclick="enterApp('overview')">
+          <div class="landing-card-icon">🗺️</div>
+          <h3>Navigate Curriculum</h3>
+          <p>Explore the competencies, mindsets, and behaviors of each simulation and case challenge across all three pillars.</p>
+          <div class="card-arrow">Start exploring →</div>
+        </div>
+
+        <div class="landing-card" onclick="enterApp('compare')">
+          <div class="landing-card-icon">⚖️</div>
+          <h3>Compare Programs</h3>
+          <p>Build and compare programs side-by-side to see total seat time, competency coverage, and learning outcomes.</p>
+          <div class="card-arrow">Start comparing →</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 <!-- HERO -->
-<div class="hero">
+<div class="hero" id="app-hero" style="display:none;">
   <div class="hero-badge">Abilitie Leadership Academy</div>
   <h1>Curriculum Map</h1>
   <p>Building leadership capabilities across three timeless business domains — from rising leaders through the executive suite — through team-based simulations with AI insights.</p>
@@ -1101,8 +1278,9 @@
 </div>
 
 <!-- NAV -->
-<div class="nav-bar">
+<div class="nav-bar" id="app-nav" style="display:none;">
   <div class="nav-inner">
+    <div class="nav-tab" onclick="showLanding()" style="font-weight:700;">← Home</div>
     <div class="nav-tab active" onclick="showView('overview')">Overview</div>
     <div class="nav-tab" onclick="showView('programs')">By Program</div>
     <div class="nav-tab" onclick="showView('ba')"><span class="dot dot-ba"></span>Business Acumen</div>
@@ -1113,7 +1291,7 @@
 </div>
 
 <!-- MAIN -->
-<div class="main">
+<div class="main" id="app-main" style="display:none;">
 
 <!-- ============ OVERVIEW ============ -->
 <div class="view-panel active" id="view-overview">
@@ -1852,7 +2030,24 @@
 </div><!-- /main -->
 
 <script>
-const NAV_MAP = { overview: 0, programs: 1, ba: 2, cf: 3, tm: 4 };
+const NAV_MAP = { overview: 1, programs: 2, ba: 3, cf: 4, tm: 5 };
+
+// Landing page functions
+function enterApp(view) {
+  document.getElementById('landing-page').style.display = 'none';
+  document.getElementById('app-hero').style.display = 'block';
+  document.getElementById('app-nav').style.display = 'block';
+  document.getElementById('app-main').style.display = 'block';
+  showView(view);
+}
+
+function showLanding() {
+  document.getElementById('landing-page').style.display = 'block';
+  document.getElementById('app-hero').style.display = 'none';
+  document.getElementById('app-nav').style.display = 'none';
+  document.getElementById('app-main').style.display = 'none';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
 
 function showView(id) {
   document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
