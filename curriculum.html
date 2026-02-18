@@ -164,25 +164,41 @@
   }
   .nav-main-buttons {
     display: flex;
-    gap: 12px;
+    gap: 0;
     align-items: center;
+    flex: 1;
+    margin-left: 20px;
   }
   .nav-main-btn {
-    padding: 10px 20px;
+    padding: 16px 24px;
     font-size: 14px;
     font-weight: 600;
-    background: var(--navy);
-    color: white;
+    background: var(--white);
+    color: var(--navy);
     border: none;
-    border-radius: 8px;
     cursor: pointer;
     transition: all 0.2s;
     display: flex;
     align-items: center;
-    gap: 6px;
+    justify-content: center;
+    gap: 8px;
+    flex: 1;
+    border-bottom: 3px solid transparent;
   }
   .nav-main-btn:hover {
-    background: var(--navy-light);
+    background: var(--gray-100);
+    color: var(--teal-dark);
+  }
+  .nav-main-btn.active {
+    border-bottom-color: var(--teal);
+    color: var(--teal-dark);
+  }
+  .nav-dropdown {
+    flex: 1;
+    display: flex;
+  }
+  .nav-dropdown .nav-main-btn {
+    width: 100%;
   }
   .dropdown-arrow {
     font-size: 10px;
@@ -1546,13 +1562,7 @@
 <div class="hero" id="app-hero" style="display:none;">
   <div class="hero-badge">Abilitie Leadership Academy</div>
   <h1>Curriculum Map</h1>
-  <p>Building leadership capabilities across three timeless business domains — from rising leaders through the executive suite — through team-based simulations with AI insights.</p>
-  <div class="hero-meta">
-    <div class="hero-stat"><div class="num">3</div><div class="label">Pillars</div></div>
-    <div class="hero-stat"><div class="num">3</div><div class="label">Levels</div></div>
-    <div class="hero-stat"><div class="num">8</div><div class="label">Simulations</div></div>
-    <div class="hero-stat"><div class="num">9</div><div class="label">Case Challenges</div></div>
-  </div>
+  <p>Building leadership capabilities across three timeless business domains — from rising leaders through the executive suite.</p>
 </div>
 
 <!-- NAV -->
