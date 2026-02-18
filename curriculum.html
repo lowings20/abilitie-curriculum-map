@@ -820,104 +820,43 @@
     gap: 20px;
     min-height: 500px;
   }
-  .journey-label {
-    font-size: 11px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    color: var(--gray-400);
-    margin-bottom: 12px;
-  }
-  .journey-timeline {
-    position: relative;
-    padding-left: 20px;
-  }
-  .journey-timeline::before {
-    content: '';
-    position: absolute;
-    left: 6px;
-    top: 0;
-    bottom: 0;
-    width: 2px;
-    background: linear-gradient(to bottom, var(--teal), var(--gold), var(--sage));
-    border-radius: 2px;
-  }
-  .journey-item {
-    position: relative;
-    padding: 12px 16px;
-    margin-bottom: 8px;
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 8px;
+  .program-items-compact {
     display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    min-height: 50px;
-    transition: all 0.2s;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
   }
-  .journey-item::before {
-    content: '';
-    position: absolute;
-    left: -17px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: var(--white);
-    border: 2px solid var(--teal);
-  }
-  .journey-item.ba::before { border-color: var(--pill-ba); }
-  .journey-item.cf::before { border-color: var(--pill-cf); }
-  .journey-item.tm::before { border-color: var(--pill-tm); }
-  .journey-item.ba { border-left: 4px solid var(--pill-ba); }
-  .journey-item.cf { border-left: 4px solid var(--pill-cf); }
-  .journey-item.tm { border-left: 4px solid var(--pill-tm); }
-  .journey-item .item-content {
-    flex: 1;
-  }
-  .journey-item .item-name {
-    font-weight: 600;
-    color: var(--navy);
-    margin-bottom: 4px;
-    font-size: 14px;
-  }
-  .journey-item .item-meta {
-    font-size: 12px;
-    color: var(--gray-500);
-    display: flex;
+  .compact-item {
+    display: inline-flex;
     align-items: center;
-    gap: 8px;
-  }
-  .journey-item .item-type {
-    font-size: 10px;
-    font-weight: 600;
-    text-transform: uppercase;
-    padding: 2px 6px;
-    border-radius: 4px;
+    gap: 4px;
+    padding: 4px 8px;
     background: var(--gray-100);
-    color: var(--gray-600);
+    border-radius: 4px;
+    font-size: 11px;
+    color: var(--gray-700);
+    border-left: 2px solid var(--gray-300);
   }
-  .journey-item .item-type.sim {
-    background: rgba(0,150,183,0.1);
-    color: var(--pill-ba);
+  .compact-item.ba { border-left-color: var(--pill-ba); }
+  .compact-item.cf { border-left-color: var(--pill-cf); }
+  .compact-item.tm { border-left-color: var(--pill-tm); }
+  .compact-item .item-name {
+    font-weight: 500;
+    max-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
-  .journey-item .item-type.case {
-    background: rgba(244,162,97,0.1);
-    color: var(--gold-dark);
-  }
-  .journey-item .remove-item {
+  .compact-item .remove-item {
     background: none;
     border: none;
     color: var(--gray-400);
     cursor: pointer;
-    font-size: 18px;
-    padding: 4px 8px;
-    border-radius: 4px;
+    font-size: 12px;
+    padding: 0;
     line-height: 1;
   }
-  .journey-item .remove-item:hover {
-    background: var(--gray-100);
+  .compact-item .remove-item:hover {
     color: var(--coral);
   }
 
@@ -3484,28 +3423,14 @@ function renderColumn(prog, items) {
 
   const pItems = items.map(id => PROGRAMS.find(x => x.id === id)).filter(Boolean);
 
-  // Calculate heights based on duration (base: 20px per hour, min: 50px)
-  function getHeight(duration) {
-    const m = duration.match(/(\d+)(?:[–-](\d+))?/);
-    if (!m) return 50;
-    const avgHrs = m[2] ? (+m[1] + +m[2]) / 2 : +m[1];
-    return Math.max(50, avgHrs * 18);
-  }
-
+  // Compact items display
   itemsEl.innerHTML = `
-    <div class="journey-label">Learning Journey</div>
-    <div class="journey-timeline">
+    <div class="program-items-compact">
       ${pItems.map(p => `
-        <div class="journey-item ${p.pillar}" style="min-height: ${getHeight(p.duration)}px;">
-          <div class="item-content">
-            <div class="item-name">${p.name}</div>
-            <div class="item-meta">
-              <span class="item-type ${p.type}">${p.type === 'sim' ? 'Simulation' : 'Case'}</span>
-              <span>${p.duration}</span>
-            </div>
-          </div>
+        <span class="compact-item ${p.pillar}">
+          <span class="item-name">${p.name}</span>
           <button class="remove-item" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
-        </div>
+        </span>
       `).join('')}
     </div>
   `;
