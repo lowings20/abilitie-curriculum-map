@@ -3127,6 +3127,22 @@ function applyFilters() {
   document.getElementById("prog-empty").style.display = visible === 0 ? "block" : "none";
 }
 
+// Map framework names to framework IDs (needed before renderPrograms)
+function getFrameworkId(frameworkName) {
+  const mapping = {
+    'Levers of Value': 'levers-of-value',
+    'Levers of Value (Advanced)': 'levers-of-value-advanced',
+    'ROIC & Capital Efficiency': 'roic-capital-efficiency',
+    'NPV & Cash Flow Modeling': 'npv-cash-flow',
+    'From Idea to Action': 'from-idea-to-action',
+    'Decision Making Framework': 'decision-making',
+    'Cynefin Framework': 'cynefin',
+    'Pillars of Trust': 'pillars-of-trust',
+    'Levers of Leadership': 'levers-of-leadership'
+  };
+  return mapping[frameworkName] || null;
+}
+
 // Initialize
 renderPrograms();
 
@@ -3464,22 +3480,6 @@ showView = function(v) {
 };
 
 // ============ FRAMEWORKS DATA & MODAL ============
-// Map framework names to framework IDs
-function getFrameworkId(frameworkName) {
-  const mapping = {
-    'Levers of Value': 'levers-of-value',
-    'Levers of Value (Advanced)': 'levers-of-value-advanced',
-    'ROIC & Capital Efficiency': 'roic-capital-efficiency',
-    'NPV & Cash Flow Modeling': 'npv-cash-flow',
-    'From Idea to Action': 'from-idea-to-action',
-    'Decision Making Framework': 'decision-making',
-    'Cynefin Framework': 'cynefin',
-    'Pillars of Trust': 'pillars-of-trust',
-    'Levers of Leadership': 'levers-of-leadership'
-  };
-  return mapping[frameworkName] || null;
-}
-
 const FRAMEWORKS = {
   'levers-of-value': {
     name: 'Levers of Value',
