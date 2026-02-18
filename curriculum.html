@@ -3616,6 +3616,12 @@ function renderProgramColumns() {
   renderColumn('a', programA);
   renderColumn('b', programB);
   renderColumn('c', programC);
+
+  // Auto-expand Program C when it has items
+  const colC = document.getElementById('program-c');
+  if (programC.length > 0) {
+    colC.classList.add('expanded');
+  }
 }
 
 function renderColumn(prog, items) {
@@ -3813,138 +3819,176 @@ function generateComparisonAnalysis(hasA, hasB, hasC) {
   const pB = programB.map(id => PROGRAMS.find(p => p.id === id)).filter(Boolean);
   const pC = programC.map(id => PROGRAMS.find(p => p.id === id)).filter(Boolean);
 
-  // Calculate stats for each program
-  function getProgramStats(items) {
-    let minHrs = 0, maxHrs = 0;
-    const pillars = new Set();
-    const levels = new Set();
-    const types = { sim: 0, case: 0, 'ai-case': 0 };
-    const allComps = new Set();
-    const allMinds = new Set();
-    const allTools = new Set();
+  // Find shared vs unique items
+  const idsA = new Set(programA);
+  const idsB = new Set(programB);
+  const idsC = new Set(programC);
 
+  const sharedAB = programA.filter(id => idsB.has(id));
+  const uniqueToA = programA.filter(id => !idsB.has(id) && (!hasC || !idsC.has(id)));
+  const uniqueToB = programB.filter(id => !idsA.has(id) && (!hasC || !idsC.has(id)));
+  const uniqueToC = hasC ? programC.filter(id => !idsA.has(id) && !idsB.has(id)) : [];
+
+  // Get competencies/mindsets/tools for each program
+  function getContent(items) {
+    const comps = new Set();
+    const minds = new Set();
+    const tools = new Set();
     items.forEach(p => {
-      const m = p.duration.match(/(\d+)(?:[–-](\d+))?/);
-      if (m) { minHrs += +m[1]; maxHrs += +(m[2]||m[1]); }
-      pillars.add(p.pillar);
-      levels.add(p.level);
-      types[p.type]++;
-      (p.competencies || []).forEach(c => allComps.add(c));
-      (p.mindsets || []).forEach(m => allMinds.add(m));
-      (p.tools || []).forEach(t => allTools.add(t));
+      (p.competencies || []).forEach(c => comps.add(c));
+      (p.mindsets || []).forEach(m => minds.add(m));
+      (p.tools || []).forEach(t => tools.add(t));
     });
-
-    return {
-      items,
-      time: minHrs === maxHrs ? `${minHrs}` : `${minHrs}–${maxHrs}`,
-      pillars: Array.from(pillars),
-      levels: Array.from(levels),
-      types,
-      comps: Array.from(allComps),
-      minds: Array.from(allMinds),
-      tools: Array.from(allTools)
-    };
+    return { comps: Array.from(comps), minds: Array.from(minds), tools: Array.from(tools) };
   }
 
-  const statsA = hasA ? getProgramStats(pA) : null;
-  const statsB = hasB ? getProgramStats(pB) : null;
-  const statsC = hasC ? getProgramStats(pC) : null;
+  const contentA = getContent(pA);
+  const contentB = getContent(pB);
+  const contentC = hasC ? getContent(pC) : { comps: [], minds: [], tools: [] };
 
-  // Helper to describe pillar focus
-  function pillarFocus(pillars) {
-    const pillarNames = { ba: 'Business Acumen', cf: 'Cross-Functional Decision-Making', tm: 'Team Management' };
-    if (pillars.length === 3) return 'all three leadership pillars';
-    if (pillars.length === 2) return pillars.map(p => pillarNames[p]).join(' and ');
-    return pillarNames[pillars[0]] || 'leadership development';
+  // Find unique competencies to each program
+  const compsOnlyA = contentA.comps.filter(c => !contentB.comps.includes(c) && (!hasC || !contentC.comps.includes(c)));
+  const compsOnlyB = contentB.comps.filter(c => !contentA.comps.includes(c) && (!hasC || !contentC.comps.includes(c)));
+  const compsOnlyC = hasC ? contentC.comps.filter(c => !contentA.comps.includes(c) && !contentB.comps.includes(c)) : [];
+
+  const mindsOnlyA = contentA.minds.filter(m => !contentB.minds.includes(m) && (!hasC || !contentC.minds.includes(m)));
+  const mindsOnlyB = contentB.minds.filter(m => !contentA.minds.includes(m) && (!hasC || !contentC.minds.includes(m)));
+  const mindsOnlyC = hasC ? contentC.minds.filter(m => !contentA.minds.includes(m) && !contentB.minds.includes(m)) : [];
+
+  // Get names from IDs
+  function getNames(ids) {
+    return ids.map(id => PROGRAMS.find(p => p.id === id)?.name).filter(Boolean);
   }
 
-  // Helper to describe level focus
-  function levelFocus(levels) {
-    const levelNames = { rising: 'Rising Leaders', experienced: 'Experienced Leaders', executive: 'Executives' };
-    if (levels.length === 3) return 'all leadership levels';
-    if (levels.length === 2) return levels.map(l => levelNames[l]).join(' and ');
-    return levelNames[levels[0]] || 'leaders';
-  }
+  const sharedNames = getNames(sharedAB);
+  const uniqueANames = getNames(uniqueToA);
+  const uniqueBNames = getNames(uniqueToB);
+  const uniqueCNames = getNames(uniqueToC);
 
-  // Helper to describe format
-  function formatFocus(types) {
-    const parts = [];
-    if (types.sim > 0) parts.push(`${types.sim} simulation${types.sim > 1 ? 's' : ''}`);
-    if (types.case > 0) parts.push(`${types.case} case challenge${types.case > 1 ? 's' : ''}`);
-    if (types['ai-case'] > 0) parts.push(`${types['ai-case']} AI case${types['ai-case'] > 1 ? 's' : ''}`);
-    return parts.join(', ');
-  }
+  // Build the analysis HTML
+  let html = '';
 
-  // Build differences section
-  let differences = '';
-  if (statsA && statsB) {
-    differences = `<div class="comparison-section">
-      <h3>Key Differences Between Programs</h3>
-      <p><strong>Time Investment:</strong> Program A requires ${statsA.time} hours while Program B requires ${statsB.time} hours${statsC ? `, and Program C requires ${statsC.time} hours` : ''}.</p>
-      <p><strong>Pillar Focus:</strong> Program A emphasizes ${pillarFocus(statsA.pillars)}, whereas Program B focuses on ${pillarFocus(statsB.pillars)}${statsC ? `. Program C covers ${pillarFocus(statsC.pillars)}` : ''}.</p>
-      <p><strong>Target Audience:</strong> Program A is designed for ${levelFocus(statsA.levels)}, while Program B targets ${levelFocus(statsB.levels)}${statsC ? `. Program C serves ${levelFocus(statsC.levels)}` : ''}.</p>
-      <p><strong>Learning Format:</strong> Program A includes ${formatFocus(statsA.types)}. Program B uses ${formatFocus(statsB.types)}${statsC ? `. Program C features ${formatFocus(statsC.types)}` : ''}.</p>
-      <p><strong>Competency Breadth:</strong> Program A develops ${statsA.comps.length} competencies across ${statsA.minds.length} mindsets. Program B builds ${statsB.comps.length} competencies with ${statsB.minds.length} mindsets${statsC ? `. Program C covers ${statsC.comps.length} competencies and ${statsC.minds.length} mindsets` : ''}.</p>
+  // Shared content section
+  if (sharedNames.length > 0) {
+    html += `<div class="comparison-section">
+      <h3>Shared Foundation</h3>
+      <p>Both programs include: <strong>${sharedNames.join(', ')}</strong></p>
+      <p style="color:var(--gray-500);font-size:14px;margin-top:8px;">This shared content means participants in either program will develop common baseline competencies.</p>
     </div>`;
   }
 
-  // Build "what you'd have to believe" sections
-  function buildBeliefCard(label, stats, cssClass) {
-    const isSim = stats.types.sim > 0;
-    const isCase = stats.types.case > 0;
-    const isAI = stats.types['ai-case'] > 0;
-    const isBA = stats.pillars.includes('ba');
-    const isCF = stats.pillars.includes('cf');
-    const isTM = stats.pillars.includes('tm');
-    const isRising = stats.levels.includes('rising');
-    const isExec = stats.levels.includes('executive');
-    const shortTime = parseInt(stats.time) <= 4;
-    const longTime = parseInt(stats.time) >= 12;
+  // Key differences section
+  html += `<div class="comparison-section">
+    <h3>What Makes Each Program Different</h3>`;
 
+  if (uniqueANames.length > 0) {
+    html += `<div class="belief-card program-a">
+      <h4>Program A Includes Uniquely</h4>
+      <p><strong>${uniqueANames.join(', ')}</strong></p>
+      ${compsOnlyA.length > 0 ? `<p style="margin-top:12px;font-size:13px;"><strong>Unique competencies:</strong> ${compsOnlyA.slice(0,3).join('; ')}${compsOnlyA.length > 3 ? ` (+${compsOnlyA.length - 3} more)` : ''}</p>` : ''}
+      ${mindsOnlyA.length > 0 ? `<p style="font-size:13px;"><strong>Unique mindsets:</strong> ${mindsOnlyA.slice(0,2).join('; ')}${mindsOnlyA.length > 2 ? ` (+${mindsOnlyA.length - 2} more)` : ''}</p>` : ''}
+    </div>`;
+  } else if (sharedNames.length === programA.length) {
+    html += `<div class="belief-card program-a">
+      <h4>Program A</h4>
+      <p>All content in Program A is also in Program B.</p>
+    </div>`;
+  }
+
+  if (uniqueBNames.length > 0) {
+    html += `<div class="belief-card program-b">
+      <h4>Program B Includes Uniquely</h4>
+      <p><strong>${uniqueBNames.join(', ')}</strong></p>
+      ${compsOnlyB.length > 0 ? `<p style="margin-top:12px;font-size:13px;"><strong>Unique competencies:</strong> ${compsOnlyB.slice(0,3).join('; ')}${compsOnlyB.length > 3 ? ` (+${compsOnlyB.length - 3} more)` : ''}</p>` : ''}
+      ${mindsOnlyB.length > 0 ? `<p style="font-size:13px;"><strong>Unique mindsets:</strong> ${mindsOnlyB.slice(0,2).join('; ')}${mindsOnlyB.length > 2 ? ` (+${mindsOnlyB.length - 2} more)` : ''}</p>` : ''}
+    </div>`;
+  } else if (sharedNames.length === programB.length) {
+    html += `<div class="belief-card program-b">
+      <h4>Program B</h4>
+      <p>All content in Program B is also in Program A.</p>
+    </div>`;
+  }
+
+  if (hasC && uniqueCNames.length > 0) {
+    html += `<div class="belief-card program-c">
+      <h4>Program C Includes Uniquely</h4>
+      <p><strong>${uniqueCNames.join(', ')}</strong></p>
+      ${compsOnlyC.length > 0 ? `<p style="margin-top:12px;font-size:13px;"><strong>Unique competencies:</strong> ${compsOnlyC.slice(0,3).join('; ')}${compsOnlyC.length > 3 ? ` (+${compsOnlyC.length - 3} more)` : ''}</p>` : ''}
+      ${mindsOnlyC.length > 0 ? `<p style="font-size:13px;"><strong>Unique mindsets:</strong> ${mindsOnlyC.slice(0,2).join('; ')}${mindsOnlyC.length > 2 ? ` (+${mindsOnlyC.length - 2} more)` : ''}</p>` : ''}
+    </div>`;
+  }
+
+  html += `</div>`;
+
+  // What you'd have to believe section - based on actual unique content
+  html += `<div class="comparison-section">
+    <h3>What You'd Have to Believe</h3>`;
+
+  function buildBeliefFromContent(label, uniqueItems, uniqueComps, uniqueMinds, cssClass) {
+    if (uniqueItems.length === 0) return '';
+
+    const programs = uniqueItems.map(id => PROGRAMS.find(p => p.id === id)).filter(Boolean);
     let beliefs = [];
 
-    // Time-based beliefs
-    if (shortTime) beliefs.push('A focused, time-efficient intervention will create meaningful behavior change');
-    if (longTime) beliefs.push('Deep immersion and extended practice time are necessary for lasting skill development');
+    // Analyze unique programs
+    const hasExperienced = programs.some(p => p.level === 'experienced');
+    const hasRising = programs.some(p => p.level === 'rising');
+    const hasExecutive = programs.some(p => p.level === 'executive');
+    const hasCF = programs.some(p => p.pillar === 'cf');
+    const hasTM = programs.some(p => p.pillar === 'tm');
+    const hasBA = programs.some(p => p.pillar === 'ba');
 
-    // Format-based beliefs
-    if (isSim && !isCase) beliefs.push('Experiential learning through simulation creates the strongest transfer to real work');
-    if (isCase && !isSim) beliefs.push('Structured case analysis builds better analytical habits than open-ended simulation');
-    if (isSim && isCase) beliefs.push('Combining simulation immersion with case analysis reinforces learning from multiple angles');
-    if (isAI) beliefs.push('AI-powered scenarios provide valuable, personalized practice opportunities');
+    // Generate beliefs based on actual unique content
+    if (hasExperienced && !hasRising) {
+      beliefs.push('Your audience needs content designed for experienced leaders with existing foundational skills');
+    }
+    if (hasRising && !hasExperienced) {
+      beliefs.push('Your audience needs foundational content suited for rising or new leaders');
+    }
 
-    // Pillar-based beliefs
-    if (isBA && !isCF && !isTM) beliefs.push('Financial and strategic acumen is the most critical skill gap to address');
-    if (isCF && !isBA && !isTM) beliefs.push('Cross-functional collaboration and influence skills are the primary development need');
-    if (isTM && !isBA && !isCF) beliefs.push('People leadership and team management are where investment will yield the highest return');
-    if (isBA && isCF && isTM) beliefs.push('A holistic approach addressing all leadership dimensions creates the best outcomes');
+    // Analyze specific unique competencies for insights
+    const compLower = uniqueComps.map(c => c.toLowerCase()).join(' ');
+    if (compLower.includes('cash flow') || compLower.includes('npv') || compLower.includes('investment')) {
+      beliefs.push('Financial modeling and long-term investment analysis skills are critical for this audience');
+    }
+    if (compLower.includes('profitability') || compLower.includes('profit driver')) {
+      beliefs.push('Understanding and managing profitability fundamentals is a key development need');
+    }
+    if (compLower.includes('influence') || compLower.includes('stakeholder')) {
+      beliefs.push('Building influence and stakeholder management capabilities is essential');
+    }
+    if (compLower.includes('feedback') || compLower.includes('coaching') || compLower.includes('trust')) {
+      beliefs.push('Developing people management and coaching skills will drive performance');
+    }
 
-    // Level-based beliefs
-    if (isRising && !isExec) beliefs.push('Building a strong foundation early in leadership careers pays dividends');
-    if (isExec && !isRising) beliefs.push('Senior leaders have unique challenges that require specialized development');
+    // Mindset-based insights
+    const mindLower = uniqueMinds.map(m => m.toLowerCase()).join(' ');
+    if (mindLower.includes('risk') || mindLower.includes('growth')) {
+      beliefs.push('Leaders need to develop a more sophisticated view of growth vs. risk tradeoffs');
+    }
+    if (mindLower.includes('time value') || mindLower.includes('cash')) {
+      beliefs.push('Building cash flow discipline and time-value-of-money thinking is a gap to address');
+    }
 
-    // Fallback
-    if (beliefs.length === 0) beliefs.push('This combination of content best addresses your specific development needs');
+    if (beliefs.length === 0) {
+      beliefs.push(`The specific content in ${label} (${programs.map(p => p.name).join(', ')}) addresses gaps the other programs don't cover`);
+    }
 
     return `<div class="belief-card ${cssClass}">
-      <h4>What You'd Have to Believe to Choose ${label}</h4>
+      <h4>To choose ${label}, you'd believe:</h4>
       <p>${beliefs.map(b => '• ' + b).join('<br>')}</p>
     </div>`;
   }
 
-  let beliefCards = '';
-  if (statsA) beliefCards += buildBeliefCard('Program A', statsA, 'program-a');
-  if (statsB) beliefCards += buildBeliefCard('Program B', statsB, 'program-b');
-  if (statsC) beliefCards += buildBeliefCard('Program C', statsC, 'program-c');
+  html += buildBeliefFromContent('Program A', uniqueToA, compsOnlyA, mindsOnlyA, 'program-a');
+  html += buildBeliefFromContent('Program B', uniqueToB, compsOnlyB, mindsOnlyB, 'program-b');
+  if (hasC) {
+    html += buildBeliefFromContent('Program C', uniqueToC, compsOnlyC, mindsOnlyC, 'program-c');
+  }
 
-  return `
-    ${differences}
-    <div class="comparison-section">
-      <h3>Decision Framework</h3>
-      <p>Each program represents a different set of assumptions about what your organization needs. Consider which beliefs align with your context:</p>
-      ${beliefCards}
-    </div>
-  `;
+  html += `</div>`;
+
+  return html;
 }
 
 // Hook into showView
