@@ -723,7 +723,7 @@
   /* COMPARE VIEW */
   .compare-container {
     display: grid;
-    grid-template-columns: 280px 1fr 1fr;
+    grid-template-columns: 320px 1fr 1fr;
     gap: 24px;
     min-height: 600px;
   }
@@ -743,18 +743,70 @@
     color: var(--navy);
     margin-bottom: 16px;
   }
+  .compare-search {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    font-size: 13px;
+    margin-bottom: 12px;
+    transition: border-color 0.2s;
+  }
+  .compare-search:focus {
+    outline: none;
+    border-color: var(--teal);
+  }
+  .compare-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    margin-bottom: 16px;
+  }
+  .filter-toggle {
+    padding: 6px 12px;
+    border: 1px solid var(--gray-200);
+    border-radius: 20px;
+    background: var(--white);
+    font-size: 11px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .filter-toggle:hover {
+    border-color: var(--teal);
+  }
+  .filter-toggle.active {
+    background: var(--teal);
+    color: white;
+    border-color: var(--teal);
+  }
+  .filter-toggle.active.ba { background: var(--pill-ba); border-color: var(--pill-ba); }
+  .filter-toggle.active.cf { background: var(--pill-cf); border-color: var(--pill-cf); }
+  .filter-toggle.active.tm { background: var(--pill-tm); border-color: var(--pill-tm); }
+  .filter-divider {
+    width: 1px;
+    background: var(--gray-200);
+    margin: 0 4px;
+  }
   .compare-item {
     padding: 12px;
     border: 1px solid var(--gray-200);
     border-radius: 8px;
     margin-bottom: 8px;
-    cursor: pointer;
+    cursor: grab;
     transition: all 0.2s;
     font-size: 13px;
+    user-select: none;
   }
   .compare-item:hover {
     border-color: var(--teal);
     background: rgba(0,180,216,0.05);
+  }
+  .compare-item.dragging {
+    opacity: 0.5;
+    cursor: grabbing;
   }
   .compare-item .item-name {
     font-weight: 600;
@@ -774,6 +826,36 @@
     border-radius: var(--radius);
     box-shadow: var(--shadow);
     overflow: hidden;
+    transition: box-shadow 0.2s;
+  }
+  .program-column.drag-over {
+    box-shadow: 0 0 0 3px var(--teal), var(--shadow);
+  }
+  .preset-selector {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 16px;
+    flex-wrap: wrap;
+  }
+  .preset-btn {
+    padding: 8px 14px;
+    border: 1px solid var(--gray-200);
+    border-radius: 6px;
+    background: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+    color: var(--navy);
+  }
+  .preset-btn:hover {
+    border-color: var(--teal);
+    background: rgba(0,180,216,0.05);
+  }
+  .preset-btn.active {
+    background: var(--navy);
+    color: white;
+    border-color: var(--navy);
   }
   .program-header {
     background: var(--navy);
@@ -854,35 +936,81 @@
   .stat-value { font-weight: 700; color: var(--navy); }
   .stat-value.highlight { color: var(--teal-dark); }
 
-  .competency-list {
-    margin-top: 16px;
-    max-height: 200px;
-    overflow-y: auto;
+  .collapsible-section {
+    margin-top: 12px;
+    border: 1px solid var(--gray-200);
+    border-radius: 8px;
+    overflow: hidden;
   }
-  .competency-list h4 {
+  .collapsible-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    background: var(--gray-50);
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+  .collapsible-header:hover {
+    background: var(--gray-100);
+  }
+  .collapsible-header h4 {
     font-size: 11px;
     font-weight: 700;
     text-transform: uppercase;
     letter-spacing: 1px;
+    color: var(--gray-500);
+    margin: 0;
+  }
+  .collapsible-header .toggle-icon {
+    font-size: 12px;
     color: var(--gray-400);
-    margin-bottom: 8px;
+    transition: transform 0.2s;
   }
-  .competency-list ul {
+  .collapsible-section.expanded .toggle-icon {
+    transform: rotate(180deg);
+  }
+  .collapsible-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out;
+  }
+  .collapsible-section.expanded .collapsible-content {
+    max-height: 400px;
+    overflow-y: auto;
+  }
+  .collapsible-content ul {
     list-style: none;
-    padding: 0;
+    padding: 12px;
+    margin: 0;
   }
-  .competency-list li {
+  .collapsible-content li {
     font-size: 12px;
     color: var(--gray-600);
-    padding: 4px 0;
-    padding-left: 12px;
+    padding: 6px 0;
+    padding-left: 14px;
     position: relative;
+    border-bottom: 1px solid var(--gray-100);
   }
-  .competency-list li::before {
+  .collapsible-content li:last-child {
+    border-bottom: none;
+  }
+  .collapsible-content li::before {
     content: "•";
     position: absolute;
     left: 0;
     color: var(--teal);
+  }
+  .collapsible-section.mindsets-section .collapsible-content li::before {
+    color: var(--gold);
+  }
+  .collapsible-section.frameworks-section .collapsible-content li::before {
+    color: var(--coral);
+  }
+  .collapsible-count {
+    font-size: 11px;
+    color: var(--gray-400);
+    font-weight: 600;
   }
 
   @media (max-width: 1100px) {
@@ -926,7 +1054,7 @@
     <div class="hero-stat"><div class="num">3</div><div class="label">Pillars</div></div>
     <div class="hero-stat"><div class="num">3</div><div class="label">Levels</div></div>
     <div class="hero-stat"><div class="num">8</div><div class="label">Simulations</div></div>
-    <div class="hero-stat"><div class="num">8</div><div class="label">Case Challenges</div></div>
+    <div class="hero-stat"><div class="num">9</div><div class="label">Case Challenges</div></div>
   </div>
 </div>
 
@@ -1017,42 +1145,59 @@
 <div class="view-panel" id="view-compare">
   <div class="overview-intro" style="margin-bottom:24px;">
     <h2>Compare Programs</h2>
-    <p>Build two programs side-by-side and compare seat time, competencies, and coverage.</p>
+    <p>Build two programs side-by-side and compare seat time, competencies, and coverage. Drag items from the left into Program A or B.</p>
+  </div>
+
+  <div class="preset-selector">
+    <button class="preset-btn" onclick="loadPreset('flagship-rising')">Flagship Rising Leader</button>
+    <button class="preset-btn" onclick="loadPreset('flagship-experienced')">Flagship Experienced Leader</button>
+    <button class="preset-btn" onclick="loadPreset('accelerator-income')">Income Accelerator</button>
+    <button class="preset-btn" onclick="loadPreset('accelerator-business')">Business Accelerator</button>
+    <button class="preset-btn" onclick="loadPreset('accelerator-influence')">Influence Accelerator</button>
+    <button class="preset-btn" onclick="loadPreset('accelerator-enterprise')">Enterprise Accelerator</button>
+    <button class="preset-btn" onclick="loadPreset('accelerator-management')">Management Accelerator</button>
+    <button class="preset-btn" onclick="loadPreset('accelerator-director')">Director Accelerator</button>
   </div>
 
   <div class="compare-container">
     <div class="compare-sidebar">
-      <h3>Add to Program</h3>
-      <div class="filter-group" style="margin-bottom:16px;">
-        <select id="compare-filter" onchange="filterCompareItems()" style="width:100%;padding:8px;border:1px solid var(--gray-200);border-radius:6px;font-size:13px;">
-          <option value="all">All Items</option>
-          <option value="sim">Simulations Only</option>
-          <option value="case">Case Challenges Only</option>
-        </select>
+      <h3>Drag to Add</h3>
+      <input type="text" id="compare-search" class="compare-search" placeholder="Search simulations & cases..." oninput="filterCompareItems()">
+      <div class="compare-filters">
+        <button class="filter-toggle active" data-filter="type" data-value="all" onclick="toggleFilter(this)">All</button>
+        <button class="filter-toggle" data-filter="type" data-value="sim" onclick="toggleFilter(this)">Sims</button>
+        <button class="filter-toggle" data-filter="type" data-value="case" onclick="toggleFilter(this)">Cases</button>
+        <div class="filter-divider"></div>
+        <button class="filter-toggle ba" data-filter="pillar" data-value="ba" onclick="toggleFilter(this)">BA</button>
+        <button class="filter-toggle cf" data-filter="pillar" data-value="cf" onclick="toggleFilter(this)">CF</button>
+        <button class="filter-toggle tm" data-filter="pillar" data-value="tm" onclick="toggleFilter(this)">TM</button>
+        <div class="filter-divider"></div>
+        <button class="filter-toggle" data-filter="level" data-value="rising" onclick="toggleFilter(this)">Rising</button>
+        <button class="filter-toggle" data-filter="level" data-value="experienced" onclick="toggleFilter(this)">Exp</button>
       </div>
       <div id="compare-items-list"></div>
     </div>
 
-    <div class="program-column" id="program-a">
+    <div class="program-column" id="program-a" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'a')">
       <div class="program-header" style="background:var(--teal-dark);">
         <h3>Program A</h3>
         <button class="clear-btn" onclick="clearProgram('a')">Clear All</button>
       </div>
       <div class="program-body">
         <div class="program-items" id="program-a-items"></div>
-        <div class="program-empty" id="program-a-empty">Click items on the left to add to Program A</div>
+        <div class="program-empty" id="program-a-empty">Drag items here to build Program A</div>
         <div class="program-stats" id="program-a-stats" style="display:none;"></div>
       </div>
     </div>
 
-    <div class="program-column" id="program-b">
+    <div class="program-column" id="program-b" ondragover="handleDragOver(event)" ondragleave="handleDragLeave(event)" ondrop="handleDrop(event, 'b')">
       <div class="program-header" style="background:var(--gold);">
         <h3>Program B</h3>
         <button class="clear-btn" onclick="clearProgram('b')">Clear All</button>
       </div>
       <div class="program-body">
         <div class="program-items" id="program-b-items"></div>
-        <div class="program-empty" id="program-b-empty">Click items on the left to add to Program B</div>
+        <div class="program-empty" id="program-b-empty">Drag items here to build Program B</div>
         <div class="program-stats" id="program-b-stats" style="display:none;"></div>
       </div>
     </div>
@@ -2082,10 +2227,85 @@ renderPrograms();
 // ============ COMPARE PROGRAMS ============
 let programA = [];
 let programB = [];
+let compareFilters = { type: 'all', pillar: [], level: [] };
+let draggedItemId = null;
+
+// Preset programs based on Abilitie Portfolio
+const PRESETS = {
+  'flagship-rising': {
+    name: 'Flagship Rising Leader',
+    items: ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability',
+            'influence-challenge', 'shifting-mindsets', 'influencing-without-authority',
+            'management-challenge', 'enabling-peak-performance', 'navigating-critical-conversations']
+  },
+  'flagship-experienced': {
+    name: 'Flagship Experienced Leader',
+    items: ['business-challenge', 'balancing-growth-risk',
+            'enterprise-challenge', 'creating-strategic-alignment', 'strategic-problem-solving',
+            'director-challenge', 'leading-in-times-of-change']
+  },
+  'accelerator-income': {
+    name: 'Income Challenge Accelerator',
+    items: ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability']
+  },
+  'accelerator-business': {
+    name: 'Business Challenge Accelerator',
+    items: ['business-challenge', 'balancing-growth-risk']
+  },
+  'accelerator-influence': {
+    name: 'Influence Challenge Accelerator',
+    items: ['influence-challenge', 'shifting-mindsets', 'influencing-without-authority']
+  },
+  'accelerator-enterprise': {
+    name: 'Enterprise Challenge Accelerator',
+    items: ['enterprise-challenge', 'creating-strategic-alignment', 'strategic-problem-solving']
+  },
+  'accelerator-management': {
+    name: 'Management Challenge Accelerator',
+    items: ['management-challenge', 'enabling-peak-performance', 'navigating-critical-conversations']
+  },
+  'accelerator-director': {
+    name: 'Director Challenge Accelerator',
+    items: ['director-challenge', 'leading-in-times-of-change']
+  }
+};
 
 function initCompare() {
+  compareFilters = { type: 'all', pillar: [], level: [] };
+  // Reset filter toggles
+  document.querySelectorAll('.compare-filters .filter-toggle').forEach(btn => {
+    if (btn.dataset.filter === 'type' && btn.dataset.value === 'all') {
+      btn.classList.add('active');
+    } else if (btn.dataset.filter === 'type') {
+      btn.classList.remove('active');
+    } else {
+      btn.classList.remove('active');
+    }
+  });
   renderCompareItems();
   renderProgramColumns();
+}
+
+function toggleFilter(btn) {
+  const filterType = btn.dataset.filter;
+  const value = btn.dataset.value;
+
+  if (filterType === 'type') {
+    // Type filters are exclusive (all/sim/case)
+    document.querySelectorAll('.filter-toggle[data-filter="type"]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    compareFilters.type = value;
+  } else {
+    // Pillar and level filters are toggleable
+    btn.classList.toggle('active');
+    const arr = compareFilters[filterType];
+    if (arr.includes(value)) {
+      compareFilters[filterType] = arr.filter(v => v !== value);
+    } else {
+      arr.push(value);
+    }
+  }
+  renderCompareItems();
 }
 
 function filterCompareItems() {
@@ -2093,28 +2313,89 @@ function filterCompareItems() {
 }
 
 function renderCompareItems() {
-  const filter = document.getElementById('compare-filter').value;
+  const searchEl = document.getElementById('compare-search');
+  const searchTerm = searchEl ? searchEl.value.toLowerCase() : '';
   const container = document.getElementById('compare-items-list');
-  
+
   if (!container) return;
-  
+
   let items = PROGRAMS.filter(p => {
-    if (filter === 'sim') return p.type === 'sim';
-    if (filter === 'case') return p.type === 'case';
+    // Type filter
+    if (compareFilters.type === 'sim' && p.type !== 'sim') return false;
+    if (compareFilters.type === 'case' && p.type !== 'case') return false;
+
+    // Pillar filter (if any selected)
+    if (compareFilters.pillar.length > 0 && !compareFilters.pillar.includes(p.pillar)) return false;
+
+    // Level filter (if any selected)
+    if (compareFilters.level.length > 0 && !compareFilters.level.includes(p.level)) return false;
+
+    // Search filter
+    if (searchTerm && !p.name.toLowerCase().includes(searchTerm)) return false;
+
     return true;
   });
 
   container.innerHTML = items.map(p => `
-    <div class="compare-item ${p.pillar}" onclick="showAddDialog('${p.id}')">
+    <div class="compare-item ${p.pillar}" draggable="true" data-id="${p.id}"
+         ondragstart="handleDragStart(event)" ondragend="handleDragEnd(event)">
       <div class="item-name">${p.name}</div>
       <div class="item-meta">${p.type === 'sim' ? 'Simulation' : 'Case'} • ${p.level} • ${p.duration}</div>
     </div>
   `).join('');
 }
 
-function showAddDialog(id) {
-  const choice = confirm('Add to Program A?\n\nOK = Program A\nCancel = Program B');
-  addItem(id, choice ? 'a' : 'b');
+// Drag and drop handlers
+function handleDragStart(e) {
+  draggedItemId = e.target.dataset.id;
+  e.target.classList.add('dragging');
+  e.dataTransfer.effectAllowed = 'copy';
+  e.dataTransfer.setData('text/plain', draggedItemId);
+}
+
+function handleDragEnd(e) {
+  e.target.classList.remove('dragging');
+  draggedItemId = null;
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  e.dataTransfer.dropEffect = 'copy';
+  e.currentTarget.classList.add('drag-over');
+}
+
+function handleDragLeave(e) {
+  e.currentTarget.classList.remove('drag-over');
+}
+
+function handleDrop(e, prog) {
+  e.preventDefault();
+  e.currentTarget.classList.remove('drag-over');
+  const id = e.dataTransfer.getData('text/plain') || draggedItemId;
+  if (id) {
+    addItem(id, prog);
+  }
+}
+
+function loadPreset(presetId) {
+  const preset = PRESETS[presetId];
+  if (!preset) return;
+
+  // Load into Program A if empty, otherwise Program B
+  const targetProg = programA.length === 0 ? 'a' : 'b';
+
+  // Clear the target program first
+  if (targetProg === 'a') {
+    programA = [...preset.items];
+  } else {
+    programB = [...preset.items];
+  }
+
+  // Update active state on preset buttons
+  document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
+  event.target.classList.add('active');
+
+  renderProgramColumns();
 }
 
 function addItem(id, prog) {
@@ -2149,7 +2430,7 @@ function renderColumn(prog, items) {
   const itemsEl = document.getElementById('program-' + prog + '-items');
   const emptyEl = document.getElementById('program-' + prog + '-empty');
   const statsEl = document.getElementById('program-' + prog + '-stats');
-  
+
   if (!itemsEl) return;
 
   if (items.length === 0) {
@@ -2180,6 +2461,7 @@ function renderColumn(prog, items) {
 
   const comps = [...new Set(pItems.flatMap(p => p.competencies || []))];
   const minds = [...new Set(pItems.flatMap(p => p.mindsets || []))];
+  const frameworks = [...new Set(pItems.flatMap(p => p.tools || []))];
   const pillars = [...new Set(pItems.map(p => p.pillar))].map(x => ({ba:'BA',cf:'CF',tm:'TM'}[x]||x)).join(', ');
   const levels = [...new Set(pItems.map(p => p.level))].map(l => l[0].toUpperCase()+l.slice(1)).join(', ');
 
@@ -2188,11 +2470,35 @@ function renderColumn(prog, items) {
     <div class="stat-row"><span class="stat-label">Programs</span><span class="stat-value">${pItems.filter(p=>p.type==='sim').length} sims, ${pItems.filter(p=>p.type==='case').length} cases</span></div>
     <div class="stat-row"><span class="stat-label">Pillars</span><span class="stat-value">${pillars||'—'}</span></div>
     <div class="stat-row"><span class="stat-label">Levels</span><span class="stat-value">${levels||'—'}</span></div>
-    <div class="stat-row"><span class="stat-label">Competencies</span><span class="stat-value">${comps.length}</span></div>
-    <div class="stat-row"><span class="stat-label">Mindsets</span><span class="stat-value">${minds.length}</span></div>
-    <div class="competency-list">
-      <h4>Competencies</h4>
-      <ul>${comps.slice(0,8).map(c=>'<li>'+c+'</li>').join('')}${comps.length>8?'<li style="color:var(--gray-400)">+'+(comps.length-8)+' more</li>':''}</ul>
+
+    <div class="collapsible-section" onclick="this.classList.toggle('expanded')">
+      <div class="collapsible-header">
+        <h4>Competencies <span class="collapsible-count">(${comps.length})</span></h4>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="collapsible-content">
+        <ul>${comps.map(c=>'<li>'+c+'</li>').join('')}</ul>
+      </div>
+    </div>
+
+    <div class="collapsible-section mindsets-section" onclick="this.classList.toggle('expanded')">
+      <div class="collapsible-header">
+        <h4>Mindsets <span class="collapsible-count">(${minds.length})</span></h4>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="collapsible-content">
+        <ul>${minds.map(m=>'<li>'+m+'</li>').join('')}</ul>
+      </div>
+    </div>
+
+    <div class="collapsible-section frameworks-section" onclick="this.classList.toggle('expanded')">
+      <div class="collapsible-header">
+        <h4>Tools & Frameworks <span class="collapsible-count">(${frameworks.length})</span></h4>
+        <span class="toggle-icon">▼</span>
+      </div>
+      <div class="collapsible-content">
+        <ul>${frameworks.map(f=>'<li>'+f+'</li>').join('')}</ul>
+      </div>
     </div>
   `;
 }
