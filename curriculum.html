@@ -1575,6 +1575,133 @@
     color: var(--gray-700);
     line-height: 1.7;
   }
+
+  /* Framework Modal */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.6);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    padding: 20px;
+  }
+  .modal-overlay.show {
+    display: flex;
+  }
+  .modal-content {
+    background: var(--white);
+    border-radius: 16px;
+    max-width: 600px;
+    width: 100%;
+    max-height: 80vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+  }
+  .modal-header {
+    padding: 24px 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+  }
+  .modal-header h2 {
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0;
+  }
+  .modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: var(--gray-400);
+    cursor: pointer;
+    padding: 0;
+    line-height: 1;
+  }
+  .modal-close:hover {
+    color: var(--gray-600);
+  }
+  .modal-pillar-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: white;
+    margin-top: 8px;
+  }
+  .modal-pillar-badge.ba { background: var(--pill-ba); }
+  .modal-pillar-badge.cf { background: var(--pill-cf); }
+  .modal-pillar-badge.tm { background: var(--pill-tm); }
+  .modal-body {
+    padding: 20px 24px 24px;
+  }
+  .modal-description {
+    font-size: 15px;
+    color: var(--gray-700);
+    line-height: 1.7;
+    margin-bottom: 20px;
+  }
+  .modal-section {
+    margin-top: 20px;
+  }
+  .modal-section h4 {
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-400);
+    margin-bottom: 12px;
+  }
+  .modal-used-in {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .modal-program-tag {
+    padding: 8px 12px;
+    background: var(--gray-100);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-700);
+  }
+  .modal-components {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  .modal-component {
+    padding: 12px 16px;
+    background: var(--gray-50);
+    border-left: 3px solid var(--teal);
+    border-radius: 0 8px 8px 0;
+  }
+  .modal-component-title {
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .modal-component-desc {
+    font-size: 13px;
+    color: var(--gray-600);
+  }
+  .framework-link {
+    color: var(--teal-dark);
+    cursor: pointer;
+    text-decoration: underline;
+    text-decoration-style: dotted;
+  }
+  .framework-link:hover {
+    color: var(--teal);
+  }
 </style>
 </head>
 <body>
@@ -2896,7 +3023,7 @@ function renderPrograms() {
       // Original sim/case rendering
       detailInner = `
         <div style="margin-bottom:8px;">
-          <span class="cell-framework ${p.pillar}" style="font-size:11px;padding:5px 12px;">Key Framework: ${p.framework}</span>
+          <span class="cell-framework ${p.pillar}" style="font-size:11px;padding:5px 12px;">Key Framework: <span class="framework-link" onclick="showFrameworkModal('${getFrameworkId(p.framework)}')">${p.framework}</span></span>
         </div>
         <div class="section-grid">
           <div class="section-block ${accentClass[p.pillar]}"><h4>Competencies</h4><ul>${listHtml(p.competencies)}</ul></div>
@@ -3336,6 +3463,196 @@ showView = function(v) {
   if (v === 'compare') initCompare();
 };
 
+// ============ FRAMEWORKS DATA & MODAL ============
+// Map framework names to framework IDs
+function getFrameworkId(frameworkName) {
+  const mapping = {
+    'Levers of Value': 'levers-of-value',
+    'Levers of Value (Advanced)': 'levers-of-value-advanced',
+    'ROIC & Capital Efficiency': 'roic-capital-efficiency',
+    'NPV & Cash Flow Modeling': 'npv-cash-flow',
+    'From Idea to Action': 'from-idea-to-action',
+    'Decision Making Framework': 'decision-making',
+    'Cynefin Framework': 'cynefin',
+    'Pillars of Trust': 'pillars-of-trust',
+    'Levers of Leadership': 'levers-of-leadership'
+  };
+  return mapping[frameworkName] || null;
+}
+
+const FRAMEWORKS = {
+  'levers-of-value': {
+    name: 'Levers of Value',
+    pillar: 'ba',
+    description: 'Business decisions create value. The drivers of a company\'s value are its growth and its profitability, but also how confident its stakeholders feel in the company\'s future: its risk. Growth × Profitability × Risk = Shareholder Value.',
+    usedIn: ['Income Challenge', 'Analyzing Profit Drivers', 'Managing Profitability'],
+    components: [
+      { title: 'Growth', desc: 'Revenue growth through pricing and volume decisions. Use breakeven analysis to understand impact on profitability.' },
+      { title: 'Profitability', desc: 'Measuring profit and margins to understand value created. Compare performance across time, market, and competitors.' },
+      { title: 'Risk', desc: 'Lower risk companies access cheaper capital and allow more value in NPV analyses.' }
+    ]
+  },
+  'levers-of-value-advanced': {
+    name: 'Levers of Value (Advanced)',
+    pillar: 'ba',
+    description: 'Building on the core Levers of Value, this advanced framework adds ROIC (Return on Invested Capital) and Capital Efficiency as key value drivers for experienced leaders managing multi-period financial strategy.',
+    usedIn: ['Business Challenge'],
+    components: [
+      { title: 'ROIC', desc: 'NOPAT ÷ Invested Capital. A higher ROIC indicates value creation.' },
+      { title: 'Capital Efficiency', desc: 'How much capital is needed to generate revenue. Lower working capital = less cash tied up.' },
+      { title: 'Growth + Profitability + Risk', desc: 'The foundational levers that drive shareholder value.' }
+    ]
+  },
+  'roic-capital-efficiency': {
+    name: 'ROIC & Capital Efficiency',
+    pillar: 'ba',
+    description: 'The most common return measure used to assess operating performance. ROIC = NOPAT (Net Operating Profit After Tax) ÷ Invested Capital. An increasing ROIC is an indicator of value creation.',
+    usedIn: ['Finance Challenge'],
+    components: [
+      { title: 'ROIC Formula', desc: 'ROIC = NOPAT ÷ Invested Capital (Fixed Assets + Working Capital)' },
+      { title: 'Working Capital', desc: 'Accounts Receivable + Inventory - Accounts Payable. Cash tied up in day-to-day operations.' },
+      { title: 'Value Creation', desc: 'When ROIC exceeds cost of capital, value is created for stakeholders.' }
+    ]
+  },
+  'npv-cash-flow': {
+    name: 'NPV & Cash Flow Modeling',
+    pillar: 'ba',
+    description: 'Net Present Value analysis discounts future cash flows to evaluate investment decisions. Time value of money: a dollar today is worth more than a dollar tomorrow.',
+    usedIn: ['Balancing Growth & Risk'],
+    components: [
+      { title: 'Cash Flow Modeling', desc: 'Projecting cash inflows and outflows over multiple periods.' },
+      { title: 'NPV Analysis', desc: 'Discounting future cash flows to evaluate investment viability.' },
+      { title: 'Risk-Return Tradeoff', desc: 'Mapping growth potential against risk exposure with scenario planning.' }
+    ]
+  },
+  'from-idea-to-action': {
+    name: 'From Idea to Action',
+    pillar: 'cf',
+    description: 'A framework for building alignment through influence without formal authority. Focus on understanding stakeholder interests vs. positions, and using expressive and receptive tactics.',
+    usedIn: ['Influence Challenge', 'Shifting Mindsets & Behaviors', 'Influencing Without Authority'],
+    components: [
+      { title: 'Positions vs. Interests', desc: 'Surface deeper motivations behind stated wants.' },
+      { title: 'Stakeholder Mapping', desc: 'Map internal and external stakeholders to identify influence pathways.' },
+      { title: 'Influence Tactics', desc: 'Expressive (Tell/Sell/Negotiate) vs. Receptive (Inquire/Listen/Facilitate).' },
+      { title: 'WIIFM', desc: 'Frame asks in terms of what the other person values.' }
+    ]
+  },
+  'decision-making': {
+    name: 'Decision Making Framework',
+    pillar: 'cf',
+    description: 'The ability to make decisions effectively across multiple departments. The quality of a decision-making process (HOW) is as important as the decision itself (WHAT). Avoid the Content Trap!',
+    usedIn: ['Enterprise Challenge', 'Creating Strategic Alignment'],
+    components: [
+      { title: 'Define', desc: 'Identify decision points, gather information, identify options.' },
+      { title: 'Deliberate', desc: 'Evaluate options using appropriate decision models (Sole Decider → Consensus → Delegate).' },
+      { title: 'Deliver', desc: 'Execute aligned downstream decisions.' },
+      { title: 'VUCA', desc: 'Volatility, Uncertainty, Complexity, Ambiguity - tailor response to each dimension.' }
+    ]
+  },
+  'cynefin': {
+    name: 'Cynefin Framework',
+    pillar: 'cf',
+    description: 'A decision framework that helps leaders match their approach to the type of situation they face. Different domains require different decision-making approaches.',
+    usedIn: ['Executive Challenge'],
+    components: [
+      { title: 'Simple (Known Knowns)', desc: 'Sense → Categorize → Respond. Use best practices and SOPs.' },
+      { title: 'Complicated (Known Unknowns)', desc: 'Sense → Analyze → Respond. Requires judgment and expertise.' },
+      { title: 'Complex (Unknown Unknowns)', desc: 'Probe → Sense → Respond. Run experiments, look for emerging patterns.' },
+      { title: 'Chaotic (Unknowables)', desc: 'Act → Sense → Respond. Make quick decisions with agile iteration.' }
+    ]
+  },
+  'pillars-of-trust': {
+    name: 'Pillars of Trust',
+    pillar: 'tm',
+    description: 'Managers must balance business demands while serving team members\' needs. Working from a solid foundation of trust with direct reports increases effectiveness in navigating these tensions.',
+    usedIn: ['Management Challenge', 'Enabling Peak Performance', 'Navigating Critical Conversations'],
+    components: [
+      { title: 'Be Present', desc: 'Focus, listen actively, make time for all team members. Presence underlies trust.' },
+      { title: 'Set Clear Expectations', desc: 'Establish connection, evaluate capabilities, set goals, make the implicit explicit.' },
+      { title: 'Enable Motivators', desc: 'Identify unique motivators for each person. Speak to motivators when assigning work.' },
+      { title: 'Provide Feedback & Coach', desc: 'Use SBI (Situation-Behavior-Impact). Tie feedback to motivators. Follow up consistently.' }
+    ]
+  },
+  'levers-of-leadership': {
+    name: 'Levers of Leadership',
+    pillar: 'tm',
+    description: 'A framework for leaders of leaders. Managing managers is fundamentally different - you become a force multiplier. Your peer group is your "First Team."',
+    usedIn: ['Director Challenge', 'Leading in Times of Change'],
+    components: [
+      { title: 'Force Multiplier', desc: 'Multiply the capability of your leaders rather than doing the work yourself.' },
+      { title: 'First Team Thinking', desc: 'Your peer group is your first team. Optimize for enterprise, not department.' },
+      { title: 'Culture as a Lever', desc: 'Intentionally shape culture to drive results.' },
+      { title: 'Change Leadership', desc: 'Lead change with intent, empathy, and conviction.' }
+    ]
+  }
+};
+
+function showFrameworkModal(frameworkId) {
+  const fw = FRAMEWORKS[frameworkId];
+  if (!fw) return;
+
+  const modal = document.getElementById('framework-modal');
+  const content = document.getElementById('framework-modal-content');
+
+  content.innerHTML = `
+    <div class="modal-header">
+      <div>
+        <h2>${fw.name}</h2>
+        <span class="modal-pillar-badge ${fw.pillar}">${{ba:'Business Acumen',cf:'Cross-Functional',tm:'Team Management'}[fw.pillar]}</span>
+      </div>
+      <button class="modal-close" onclick="closeFrameworkModal()">×</button>
+    </div>
+    <div class="modal-body">
+      <p class="modal-description">${fw.description}</p>
+
+      <div class="modal-section">
+        <h4>Used In</h4>
+        <div class="modal-used-in">
+          ${fw.usedIn.map(p => `<span class="modal-program-tag">${p}</span>`).join('')}
+        </div>
+      </div>
+
+      <div class="modal-section">
+        <h4>Key Components</h4>
+        <div class="modal-components">
+          ${fw.components.map(c => `
+            <div class="modal-component">
+              <div class="modal-component-title">${c.title}</div>
+              <div class="modal-component-desc">${c.desc}</div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+    </div>
+  `;
+
+  modal.classList.add('show');
+}
+
+function closeFrameworkModal() {
+  document.getElementById('framework-modal').classList.remove('show');
+}
+
+// Close modal on overlay click
+document.addEventListener('click', function(e) {
+  if (e.target.id === 'framework-modal') {
+    closeFrameworkModal();
+  }
+});
+
+// Close modal on Escape key
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') {
+    closeFrameworkModal();
+  }
+});
+
 </script>
+
+<!-- Framework Modal -->
+<div class="modal-overlay" id="framework-modal">
+  <div class="modal-content" id="framework-modal-content"></div>
+</div>
+
 </body>
 </html>
