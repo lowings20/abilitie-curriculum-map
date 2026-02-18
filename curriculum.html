@@ -1231,7 +1231,7 @@
       <div class="landing-stat"><div class="num">3</div><div class="label">Pillars</div></div>
       <div class="landing-stat"><div class="num">3</div><div class="label">Levels</div></div>
       <div class="landing-stat"><div class="num">8</div><div class="label">Simulations</div></div>
-      <div class="landing-stat"><div class="num">9</div><div class="label">Case Challenges</div></div>
+      <div class="landing-stat"><div class="num">7</div><div class="label">Case Challenges</div></div>
     </div>
 
     <div class="landing-ways">
@@ -1273,7 +1273,7 @@
     <div class="hero-stat"><div class="num">3</div><div class="label">Pillars</div></div>
     <div class="hero-stat"><div class="num">3</div><div class="label">Levels</div></div>
     <div class="hero-stat"><div class="num">8</div><div class="label">Simulations</div></div>
-    <div class="hero-stat"><div class="num">9</div><div class="label">Case Challenges</div></div>
+    <div class="hero-stat"><div class="num">7</div><div class="label">Case Challenges</div></div>
   </div>
 </div>
 
@@ -1312,7 +1312,6 @@
 
     <div class="grid-cell ba-cell" onclick="showView('ba'); openLevel('ba-exec');">
       <div class="cell-sim">Finance Challenge</div>
-      <div class="cell-cases">+ Generating Financial Insights</div>
       <div class="cell-click-hint">Click to explore →</div>
     </div>
     <div class="grid-cell cf-cell" style="grid-column: span 2;" onclick="showView('cf'); openLevel('cf-exec');">
@@ -1331,7 +1330,7 @@
     </div>
     <div class="grid-cell cf-cell" onclick="showView('cf'); openLevel('cf-exp');">
       <div class="cell-sim">Enterprise Challenge</div>
-      <div class="cell-cases">+ Creating Strategic Alignment<br>+ Strategic Problem Solving</div>
+      <div class="cell-cases">+ Creating Strategic Alignment</div>
       <div class="cell-click-hint">Click to explore →</div>
     </div>
     <div class="grid-cell tm-cell" onclick="showView('tm'); openLevel('tm-exp');">
@@ -1576,7 +1575,7 @@
     <div class="level-card-header" onclick="toggleCard('ba-exec')">
       <div class="left">
         <span class="level-badge">Level 3</span>
-        <div><div class="level-title">Executive Leader</div><div class="level-subtitle">Finance Challenge (Finance Summit) + Generating Financial Insights</div></div>
+        <div><div class="level-title">Executive Leader</div><div class="level-subtitle">Finance Challenge (Finance Summit)</div></div>
       </div>
       <span class="expand-icon">▾</span>
     </div>
@@ -1585,7 +1584,6 @@
         <span class="audience-badge">Audience: Senior executives and financial decision-makers</span>
         <div class="programs-row">
           <div class="program-chip sim"><span class="chip-tag">Simulation</span> Finance Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Generating Financial Insights (2 hrs)</div>
         </div>
 
         <div class="section-grid">
@@ -1715,7 +1713,7 @@
     <div class="level-card-header" onclick="toggleCard('cf-exp')">
       <div class="left">
         <span class="level-badge">Level 2</span>
-        <div><div class="level-title">Experienced Leader</div><div class="level-subtitle">Enterprise Challenge + Creating Strategic Alignment + Strategic Problem Solving</div></div>
+        <div><div class="level-title">Experienced Leader</div><div class="level-subtitle">Enterprise Challenge + Creating Strategic Alignment</div></div>
       </div>
       <span class="expand-icon">▾</span>
     </div>
@@ -1725,7 +1723,6 @@
         <div class="programs-row">
           <div class="program-chip sim"><span class="chip-tag">Simulation</span> Enterprise Challenge (6–8 hrs)</div>
           <div class="program-chip case-chip"><span class="chip-tag">Case</span> Creating Strategic Alignment (2 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Strategic Problem Solving (2 hrs)</div>
         </div>
 
         <div class="section-grid">
@@ -2122,10 +2119,6 @@ const PROGRAMS = [
     competencies:["Model cash flows over time to evaluate strategic options","Apply time value of money to long-term investment decisions","Connect financial analysis to strategic decision-making","Evaluate the tradeoffs between growth opportunities and risk exposure"],
     mindsets:["Time value awareness: A dollar today is worth more than a dollar tomorrow","Growth is not free: Every growth initiative carries risk and capital cost","Finance as strategy: Financial modeling is a strategic tool, not just an accounting exercise"],
     tools:["Cash Flow Modeling: Projecting cash inflows and outflows over multiple periods","Net Present Value (NPV): Discounting future cash flows to evaluate investment viability","Risk-Return Tradeoff Analysis: Mapping growth potential against risk exposure","Scenario Planning: Modeling best-case, base-case, and worst-case outcomes"]},
-  { id:"generating-financial-insights", name:"Generating Financial Insights", type:"case", pillar:"ba", level:"executive", duration:"2 hrs", framework:"ROIC & Capital Efficiency",
-    competencies:["Diagnose enterprise performance using financial ratios and return metrics","Generate actionable insights from complex financial data","Communicate financial strategy to senior leadership and boards","Identify value creation opportunities through capital efficiency analysis"],
-    mindsets:["Insight over information: Raw data is useless without interpretation and narrative","Capital discipline: Great companies obsess over returns, not just revenue","Financial fluency as leadership: Executives who speak finance lead with authority"],
-    tools:["Financial Ratio Analysis: Profitability, efficiency, and leverage ratios","ROIC Decomposition: Breaking returns into operational and capital components","Executive Financial Narrative: Structuring insights for board-level communication","Benchmarking: Comparing performance against industry and competitor standards"]},
   /* ---- CF CASE CHALLENGES ---- */
   { id:"shifting-mindsets", name:"Shifting Mindsets & Behaviors", type:"case", pillar:"cf", level:"rising", duration:"2 hrs", framework:"From Idea to Action",
     competencies:["Identify stakeholder interests and what drives their positions","Build alignment through influence by connecting to shared goals","Translate stakeholder concerns into shared messaging","Navigate resistance by reframing conversations around mutual benefit"],
@@ -2139,10 +2132,6 @@ const PROGRAMS = [
     competencies:["Assess strategic fit between opportunities and organizational capabilities","Navigate senior stakeholder dynamics with competing priorities","Recommend a clear path forward with cross-functional buy-in","Analyze core competencies to guide strategic positioning"],
     mindsets:["Alignment is a process: It requires deliberate effort, not just good intentions","Strategic fit matters: Not every opportunity is the right opportunity","First Team orientation: Align with peers before cascading to your teams"],
     tools:["Strategic Fit Assessment: Evaluating opportunities against core competencies","Stakeholder Alignment Map: Identifying where alignment exists and where gaps remain","Cross-Functional Decision Framework: Structuring recommendations for enterprise buy-in","Core Competencies Diagnostic: Five questions to evaluate strategic positioning"]},
-  { id:"strategic-problem-solving", name:"Strategic Problem Solving", type:"case", pillar:"cf", level:"experienced", duration:"2 hrs", framework:"Root Cause Analysis",
-    competencies:["Conduct structured root cause analysis under time pressure","Assess risk systematically across multiple dimensions","Evaluate options using data-driven decision criteria","Communicate recommendations with clarity and conviction"],
-    mindsets:["Symptoms \u2260 causes: Solving the wrong problem well is still failure","Structured thinking under pressure: Frameworks prevent panic-driven decisions","Risk is multidimensional: Financial, reputational, operational, and strategic risks must all be weighed"],
-    tools:["Fishbone (Ishikawa) Diagram: Structured root cause identification","Risk Assessment Matrix: Likelihood \u00d7 Impact prioritization","Decision Matrix: Weighted criteria scoring for option evaluation","Recommendation Structure: Problem \u2192 Analysis \u2192 Options \u2192 Recommendation \u2192 Action"]},
   /* ---- TM CASE CHALLENGES ---- */
   { id:"enabling-peak-performance", name:"Enabling Peak Performance", type:"case", pillar:"tm", level:"rising", duration:"2 hrs", framework:"Pillars of Trust",
     competencies:["Set clear expectations that build trust, alignment, and accountability","Deliver effective feedback using the SBI framework","Coach for growth by connecting feedback to individual motivators","Create a safe space for honest, productive conversations"],
@@ -2469,7 +2458,7 @@ const PRESETS = {
   'flagship-experienced': {
     name: 'Flagship Experienced Leader',
     items: ['business-challenge', 'balancing-growth-risk',
-            'enterprise-challenge', 'creating-strategic-alignment', 'strategic-problem-solving',
+            'enterprise-challenge', 'creating-strategic-alignment',
             'director-challenge', 'leading-in-times-of-change']
   },
   'accelerator-income': {
@@ -2486,7 +2475,7 @@ const PRESETS = {
   },
   'accelerator-enterprise': {
     name: 'Enterprise Challenge Accelerator',
-    items: ['enterprise-challenge', 'creating-strategic-alignment', 'strategic-problem-solving']
+    items: ['enterprise-challenge', 'creating-strategic-alignment']
   },
   'accelerator-management': {
     name: 'Management Challenge Accelerator',
