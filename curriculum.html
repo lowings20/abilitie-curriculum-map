@@ -1216,6 +1216,119 @@
       gap: 24px;
     }
   }
+
+  /* AI CHAT VIEW */
+  .ai-chat-container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .ai-chat-header {
+    text-align: center;
+    margin-bottom: 32px;
+  }
+  .ai-chat-header h2 {
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 8px;
+  }
+  .ai-chat-header p {
+    color: var(--gray-600);
+    font-size: 15px;
+  }
+  .ai-chat-input-wrapper {
+    position: relative;
+    margin-bottom: 32px;
+  }
+  .ai-chat-input {
+    width: 100%;
+    padding: 16px 50px 16px 20px;
+    border: 2px solid var(--gray-200);
+    border-radius: 12px;
+    font-size: 16px;
+    font-family: inherit;
+    transition: border-color 0.2s;
+    background: var(--white);
+  }
+  .ai-chat-input:focus {
+    outline: none;
+    border-color: var(--teal);
+  }
+  .ai-chat-input::placeholder {
+    color: var(--gray-400);
+  }
+  .ai-chat-send {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: var(--teal);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    transition: background 0.2s;
+  }
+  .ai-chat-send:hover {
+    background: var(--teal-dark);
+  }
+  .ai-suggestions-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: var(--gray-400);
+    margin-bottom: 16px;
+  }
+  .ai-suggestions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .ai-suggestion {
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    padding: 16px 20px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: left;
+    font-size: 14px;
+    color: var(--gray-800);
+    line-height: 1.5;
+  }
+  .ai-suggestion:hover {
+    border-color: var(--teal);
+    background: rgba(0,180,216,0.03);
+    transform: translateX(4px);
+  }
+  .ai-suggestion::before {
+    content: "💬 ";
+  }
+  .ai-chat-response {
+    margin-top: 32px;
+    padding: 24px;
+    background: var(--white);
+    border-radius: 12px;
+    border: 1px solid var(--gray-200);
+    display: none;
+  }
+  .ai-chat-response.active {
+    display: block;
+  }
+  .ai-chat-response h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--teal-dark);
+    margin-bottom: 12px;
+  }
+  .ai-chat-response p {
+    color: var(--gray-700);
+    line-height: 1.7;
+  }
 </style>
 </head>
 <body>
@@ -1225,7 +1338,6 @@
   <div class="landing-content">
     <div class="landing-badge">Abilitie Leadership Academy</div>
     <h1>Curriculum Map</h1>
-    <p>Building leadership capabilities across three timeless business domains — from rising leaders through the executive suite — through team-based simulations with AI insights.</p>
 
     <div class="landing-stats">
       <div class="landing-stat"><div class="num">3</div><div class="label">Pillars</div></div>
@@ -1239,7 +1351,7 @@
       <p>Choose how you'd like to explore the Abilitie curriculum</p>
 
       <div class="landing-cards">
-        <div class="landing-card" onclick="enterApp('overview')">
+        <div class="landing-card" onclick="enterApp('ai')">
           <div class="landing-card-icon">💬</div>
           <h3>Ask Questions</h3>
           <p>Ask questions about our curriculum using AI-powered search and get instant answers about competencies, programs, and more.</p>
@@ -1292,6 +1404,36 @@
 
 <!-- MAIN -->
 <div class="main" id="app-main" style="display:none;">
+
+<!-- ============ AI CHAT ============ -->
+<div class="view-panel" id="view-ai">
+  <div class="ai-chat-container">
+    <div class="ai-chat-header">
+      <h2>Ask About Our Curriculum</h2>
+      <p>Get instant answers about competencies, programs, simulations, and more</p>
+    </div>
+
+    <div class="ai-chat-input-wrapper">
+      <input type="text" class="ai-chat-input" id="ai-input" placeholder="Ask a question about Abilitie's curriculum..." onkeypress="if(event.key==='Enter')sendAIQuestion()">
+      <button class="ai-chat-send" onclick="sendAIQuestion()">→</button>
+    </div>
+
+    <div class="ai-suggestions-label">Try asking:</div>
+    <div class="ai-suggestions">
+      <div class="ai-suggestion" onclick="askSuggestion(this)">My client is using DiSC... what do we have that fits with that?</div>
+      <div class="ai-suggestion" onclick="askSuggestion(this)">I have a potential 30 person program for business acumen... what are my options?</div>
+      <div class="ai-suggestion" onclick="askSuggestion(this)">What's the difference between Income Challenge and Business Challenge?</div>
+      <div class="ai-suggestion" onclick="askSuggestion(this)">Which programs focus on cross-functional collaboration?</div>
+      <div class="ai-suggestion" onclick="askSuggestion(this)">What competencies does the Management Challenge develop?</div>
+      <div class="ai-suggestion" onclick="askSuggestion(this)">I need a half-day program for rising leaders... what do you recommend?</div>
+    </div>
+
+    <div class="ai-chat-response" id="ai-response">
+      <h4>Response</h4>
+      <p id="ai-response-text"></p>
+    </div>
+  </div>
+</div>
 
 <!-- ============ OVERVIEW ============ -->
 <div class="view-panel active" id="view-overview">
@@ -2053,6 +2195,106 @@ function showView(id) {
   const tabs = document.querySelectorAll('.nav-tab');
   if (NAV_MAP[id] !== undefined) tabs[NAV_MAP[id]].classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// AI Chat functions
+function askSuggestion(el) {
+  const question = el.textContent;
+  document.getElementById('ai-input').value = question;
+  sendAIQuestion();
+}
+
+function sendAIQuestion() {
+  const input = document.getElementById('ai-input');
+  const question = input.value.trim();
+  if (!question) return;
+
+  const responseEl = document.getElementById('ai-response');
+  const responseText = document.getElementById('ai-response-text');
+
+  // Show loading state
+  responseEl.classList.add('active');
+  responseText.innerHTML = '<em>Thinking...</em>';
+
+  // Simulate AI response (in production, this would call an API)
+  setTimeout(() => {
+    const response = generateAIResponse(question);
+    responseText.innerHTML = response;
+  }, 800);
+}
+
+function generateAIResponse(question) {
+  const q = question.toLowerCase();
+
+  if (q.includes('disc')) {
+    return `Great question! DiSC pairs well with several of our programs:<br><br>
+    <strong>Management Challenge</strong> - Our Team Management simulation focuses heavily on understanding individual motivators and adapting communication styles, which complements DiSC profiles perfectly.<br><br>
+    <strong>Influence Challenge</strong> - This simulation teaches the "Platinum Rule" (influence others as they want to be influenced), directly aligning with DiSC's emphasis on adapting to different behavioral styles.<br><br>
+    <strong>Enabling Peak Performance</strong> and <strong>Navigating Critical Conversations</strong> case challenges also build skills in understanding and adapting to different personalities.`;
+  }
+
+  if (q.includes('business acumen') || q.includes('30 person')) {
+    return `For a 30-person Business Acumen program, you have several great options:<br><br>
+    <strong>For Rising Leaders:</strong><br>
+    • <strong>Income Challenge</strong> (6-8 hrs) + case challenges = comprehensive financial foundations<br><br>
+    <strong>For Experienced Leaders:</strong><br>
+    • <strong>Business Challenge</strong> (6-8 hrs) - deeper dive into multi-period financial strategy<br><br>
+    <strong>For a shorter engagement:</strong><br>
+    • <strong>Analyzing Profit Drivers</strong> (2 hrs) or <strong>Managing Profitability</strong> (2 hrs) as standalone case challenges<br><br>
+    All programs work well with 30 participants in teams of 4-5.`;
+  }
+
+  if (q.includes('income challenge') && q.includes('business challenge')) {
+    return `<strong>Income Challenge</strong> (Rising Leaders):<br>
+    • Focus: Financial fundamentals - income statements, breakeven analysis, profit drivers<br>
+    • Best for: New managers learning to read and interpret financial statements<br>
+    • Framework: Levers of Value<br><br>
+    <strong>Business Challenge</strong> (Experienced Leaders):<br>
+    • Focus: Multi-period financial strategy, NPV, cash flow modeling, investment decisions<br>
+    • Best for: Directors managing P&L responsibility and making strategic investments<br>
+    • Framework: Levers of Value (Advanced)<br><br>
+    Income Challenge builds the foundation; Business Challenge extends into strategic financial decision-making.`;
+  }
+
+  if (q.includes('cross-functional') || q.includes('collaboration')) {
+    return `Our <strong>Cross-Functional Decision-Making</strong> pillar is dedicated to this:<br><br>
+    <strong>Influence Challenge</strong> (Rising) - Building alignment through influence without authority<br>
+    <strong>Enterprise Challenge</strong> (Experienced) - Strategic decision-making across silos<br>
+    <strong>Executive Challenge</strong> (Executive) - C-suite level cross-functional leadership<br><br>
+    Case challenges like <strong>Creating Strategic Alignment</strong> and <strong>Shifting Mindsets & Behaviors</strong> also focus heavily on cross-functional collaboration skills.`;
+  }
+
+  if (q.includes('management challenge') && q.includes('competenc')) {
+    return `<strong>Management Challenge</strong> develops these key competencies:<br><br>
+    • Set clear expectations aligned to business goals<br>
+    • Deliver effective feedback using structured frameworks<br>
+    • Diagnose individual motivators and adapt leadership approach<br>
+    • Coach for development and growth<br>
+    • Build psychological safety and trust<br>
+    • Navigate difficult conversations with empathy<br><br>
+    <strong>Framework:</strong> Pillars of Trust<br>
+    <strong>Duration:</strong> 6-8 hours<br>
+    <strong>Best paired with:</strong> Enabling Peak Performance + Navigating Critical Conversations`;
+  }
+
+  if (q.includes('half-day') || q.includes('half day') || q.includes('rising leader')) {
+    return `For a half-day (2-4 hour) Rising Leader program, I'd recommend:<br><br>
+    <strong>Option 1 - Business Acumen focus:</strong><br>
+    • Analyzing Profit Drivers (2 hrs) OR Managing Profitability (2 hrs)<br><br>
+    <strong>Option 2 - Influence focus:</strong><br>
+    • Shifting Mindsets & Behaviors (2 hrs) OR Influencing Without Authority (2 hrs)<br><br>
+    <strong>Option 3 - Team Management focus:</strong><br>
+    • Enabling Peak Performance (2 hrs) OR Navigating Critical Conversations (2 hrs)<br><br>
+    For a full half-day, you could combine any simulation with its paired case challenge.`;
+  }
+
+  // Default response
+  return `Thanks for your question! Based on your inquiry, I'd recommend exploring our curriculum map to find the best fit.<br><br>
+  Our programs span three pillars:<br>
+  • <strong>Business Acumen</strong> - Financial decision-making and value creation<br>
+  • <strong>Cross-Functional Decision-Making</strong> - Influence, strategy, and collaboration<br>
+  • <strong>Team Management</strong> - Leading and developing people<br><br>
+  Each pillar has programs for Rising Leaders, Experienced Leaders, and Executives. Click "Navigate Curriculum" to explore the full map, or ask me a more specific question!`;
 }
 
 function toggleCard(id) {
