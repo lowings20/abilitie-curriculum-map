@@ -1482,80 +1482,109 @@
     color: var(--gray-600);
     font-size: 15px;
   }
-  .ai-chat-input-wrapper {
-    position: relative;
-    margin-bottom: 32px;
-  }
-  .ai-chat-input {
-    width: 100%;
-    padding: 16px 50px 16px 20px;
+  .ai-input-box {
+    background: var(--white);
     border: 2px solid var(--gray-200);
     border-radius: 12px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .ai-input-box:focus-within {
+    border-color: var(--teal);
+  }
+  .ai-input-row {
+    display: flex;
+    align-items: center;
+    padding: 4px;
+  }
+  .ai-chat-input {
+    flex: 1;
+    padding: 12px 16px;
+    border: none;
     font-size: 16px;
     font-family: inherit;
-    transition: border-color 0.2s;
-    background: var(--white);
+    background: transparent;
   }
   .ai-chat-input:focus {
     outline: none;
-    border-color: var(--teal);
   }
   .ai-chat-input::placeholder {
     color: var(--gray-400);
   }
   .ai-chat-send {
-    position: absolute;
-    right: 8px;
-    top: 50%;
-    transform: translateY(-50%);
     background: var(--teal);
     border: none;
     color: white;
-    width: 36px;
-    height: 36px;
+    width: 40px;
+    height: 40px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 18px;
     transition: background 0.2s;
+    flex-shrink: 0;
   }
   .ai-chat-send:hover {
     background: var(--teal-dark);
   }
-  .ai-suggestions-label {
+  .ai-picker-toggle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 16px;
+    border-top: 1px solid var(--gray-100);
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.2s;
+  }
+  .ai-picker-toggle:hover {
+    background: var(--gray-100);
+  }
+  .ai-picker-toggle-text {
+    font-size: 13px;
+    color: var(--gray-500);
+    font-weight: 500;
+  }
+  .ai-picker-toggle-arrow {
     font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 1px;
     color: var(--gray-400);
-    margin-bottom: 16px;
+    transition: transform 0.2s;
+  }
+  .ai-picker-toggle.expanded .ai-picker-toggle-arrow {
+    transform: rotate(180deg);
   }
   .ai-suggestions {
-    display: flex;
+    display: none;
     flex-direction: column;
-    gap: 12px;
+    border-top: 1px solid var(--gray-100);
+    max-height: 280px;
+    overflow-y: auto;
+  }
+  .ai-suggestions.expanded {
+    display: flex;
   }
   .ai-suggestion {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 10px;
-    padding: 16px 20px;
+    padding: 14px 16px;
     cursor: pointer;
-    transition: all 0.2s;
+    transition: background 0.15s;
     text-align: left;
     font-size: 14px;
-    color: var(--gray-800);
-    line-height: 1.5;
+    color: var(--gray-700);
+    line-height: 1.4;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .ai-suggestion:last-child {
+    border-bottom: none;
   }
   .ai-suggestion:hover {
-    border-color: var(--teal);
-    background: rgba(0,180,216,0.03);
-    transform: translateX(4px);
+    background: rgba(0,180,216,0.06);
+    color: var(--teal-dark);
   }
   .ai-suggestion::before {
     content: "💬 ";
+    margin-right: 4px;
   }
   .ai-chat-response {
-    margin-top: 32px;
+    margin-top: 20px;
     padding: 24px;
     background: var(--white);
     border-radius: 12px;
@@ -1570,6 +1599,8 @@
     font-weight: 600;
     color: var(--teal-dark);
     margin-bottom: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   .ai-chat-response p {
     color: var(--gray-700);
@@ -1796,19 +1827,23 @@
       <p>Get instant answers about competencies, programs, simulations, and more</p>
     </div>
 
-    <div class="ai-chat-input-wrapper">
-      <input type="text" class="ai-chat-input" id="ai-input" placeholder="Ask a question about Abilitie's curriculum..." onkeypress="if(event.key==='Enter')sendAIQuestion()">
-      <button class="ai-chat-send" onclick="sendAIQuestion()">→</button>
-    </div>
-
-    <div class="ai-suggestions-label">Try asking:</div>
-    <div class="ai-suggestions">
-      <div class="ai-suggestion" onclick="askSuggestion(this)">My client is using DiSC... what do we have that fits with that?</div>
-      <div class="ai-suggestion" onclick="askSuggestion(this)">I have a potential 30 person program for business acumen... what are my options?</div>
-      <div class="ai-suggestion" onclick="askSuggestion(this)">What's the difference between Income Challenge and Business Challenge?</div>
-      <div class="ai-suggestion" onclick="askSuggestion(this)">Which programs focus on cross-functional collaboration?</div>
-      <div class="ai-suggestion" onclick="askSuggestion(this)">What competencies does the Management Challenge develop?</div>
-      <div class="ai-suggestion" onclick="askSuggestion(this)">I need a half-day program for rising leaders... what do you recommend?</div>
+    <div class="ai-input-box">
+      <div class="ai-input-row">
+        <input type="text" class="ai-chat-input" id="ai-input" placeholder="Ask a question about Abilitie's curriculum..." onkeypress="if(event.key==='Enter')sendAIQuestion()">
+        <button class="ai-chat-send" onclick="sendAIQuestion()">→</button>
+      </div>
+      <div class="ai-picker-toggle" id="ai-picker-toggle" onclick="toggleAIPicker()">
+        <span class="ai-picker-toggle-text">Or choose a sample question...</span>
+        <span class="ai-picker-toggle-arrow">▼</span>
+      </div>
+      <div class="ai-suggestions" id="ai-suggestions">
+        <div class="ai-suggestion" onclick="askSuggestion(this)">My client is using DiSC... what do we have that fits with that?</div>
+        <div class="ai-suggestion" onclick="askSuggestion(this)">I have a potential 30 person program for business acumen... what are my options?</div>
+        <div class="ai-suggestion" onclick="askSuggestion(this)">What's the difference between Income Challenge and Business Challenge?</div>
+        <div class="ai-suggestion" onclick="askSuggestion(this)">Which programs focus on cross-functional collaboration?</div>
+        <div class="ai-suggestion" onclick="askSuggestion(this)">What competencies does the Management Challenge develop?</div>
+        <div class="ai-suggestion" onclick="askSuggestion(this)">I need a half-day program for rising leaders... what do you recommend?</div>
+      </div>
     </div>
 
     <div class="ai-chat-response" id="ai-response">
@@ -2631,9 +2666,22 @@ function showView(id) {
 }
 
 // AI Chat functions
+function toggleAIPicker() {
+  const toggle = document.getElementById('ai-picker-toggle');
+  const suggestions = document.getElementById('ai-suggestions');
+  toggle.classList.toggle('expanded');
+  suggestions.classList.toggle('expanded');
+}
+
+function collapseAIPicker() {
+  document.getElementById('ai-picker-toggle').classList.remove('expanded');
+  document.getElementById('ai-suggestions').classList.remove('expanded');
+}
+
 function askSuggestion(el) {
-  const question = el.textContent;
+  const question = el.textContent.replace(/^💬\s*/, '');
   document.getElementById('ai-input').value = question;
+  collapseAIPicker();
   sendAIQuestion();
 }
 
@@ -2642,6 +2690,7 @@ function sendAIQuestion() {
   const question = input.value.trim();
   if (!question) return;
 
+  collapseAIPicker();
   const responseEl = document.getElementById('ai-response');
   const responseText = document.getElementById('ai-response-text');
 
