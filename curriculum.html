@@ -1200,6 +1200,39 @@
     font-weight: 600;
   }
 
+  /* Hover tooltip for competency/mindset/tool source */
+  .hoverable-item {
+    position: relative;
+    cursor: pointer;
+  }
+  .source-tooltip {
+    display: none;
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    margin-bottom: 6px;
+    padding: 6px 10px;
+    background: var(--navy);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  }
+  .source-tooltip::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 16px;
+    border: 6px solid transparent;
+    border-top-color: var(--navy);
+  }
+  .hoverable-item:hover .source-tooltip {
+    display: block;
+  }
+
   @media (max-width: 1100px) {
     .compare-container {
       grid-template-columns: 1fr 1fr;
@@ -3500,48 +3533,67 @@ function renderColumn(prog, items) {
     if (m) { minHrs += +m[1]; maxHrs += +(m[2]||m[1]); }
   });
 
-  const comps = [...new Set(pItems.flatMap(p => p.competencies || []))];
-  const minds = [...new Set(pItems.flatMap(p => p.mindsets || []))];
-  const frameworks = [...new Set(pItems.flatMap(p => p.tools || []))];
-  const pillars = [...new Set(pItems.map(p => p.pillar))].map(x => ({ba:'BA',cf:'CF',tm:'TM'}[x]||x)).join(', ');
-  const levels = [...new Set(pItems.map(p => p.level))].map(l => l[0].toUpperCase()+l.slice(1)).join(', ');
+  // Build maps of items to their source programs
+  const compMap = {};
+  const mindMap = {};
+  const toolMap = {};
+  pItems.forEach(p => {
+    (p.competencies || []).forEach(c => {
+      if (!compMap[c]) compMap[c] = [];
+      compMap[c].push(p.name);
+    });
+    (p.mindsets || []).forEach(m => {
+      if (!mindMap[m]) mindMap[m] = [];
+      mindMap[m].push(p.name);
+    });
+    (p.tools || []).forEach(t => {
+      if (!toolMap[t]) toolMap[t] = [];
+      toolMap[t].push(p.name);
+    });
+  });
 
-  statsEl.innerHTML = `
-    <div class="stat-row"><span class="stat-label">Seat Time</span><span class="stat-value highlight">${minHrs===maxHrs?minHrs:minHrs+'–'+maxHrs} hrs</span></div>
-    <div class="stat-row"><span class="stat-label">Programs</span><span class="stat-value">${pItems.filter(p=>p.type==='sim').length} sims, ${pItems.filter(p=>p.type==='case').length} cases</span></div>
-    <div class="stat-row"><span class="stat-label">Pillars</span><span class="stat-value">${pillars||'—'}</span></div>
-    <div class="stat-row"><span class="stat-label">Levels</span><span class="stat-value">${levels||'—'}</span></div>
+  const comps = Object.keys(compMap);
+  const minds = Object.keys(mindMap);
+  const frameworks = Object.keys(toolMap);
+
+  function makeListItem(text, sources) {
+    const sourceText = sources.join(', ');
+    return \`<li class="hoverable-item" data-sources="\${sourceText.replace(/"/g, '&quot;')}">\${text}<span class="source-tooltip">From: \${sourceText}</span></li>\`;
+  }
+
+  statsEl.innerHTML = \`
+    <div class="stat-row"><span class="stat-label">Seat Time</span><span class="stat-value highlight">\${minHrs===maxHrs?minHrs:minHrs+'–'+maxHrs} hrs</span></div>
 
     <div class="collapsible-section" onclick="this.classList.toggle('expanded')">
       <div class="collapsible-header">
-        <h4>Competencies <span class="collapsible-count">(${comps.length})</span></h4>
+        <h4>Competencies <span class="collapsible-count">(\${comps.length})</span></h4>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="collapsible-content">
-        <ul>${comps.map(c=>'<li>'+c+'</li>').join('')}</ul>
+        <ul>\${comps.map(c => makeListItem(c, compMap[c])).join('')}</ul>
       </div>
     </div>
 
     <div class="collapsible-section mindsets-section" onclick="this.classList.toggle('expanded')">
       <div class="collapsible-header">
-        <h4>Mindsets <span class="collapsible-count">(${minds.length})</span></h4>
+        <h4>Mindsets <span class="collapsible-count">(\${minds.length})</span></h4>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="collapsible-content">
-        <ul>${minds.map(m=>'<li>'+m+'</li>').join('')}</ul>
+        <ul>\${minds.map(m => makeListItem(m, mindMap[m])).join('')}</ul>
       </div>
     </div>
 
     <div class="collapsible-section frameworks-section" onclick="this.classList.toggle('expanded')">
       <div class="collapsible-header">
-        <h4>Tools & Frameworks <span class="collapsible-count">(${frameworks.length})</span></h4>
+        <h4>Tools & Frameworks <span class="collapsible-count">(\${frameworks.length})</span></h4>
         <span class="toggle-icon">▼</span>
       </div>
       <div class="collapsible-content">
-        <ul>${frameworks.map(f=>'<li>'+f+'</li>').join('')}</ul>
+        <ul>\${frameworks.map(f => makeListItem(f, toolMap[f])).join('')}</ul>
       </div>
     </div>
-  `;
+  \`;
 }
 
 // Hook into showView
