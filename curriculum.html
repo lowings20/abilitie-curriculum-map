@@ -887,9 +887,51 @@
   }
   .program-empty {
     text-align: center;
-    padding: 40px 20px;
+    padding: 24px 16px;
+    color: var(--gray-500);
+    font-size: 14px;
+  }
+  .empty-intro {
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 12px;
+  }
+  .empty-presets {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .empty-or {
+    font-size: 12px;
+    color: var(--gray-400);
+  }
+  .preset-btn.open-btn {
+    background: var(--teal);
+    color: white;
+    border-color: var(--teal);
+    padding: 10px 24px;
+    font-size: 14px;
+  }
+  .preset-btn.open-btn:hover {
+    background: var(--teal-dark);
+    border-color: var(--teal-dark);
+  }
+  .preset-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+  .preset-grid .preset-btn {
+    font-size: 11px;
+    padding: 8px 10px;
+  }
+  .empty-drag-hint {
     color: var(--gray-400);
     font-size: 14px;
+    padding: 40px 20px;
   }
   .program-items {
     display: flex;
@@ -1148,17 +1190,6 @@
     <p>Build two programs side-by-side and compare seat time, competencies, and coverage. Drag items from the left into Program A or B.</p>
   </div>
 
-  <div class="preset-selector">
-    <button class="preset-btn" onclick="loadPreset('flagship-rising')">Flagship Rising Leader</button>
-    <button class="preset-btn" onclick="loadPreset('flagship-experienced')">Flagship Experienced Leader</button>
-    <button class="preset-btn" onclick="loadPreset('accelerator-income')">Income Accelerator</button>
-    <button class="preset-btn" onclick="loadPreset('accelerator-business')">Business Accelerator</button>
-    <button class="preset-btn" onclick="loadPreset('accelerator-influence')">Influence Accelerator</button>
-    <button class="preset-btn" onclick="loadPreset('accelerator-enterprise')">Enterprise Accelerator</button>
-    <button class="preset-btn" onclick="loadPreset('accelerator-management')">Management Accelerator</button>
-    <button class="preset-btn" onclick="loadPreset('accelerator-director')">Director Accelerator</button>
-  </div>
-
   <div class="compare-container">
     <div class="compare-sidebar">
       <h3>Drag to Add</h3>
@@ -1185,7 +1216,7 @@
       </div>
       <div class="program-body">
         <div class="program-items" id="program-a-items"></div>
-        <div class="program-empty" id="program-a-empty">Drag items here to build Program A</div>
+        <div class="program-empty" id="program-a-empty"></div>
         <div class="program-stats" id="program-a-stats" style="display:none;"></div>
       </div>
     </div>
@@ -1197,7 +1228,7 @@
       </div>
       <div class="program-body">
         <div class="program-items" id="program-b-items"></div>
-        <div class="program-empty" id="program-b-empty">Drag items here to build Program B</div>
+        <div class="program-empty" id="program-b-empty"></div>
         <div class="program-stats" id="program-b-stats" style="display:none;"></div>
       </div>
     </div>
@@ -2227,6 +2258,8 @@ renderPrograms();
 // ============ COMPARE PROGRAMS ============
 let programA = [];
 let programB = [];
+let programAStarted = false;
+let programBStarted = false;
 let compareFilters = { type: 'all', pillar: [], level: [] };
 let draggedItemId = null;
 
@@ -2377,23 +2410,34 @@ function handleDrop(e, prog) {
   }
 }
 
-function loadPreset(presetId) {
+function loadPreset(presetId, targetProg) {
+  // Mark program as started
+  if (targetProg === 'a') {
+    programAStarted = true;
+  } else {
+    programBStarted = true;
+  }
+
+  // Handle 'open' - just initialize empty program ready for drag/drop
+  if (presetId === 'open') {
+    if (targetProg === 'a') {
+      programA = [];
+    } else {
+      programB = [];
+    }
+    renderProgramColumns();
+    return;
+  }
+
   const preset = PRESETS[presetId];
   if (!preset) return;
 
-  // Load into Program A if empty, otherwise Program B
-  const targetProg = programA.length === 0 ? 'a' : 'b';
-
-  // Clear the target program first
+  // Load into specified program
   if (targetProg === 'a') {
     programA = [...preset.items];
   } else {
     programB = [...preset.items];
   }
-
-  // Update active state on preset buttons
-  document.querySelectorAll('.preset-btn').forEach(btn => btn.classList.remove('active'));
-  event.target.classList.add('active');
 
   renderProgramColumns();
 }
@@ -2416,8 +2460,13 @@ function removeItem(prog, id) {
 }
 
 function clearProgram(prog) {
-  if (prog === 'a') programA = [];
-  else programB = [];
+  if (prog === 'a') {
+    programA = [];
+    programAStarted = false;
+  } else {
+    programB = [];
+    programBStarted = false;
+  }
   renderProgramColumns();
 }
 
@@ -2426,17 +2475,45 @@ function renderProgramColumns() {
   renderColumn('b', programB);
 }
 
+function getPresetButtonsHTML(prog) {
+  return `
+    <div class="empty-intro">Start with:</div>
+    <div class="empty-presets">
+      <button class="preset-btn open-btn" onclick="loadPreset('open', '${prog}')">Open</button>
+      <span class="empty-or">or choose a preset below</span>
+    </div>
+    <div class="preset-grid">
+      <button class="preset-btn" onclick="loadPreset('flagship-rising', '${prog}')">Flagship Rising</button>
+      <button class="preset-btn" onclick="loadPreset('flagship-experienced', '${prog}')">Flagship Experienced</button>
+      <button class="preset-btn" onclick="loadPreset('accelerator-income', '${prog}')">Income Accelerator</button>
+      <button class="preset-btn" onclick="loadPreset('accelerator-business', '${prog}')">Business Accelerator</button>
+      <button class="preset-btn" onclick="loadPreset('accelerator-influence', '${prog}')">Influence Accelerator</button>
+      <button class="preset-btn" onclick="loadPreset('accelerator-enterprise', '${prog}')">Enterprise Accelerator</button>
+      <button class="preset-btn" onclick="loadPreset('accelerator-management', '${prog}')">Management Accelerator</button>
+      <button class="preset-btn" onclick="loadPreset('accelerator-director', '${prog}')">Director Accelerator</button>
+    </div>
+  `;
+}
+
 function renderColumn(prog, items) {
   const itemsEl = document.getElementById('program-' + prog + '-items');
   const emptyEl = document.getElementById('program-' + prog + '-empty');
   const statsEl = document.getElementById('program-' + prog + '-stats');
+  const isStarted = prog === 'a' ? programAStarted : programBStarted;
 
   if (!itemsEl) return;
 
   if (items.length === 0) {
     itemsEl.innerHTML = '';
-    emptyEl.style.display = 'block';
     statsEl.style.display = 'none';
+    if (isStarted) {
+      // Program started but empty - show drag hint
+      emptyEl.innerHTML = '<div class="empty-drag-hint">Drag items here from the left</div>';
+    } else {
+      // Show preset buttons
+      emptyEl.innerHTML = getPresetButtonsHTML(prog);
+    }
+    emptyEl.style.display = 'block';
     return;
   }
 
