@@ -820,32 +820,49 @@
     gap: 20px;
     min-height: 500px;
   }
-  .program-items-compact {
+  .category-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .category-row.sims { background: rgba(0,150,183,0.08); }
+  .category-row.cases { background: rgba(244,162,97,0.08); }
+  .category-row.ai-cases { background: rgba(139,92,246,0.08); }
+  .category-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 4px 8px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+  }
+  .category-row.sims .category-label { background: var(--pill-ba); color: white; }
+  .category-row.cases .category-label { background: var(--gold); color: white; }
+  .category-row.ai-cases .category-label { background: var(--pill-ts); color: white; }
+  .category-items {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    margin-bottom: 16px;
+    flex: 1;
   }
   .compact-item {
     display: inline-flex;
     align-items: center;
     gap: 4px;
     padding: 4px 8px;
-    background: var(--gray-100);
+    background: var(--white);
     border-radius: 4px;
     font-size: 11px;
     color: var(--gray-700);
-    border-left: 2px solid var(--gray-300);
+    border: 1px solid var(--gray-200);
   }
-  .compact-item.ba { border-left-color: var(--pill-ba); }
-  .compact-item.cf { border-left-color: var(--pill-cf); }
-  .compact-item.tm { border-left-color: var(--pill-tm); }
   .compact-item .item-name {
     font-weight: 500;
-    max-width: 120px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
   }
   .compact-item .remove-item {
     background: none;
@@ -858,6 +875,30 @@
   }
   .compact-item .remove-item:hover {
     color: var(--coral);
+  }
+  .add-inline-btn {
+    padding: 4px 10px;
+    border: 1px dashed var(--gray-300);
+    border-radius: 4px;
+    background: transparent;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--gray-500);
+    cursor: pointer;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+  .add-inline-btn:hover {
+    border-color: var(--teal);
+    color: var(--teal);
+    background: rgba(0,180,216,0.05);
+  }
+  .add-program-top {
+    margin-bottom: 12px;
+  }
+  .add-program-top .add-btn {
+    width: 100%;
+    justify-content: center;
   }
 
   .program-column {
@@ -1948,22 +1989,7 @@
         <button class="clear-btn" onclick="clearProgram('a')">Clear All</button>
       </div>
       <div class="program-body">
-        <div class="add-buttons">
-          <div class="add-btn-wrapper" id="add-program-a">
-            <button class="add-btn" onclick="toggleAddDropdown('add-program-a')">+ Add Program <span class="arrow">▼</span></button>
-            <div class="add-dropdown" id="dropdown-program-a"></div>
-          </div>
-          <div class="add-btn-wrapper" id="add-sim-a">
-            <button class="add-btn" onclick="toggleAddDropdown('add-sim-a')">+ Add Simulation <span class="arrow">▼</span></button>
-            <div class="add-dropdown" id="dropdown-sim-a"></div>
-          </div>
-          <div class="add-btn-wrapper" id="add-case-a">
-            <button class="add-btn" onclick="toggleAddDropdown('add-case-a')">+ Add Case <span class="arrow">▼</span></button>
-            <div class="add-dropdown" id="dropdown-case-a"></div>
-          </div>
-        </div>
         <div class="program-items" id="program-a-items"></div>
-        <div class="program-empty" id="program-a-empty">Add items above to build your program</div>
         <div class="program-stats" id="program-a-stats" style="display:none;"></div>
       </div>
     </div>
@@ -1974,22 +2000,7 @@
         <button class="clear-btn" onclick="clearProgram('b')">Clear All</button>
       </div>
       <div class="program-body">
-        <div class="add-buttons">
-          <div class="add-btn-wrapper" id="add-program-b">
-            <button class="add-btn" onclick="toggleAddDropdown('add-program-b')">+ Add Program <span class="arrow">▼</span></button>
-            <div class="add-dropdown" id="dropdown-program-b"></div>
-          </div>
-          <div class="add-btn-wrapper" id="add-sim-b">
-            <button class="add-btn" onclick="toggleAddDropdown('add-sim-b')">+ Add Simulation <span class="arrow">▼</span></button>
-            <div class="add-dropdown" id="dropdown-sim-b"></div>
-          </div>
-          <div class="add-btn-wrapper" id="add-case-b">
-            <button class="add-btn" onclick="toggleAddDropdown('add-case-b')">+ Add Case <span class="arrow">▼</span></button>
-            <div class="add-dropdown" id="dropdown-case-b"></div>
-          </div>
-        </div>
         <div class="program-items" id="program-b-items"></div>
-        <div class="program-empty" id="program-b-empty">Add items above to build your program</div>
         <div class="program-stats" id="program-b-stats" style="display:none;"></div>
       </div>
     </div>
@@ -2001,22 +2012,7 @@
         <button class="clear-btn" onclick="clearProgram('c'); event.stopPropagation();">Clear All</button>
       </div>
       <div class="program-body">
-        <div class="add-buttons">
-          <div class="add-btn-wrapper" id="add-program-c">
-            <button class="add-btn" onclick="toggleAddDropdown('add-program-c'); event.stopPropagation();">+ Add Program <span class="arrow">▼</span></button>
-            <div class="add-dropdown" id="dropdown-program-c"></div>
-          </div>
-          <div class="add-btn-wrapper" id="add-sim-c">
-            <button class="add-btn" onclick="toggleAddDropdown('add-sim-c'); event.stopPropagation();">+ Add Simulation <span class="arrow">▼</span></button>
-            <div class="add-dropdown" id="dropdown-sim-c"></div>
-          </div>
-          <div class="add-btn-wrapper" id="add-case-c">
-            <button class="add-btn" onclick="toggleAddDropdown('add-case-c'); event.stopPropagation();">+ Add Case <span class="arrow">▼</span></button>
-            <div class="add-dropdown" id="dropdown-case-c"></div>
-          </div>
-        </div>
         <div class="program-items" id="program-c-items"></div>
-        <div class="program-empty" id="program-c-empty">Add items above to build your program</div>
         <div class="program-stats" id="program-c-stats" style="display:none;"></div>
       </div>
     </div>
@@ -3276,72 +3272,81 @@ const PRESETS = {
 };
 
 function initCompare() {
-  populateDropdowns();
   renderProgramColumns();
 }
 
-function populateDropdowns() {
-  ['a', 'b', 'c'].forEach(prog => {
-    // Program presets dropdown
-    const programDropdown = document.getElementById('dropdown-program-' + prog);
-    if (programDropdown) {
-      programDropdown.innerHTML = Object.entries(PRESETS).map(([id, preset]) => `
-        <div class="add-dropdown-item" onclick="loadPreset('${id}', '${prog}')">
-          <div class="item-name">${preset.name}</div>
-          <div class="item-meta">${preset.items.length} items</div>
-        </div>
-      `).join('');
-    }
+let openDropdown = null;
 
-    // Simulations dropdown
-    const simDropdown = document.getElementById('dropdown-sim-' + prog);
-    if (simDropdown) {
-      const sims = PROGRAMS.filter(p => p.type === 'sim');
-      simDropdown.innerHTML = sims.map(p => `
-        <div class="add-dropdown-item" onclick="addItem('${p.id}', '${prog}')">
-          <div class="item-name">${p.name}</div>
-          <div class="item-meta">${p.duration} • ${p.level}</div>
-        </div>
-      `).join('');
-    }
+function toggleInlineDropdown(prog, type, btn, e) {
+  if (e) e.stopPropagation();
+  const dropdownId = `dropdown-${type}-${prog}`;
+  const existing = document.getElementById(dropdownId);
 
-    // Cases dropdown
-    const caseDropdown = document.getElementById('dropdown-case-' + prog);
-    if (caseDropdown) {
-      const cases = PROGRAMS.filter(p => p.type === 'case');
-      caseDropdown.innerHTML = cases.map(p => `
-        <div class="add-dropdown-item" onclick="addItem('${p.id}', '${prog}')">
-          <div class="item-name">${p.name}</div>
-          <div class="item-meta">${p.duration} • ${p.level}</div>
-        </div>
-      `).join('');
-    }
-  });
-}
-
-function toggleAddDropdown(wrapperId) {
-  const wrapper = document.getElementById(wrapperId);
-  const wasOpen = wrapper.classList.contains('open');
-
-  // Close all dropdowns first
-  document.querySelectorAll('.add-btn-wrapper').forEach(w => w.classList.remove('open'));
-
-  // Toggle the clicked one
-  if (!wasOpen) {
-    wrapper.classList.add('open');
+  // Close any open dropdown
+  if (openDropdown && openDropdown !== existing) {
+    openDropdown.remove();
+    openDropdown = null;
   }
+
+  if (existing) {
+    existing.remove();
+    openDropdown = null;
+    return;
+  }
+
+  // Create dropdown
+  const dropdown = document.createElement('div');
+  dropdown.id = dropdownId;
+  dropdown.className = 'inline-dropdown';
+  dropdown.style.cssText = 'position:absolute;top:100%;left:0;margin-top:4px;background:var(--white);border:1px solid var(--gray-200);border-radius:8px;box-shadow:0 8px 40px rgba(0,0,0,0.12);min-width:200px;max-height:250px;overflow-y:auto;z-index:1000;';
+
+  let items = [];
+  if (type === 'program') {
+    items = Object.entries(PRESETS).map(([id, preset]) =>
+      `<div class="dropdown-item" onclick="loadPreset('${id}', '${prog}')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--gray-100);font-size:13px;">
+        <div style="font-weight:600;color:var(--navy);">${preset.name}</div>
+        <div style="font-size:11px;color:var(--gray-500);">${preset.items.length} items</div>
+      </div>`
+    );
+  } else if (type === 'sim') {
+    items = PROGRAMS.filter(p => p.type === 'sim').map(p =>
+      `<div class="dropdown-item" onclick="addItem('${p.id}', '${prog}')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--gray-100);font-size:13px;">
+        <div style="font-weight:600;color:var(--navy);">${p.name}</div>
+        <div style="font-size:11px;color:var(--gray-500);">${p.duration}</div>
+      </div>`
+    );
+  } else if (type === 'case') {
+    items = PROGRAMS.filter(p => p.type === 'case').map(p =>
+      `<div class="dropdown-item" onclick="addItem('${p.id}', '${prog}')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--gray-100);font-size:13px;">
+        <div style="font-weight:600;color:var(--navy);">${p.name}</div>
+        <div style="font-size:11px;color:var(--gray-500);">${p.duration}</div>
+      </div>`
+    );
+  } else if (type === 'ai') {
+    items = PROGRAMS.filter(p => p.type === 'ai-case').map(p =>
+      `<div class="dropdown-item" onclick="addItem('${p.id}', '${prog}')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--gray-100);font-size:13px;">
+        <div style="font-weight:600;color:var(--navy);">${p.name}</div>
+        <div style="font-size:11px;color:var(--gray-500);">${p.duration}</div>
+      </div>`
+    );
+  }
+
+  dropdown.innerHTML = items.join('');
+  btn.parentElement.style.position = 'relative';
+  btn.parentElement.appendChild(dropdown);
+  openDropdown = dropdown;
 }
 
 // Close dropdowns when clicking outside
 document.addEventListener('click', function(e) {
-  if (!e.target.closest('.add-btn-wrapper')) {
-    document.querySelectorAll('.add-btn-wrapper').forEach(w => w.classList.remove('open'));
+  if (!e.target.closest('.add-inline-btn') && openDropdown) {
+    openDropdown.remove();
+    openDropdown = null;
   }
 });
 
 function toggleProgramC(e) {
-  // Don't toggle if clicking on buttons or dropdowns inside
-  if (e.target.closest('.add-btn-wrapper') || e.target.closest('.clear-btn') || e.target.closest('.remove-item')) {
+  if (e.target.closest('.clear-btn') || e.target.closest('.remove-item') || e.target.closest('.add-inline-btn')) {
     return;
   }
   const col = document.getElementById('program-c');
@@ -3360,8 +3365,7 @@ function loadPreset(presetId, targetProg) {
     programC = [...preset.items];
   }
 
-  // Close dropdown
-  document.querySelectorAll('.add-btn-wrapper').forEach(w => w.classList.remove('open'));
+  if (openDropdown) { openDropdown.remove(); openDropdown = null; }
   renderProgramColumns();
 }
 
@@ -3369,8 +3373,7 @@ function addItem(id, prog) {
   const arr = prog === 'a' ? programA : prog === 'b' ? programB : programC;
   if (!arr.includes(id)) {
     arr.push(id);
-    // Close dropdown
-    document.querySelectorAll('.add-btn-wrapper').forEach(w => w.classList.remove('open'));
+    if (openDropdown) { openDropdown.remove(); openDropdown = null; }
     renderProgramColumns();
   }
 }
@@ -3406,34 +3409,89 @@ function renderProgramColumns() {
 
 function renderColumn(prog, items) {
   const itemsEl = document.getElementById('program-' + prog + '-items');
-  const emptyEl = document.getElementById('program-' + prog + '-empty');
   const statsEl = document.getElementById('program-' + prog + '-stats');
 
   if (!itemsEl) return;
 
-  if (items.length === 0) {
-    itemsEl.innerHTML = '';
+  const pItems = items.map(id => PROGRAMS.find(x => x.id === id)).filter(Boolean);
+  const sims = pItems.filter(p => p.type === 'sim');
+  const cases = pItems.filter(p => p.type === 'case');
+  const aiCases = pItems.filter(p => p.type === 'ai-case');
+  const hasItems = items.length > 0;
+
+  // Build category rows HTML
+  let html = '';
+
+  // Add Program button (only when empty)
+  if (!hasItems) {
+    html += `
+      <div class="add-program-top">
+        <div style="position:relative;">
+          <button class="add-btn" onclick="toggleInlineDropdown('${prog}', 'program', this, event)" style="width:100%;justify-content:center;padding:12px 16px;border:2px dashed var(--gray-300);background:var(--gray-100);border-radius:8px;font-size:14px;font-weight:600;color:var(--gray-600);cursor:pointer;">
+            + Add a Program
+          </button>
+        </div>
+      </div>
+    `;
+  }
+
+  // Simulations row
+  html += `
+    <div class="category-row sims">
+      <span class="category-label">Sims</span>
+      <div class="category-items">
+        ${sims.map(p => `
+          <span class="compact-item">
+            <span class="item-name">${p.name}</span>
+            <button class="remove-item" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
+          </span>
+        `).join('')}
+        <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'sim', this, event)">+ Add Sim</button>
+      </div>
+    </div>
+  `;
+
+  // Case Challenges row
+  html += `
+    <div class="category-row cases">
+      <span class="category-label">Cases</span>
+      <div class="category-items">
+        ${cases.map(p => `
+          <span class="compact-item">
+            <span class="item-name">${p.name}</span>
+            <button class="remove-item" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
+          </span>
+        `).join('')}
+        <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'case', this, event)">+ Add Case</button>
+      </div>
+    </div>
+  `;
+
+  // AI Cases row
+  html += `
+    <div class="category-row ai-cases">
+      <span class="category-label">AI Cases</span>
+      <div class="category-items">
+        ${aiCases.map(p => `
+          <span class="compact-item">
+            <span class="item-name">${p.name}</span>
+            <button class="remove-item" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
+          </span>
+        `).join('')}
+        <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'ai', this, event)">+ Add AIC</button>
+      </div>
+    </div>
+  `;
+
+  itemsEl.innerHTML = html;
+
+  // Stats
+  if (!hasItems) {
     statsEl.style.display = 'none';
-    emptyEl.style.display = 'block';
     return;
   }
 
-  emptyEl.style.display = 'none';
   statsEl.style.display = 'block';
-
-  const pItems = items.map(id => PROGRAMS.find(x => x.id === id)).filter(Boolean);
-
-  // Compact items display
-  itemsEl.innerHTML = `
-    <div class="program-items-compact">
-      ${pItems.map(p => `
-        <span class="compact-item ${p.pillar}">
-          <span class="item-name">${p.name}</span>
-          <button class="remove-item" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
-        </span>
-      `).join('')}
-    </div>
-  `;
 
   // Stats
   let minHrs = 0, maxHrs = 0;
