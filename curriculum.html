@@ -2602,7 +2602,12 @@ if (sessionStorage.getItem('gateUnlocked') === 'true') {
   });
 }
 
-const NAV_MAP = { overview: 1, programs: 2, ba: 3, cf: 4, tm: 5 };
+// Map views to nav button indices (0=Ask, 1=Explore, 2=Compare)
+const NAV_BTN_MAP = {
+  ai: 0,
+  overview: 1, programs: 1, ba: 1, cf: 1, tm: 1,  // All explore views
+  compare: 2
+};
 
 // Landing page functions
 function enterApp(view) {
@@ -2641,9 +2646,12 @@ document.addEventListener('click', function(e) {
 function showView(id) {
   document.querySelectorAll('.view-panel').forEach(p => p.classList.remove('active'));
   document.getElementById('view-' + id).classList.add('active');
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  const tabs = document.querySelectorAll('.nav-tab');
-  if (NAV_MAP[id] !== undefined) tabs[NAV_MAP[id]].classList.add('active');
+  // Update nav button highlighting
+  document.querySelectorAll('.nav-main-btn').forEach(b => b.classList.remove('active'));
+  const btns = document.querySelectorAll('.nav-main-buttons > button, .nav-main-buttons > .nav-dropdown > button');
+  if (NAV_BTN_MAP[id] !== undefined && btns[NAV_BTN_MAP[id]]) {
+    btns[NAV_BTN_MAP[id]].classList.add('active');
+  }
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
