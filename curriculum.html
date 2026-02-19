@@ -797,6 +797,217 @@
     border-bottom: 1px solid var(--gray-200);
   }
 
+  /* LEARNING JOURNEY PAGES */
+  .journey-page {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 24px;
+  }
+
+  .journey-header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .journey-header h1 {
+    font-family: var(--font-heading);
+    font-size: 36px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0 0 16px 0;
+  }
+
+  .journey-subtitle {
+    font-size: 16px;
+    color: var(--gray-600);
+    max-width: 800px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  .journey-diagram {
+    position: relative;
+    padding: 40px 0 40px 120px;
+  }
+
+  .journey-kickoff {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .kickoff-dot {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #9ca3af;
+  }
+
+  .kickoff-label {
+    font-size: 12px;
+    color: var(--gray-600);
+    text-align: center;
+    line-height: 1.3;
+  }
+
+  .journey-track {
+    margin-bottom: 48px;
+    position: relative;
+  }
+
+  .journey-track:last-child {
+    margin-bottom: 0;
+  }
+
+  .track-label {
+    font-family: var(--font-heading);
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 12px;
+    padding-left: 8px;
+  }
+
+  .tm-track .track-label { color: var(--blue-600); }
+  .ba-track .track-label { color: var(--gold-700); }
+  .cf-track .track-label { color: var(--green-600); }
+
+  .track-line {
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+
+  /* Dashed line from kickoff */
+  .journey-track::before {
+    content: '';
+    position: absolute;
+    left: -80px;
+    top: 50%;
+    width: 80px;
+    height: 2px;
+    border-top: 2px dashed var(--gray-300);
+  }
+
+  .track-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+
+  .track-node .node-dot {
+    border-radius: 50%;
+    margin-bottom: 12px;
+    flex-shrink: 0;
+  }
+
+  .track-node.small .node-dot {
+    width: 28px;
+    height: 28px;
+  }
+
+  .track-node.large .node-dot {
+    width: 48px;
+    height: 48px;
+  }
+
+  .tm-track .node-dot { background: var(--blue-400); }
+  .tm-track .track-node.large .node-dot { background: var(--blue-600); }
+  .ba-track .node-dot { background: var(--gold-300); }
+  .ba-track .track-node.large .node-dot { background: var(--gold-500); }
+  .cf-track .node-dot { background: var(--green-300); }
+  .cf-track .track-node.large .node-dot { background: var(--green-600); }
+
+  .node-label {
+    font-size: 12px;
+    color: var(--gray-700);
+    text-align: center;
+    line-height: 1.4;
+    max-width: 120px;
+  }
+
+  .node-label strong {
+    color: var(--navy);
+  }
+
+  .track-connector {
+    flex: 1;
+    height: 3px;
+    min-width: 60px;
+    max-width: 120px;
+    margin: 0 8px;
+    margin-bottom: 48px;
+  }
+
+  .tm-track .track-connector { background: var(--blue-500); }
+  .ba-track .track-connector { background: var(--gold-400); }
+  .cf-track .track-connector { background: var(--green-500); }
+
+  .journey-footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 48px;
+    padding: 24px 32px;
+    background: var(--gold-100);
+    border-radius: 0;
+    border-top: 4px solid var(--navy);
+  }
+
+  .footer-item {
+    font-size: 14px;
+    color: var(--navy);
+  }
+
+  .footer-divider {
+    width: 2px;
+    height: 24px;
+    background: var(--gold-500);
+  }
+
+  @media (max-width: 900px) {
+    .journey-diagram {
+      padding-left: 80px;
+    }
+
+    .journey-kickoff {
+      left: 0;
+    }
+
+    .journey-track::before {
+      left: -50px;
+      width: 50px;
+    }
+
+    .track-connector {
+      min-width: 30px;
+      max-width: 60px;
+    }
+
+    .node-label {
+      font-size: 11px;
+      max-width: 90px;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .journey-footer {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .footer-divider {
+      display: none;
+    }
+  }
+
   /* PROGRAM EXPLORER VIEW */
   .prog-filters {
     display: flex;
@@ -2368,11 +2579,14 @@
         <button class="nav-main-btn" onclick="toggleExploreMenu()">🗺️ Explore <span class="dropdown-arrow">▼</span></button>
         <div class="nav-dropdown-menu" id="explore-menu">
           <div class="dropdown-item" onclick="showView('overview'); closeExploreMenu()">Abilitie's Leadership Academy</div>
-          <div class="dropdown-item" onclick="showView('programs'); closeExploreMenu()">Full List</div>
+          <div class="dropdown-item" onclick="showView('programs'); closeExploreMenu()">Complete Catalog</div>
           <div class="dropdown-divider"></div>
-          <div class="dropdown-item" onclick="showView('ba'); closeExploreMenu()"><span class="dot dot-ba"></span>Business Acumen</div>
-          <div class="dropdown-item" onclick="showView('cf'); closeExploreMenu()"><span class="dot dot-cf"></span>Cross-Functional Decision-Making</div>
-          <div class="dropdown-item" onclick="showView('tm'); closeExploreMenu()"><span class="dot dot-tm"></span>Team Management</div>
+          <div class="dropdown-item" onclick="showView('ba'); closeExploreMenu()"><span class="dot dot-ba"></span>Business Acumen Programs</div>
+          <div class="dropdown-item" onclick="showView('cf'); closeExploreMenu()"><span class="dot dot-cf"></span>Cross-Functional Decision-Making Programs</div>
+          <div class="dropdown-item" onclick="showView('tm'); closeExploreMenu()"><span class="dot dot-tm"></span>Team Management Programs</div>
+          <div class="dropdown-divider"></div>
+          <div class="dropdown-item" onclick="showView('rising-leader'); closeExploreMenu()">Rising Leader Program</div>
+          <div class="dropdown-item" onclick="showView('exp-leader'); closeExploreMenu()">Experienced Leader Program</div>
         </div>
       </div>
       <button class="nav-main-btn" onclick="showView('compare')">⚖️ Compare</button>
@@ -3347,6 +3561,167 @@
   </div>
 </div>
 
+<!-- ============ RISING LEADER PROGRAM ============ -->
+<div class="view-panel" id="view-rising-leader">
+  <div class="journey-page">
+    <div class="journey-header">
+      <h1>Rising Leader Program</h1>
+      <p class="journey-subtitle">The sequencing and components of this program can be custom-tailored, including the integration of an organization's vision, mission, business metrics, and decision frameworks.</p>
+    </div>
+
+    <div class="journey-diagram">
+      <!-- Program Kickoff -->
+      <div class="journey-kickoff">
+        <div class="kickoff-dot"></div>
+        <div class="kickoff-label">Program<br>Kickoff</div>
+      </div>
+
+      <!-- Team Management Track -->
+      <div class="journey-track tm-track">
+        <div class="track-label">Team Management</div>
+        <div class="track-line">
+          <div class="track-node small">
+            <div class="node-dot"></div>
+            <div class="node-label">Case Challenge:<br><strong>Enabling Peak<br>Performance</strong></div>
+          </div>
+          <div class="track-connector"></div>
+          <div class="track-node small">
+            <div class="node-dot"></div>
+            <div class="node-label">Case Challenge:<br><strong>Navigating Critical<br>Conversations</strong></div>
+          </div>
+          <div class="track-connector"></div>
+          <div class="track-node large">
+            <div class="node-dot"></div>
+            <div class="node-label">Simulation:<br><strong>Management<br>Challenge</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Acumen Track -->
+      <div class="journey-track ba-track">
+        <div class="track-label">Business Acumen</div>
+        <div class="track-line">
+          <div class="track-node small">
+            <div class="node-dot"></div>
+            <div class="node-label">Case Challenge:<br><strong>Managing<br>Profitability</strong></div>
+          </div>
+          <div class="track-connector"></div>
+          <div class="track-node small">
+            <div class="node-dot"></div>
+            <div class="node-label">Case Challenge:<br><strong>Analyzing Profit<br>Drivers</strong></div>
+          </div>
+          <div class="track-connector"></div>
+          <div class="track-node large">
+            <div class="node-dot"></div>
+            <div class="node-label">Simulation:<br><strong>Income<br>Challenge</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cross-Functional Track -->
+      <div class="journey-track cf-track">
+        <div class="track-label">Cross-Functional Decision-Making</div>
+        <div class="track-line">
+          <div class="track-node small">
+            <div class="node-dot"></div>
+            <div class="node-label">Case Challenge:<br><strong>Shifting Mindsets<br>and Behaviors</strong></div>
+          </div>
+          <div class="track-connector"></div>
+          <div class="track-node small">
+            <div class="node-dot"></div>
+            <div class="node-label">Case Challenge:<br><strong>Influencing Without<br>Authority</strong></div>
+          </div>
+          <div class="track-connector"></div>
+          <div class="track-node large">
+            <div class="node-dot"></div>
+            <div class="node-label">Simulation:<br><strong>Influence<br>Challenge</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="journey-footer">
+      <div class="footer-item"><strong>Flexible delivery options:</strong> in-person or virtual.</div>
+      <div class="footer-divider"></div>
+      <div class="footer-item"><strong>Live Sessions:</strong> ~ 40 Hours</div>
+    </div>
+  </div>
+</div>
+
+<!-- ============ EXPERIENCED LEADER PROGRAM ============ -->
+<div class="view-panel" id="view-exp-leader">
+  <div class="journey-page">
+    <div class="journey-header">
+      <h1>Experienced Leader Program</h1>
+      <p class="journey-subtitle">The sequencing and components of this program can be custom-tailored, including the integration of an organization's vision, mission, business metrics, and decision frameworks.</p>
+    </div>
+
+    <div class="journey-diagram">
+      <!-- Program Kickoff -->
+      <div class="journey-kickoff">
+        <div class="kickoff-dot"></div>
+        <div class="kickoff-label">Program<br>Kickoff</div>
+      </div>
+
+      <!-- Team Management Track -->
+      <div class="journey-track tm-track exp-track">
+        <div class="track-label">Team Management</div>
+        <div class="track-line">
+          <div class="track-node small">
+            <div class="node-dot"></div>
+            <div class="node-label">Case Challenge:<br><strong>Leading in Times of<br>Change</strong></div>
+          </div>
+          <div class="track-connector"></div>
+          <div class="track-node large">
+            <div class="node-dot"></div>
+            <div class="node-label">Simulation:<br><strong>Director<br>Challenge</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Business Acumen Track -->
+      <div class="journey-track ba-track exp-track">
+        <div class="track-label">Business Acumen</div>
+        <div class="track-line">
+          <div class="track-node small">
+            <div class="node-dot"></div>
+            <div class="node-label">Case Challenge:<br><strong>Balancing<br>Growth and Risk</strong></div>
+          </div>
+          <div class="track-connector"></div>
+          <div class="track-node large">
+            <div class="node-dot"></div>
+            <div class="node-label">Simulation:<br><strong>Business<br>Challenge</strong></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Cross-Functional Track -->
+      <div class="journey-track cf-track exp-track">
+        <div class="track-label">Cross-Functional Decision-Making</div>
+        <div class="track-line">
+          <div class="track-node small">
+            <div class="node-dot"></div>
+            <div class="node-label">Case Challenge:<br><strong>Creating Strategic<br>Alignment</strong></div>
+          </div>
+          <div class="track-connector"></div>
+          <div class="track-node large">
+            <div class="node-dot"></div>
+            <div class="node-label">Simulation:<br><strong>Enterprise<br>Challenge</strong></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="journey-footer">
+      <div class="footer-item"><strong>Flexible delivery options:</strong> in-person or virtual.</div>
+      <div class="footer-divider"></div>
+      <div class="footer-item"><strong>Live Sessions:</strong> ~ 40 Hours</div>
+      <div class="footer-divider"></div>
+      <div class="footer-item"><strong>Fluent in Finance - self study:</strong> 2 - 14 hours</div>
+    </div>
+  </div>
+</div>
+
 </div><!-- /main -->
 
 <script>
@@ -3377,7 +3752,7 @@ if (localStorage.getItem('gateUnlocked') === 'true') {
 
 // Map views to nav button indices (0=Explore, 1=Compare, 2=Ask)
 const NAV_BTN_MAP = {
-  overview: 0, programs: 0, ba: 0, cf: 0, tm: 0,  // All explore views
+  overview: 0, programs: 0, ba: 0, cf: 0, tm: 0, 'rising-leader': 0, 'exp-leader': 0,  // All explore views
   compare: 1,
   ai: 2
 };
