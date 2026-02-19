@@ -558,9 +558,16 @@
     color: var(--gray-700);
     border: 1px solid var(--gray-200);
     position: relative;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .program-item:hover {
+    background: var(--gray-50);
+    border-color: var(--gray-300);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
   .program-item.ai-case-item {
-    cursor: help;
+    cursor: pointer;
   }
   .program-item.ai-case-item::after {
     content: "Scores come from rubric";
@@ -4746,10 +4753,75 @@ function closeFrameworkModal() {
   document.getElementById('framework-modal').classList.remove('show');
 }
 
+// Program Modal Functions
+function openProgramModal(programName) {
+  // Find program by name (strip duration text if present)
+  const cleanName = programName.replace(/\s*\([^)]*\)\s*$/, '').trim();
+  const program = PROGRAMS.find(p => p.name === cleanName || p.name.includes(cleanName) || cleanName.includes(p.name));
+
+  if (!program) {
+    console.log('Program not found:', cleanName);
+    return;
+  }
+
+  const modal = document.getElementById('program-modal');
+  const content = document.getElementById('program-modal-content');
+
+  const pillarNames = { ba: 'Business Acumen', cf: 'Cross-Functional', tm: 'Team Management' };
+  const typeLabels = { sim: 'Simulation', case: 'Case Challenge', 'ai-case': 'Async', course: 'Course' };
+
+  content.innerHTML = `
+    <div class="modal-header">
+      <div>
+        <h2>${program.name}</h2>
+        <div style="display: flex; gap: 8px; margin-top: 8px; flex-wrap: wrap;">
+          <span class="modal-pillar-badge ${program.pillar}">${pillarNames[program.pillar]}</span>
+          <span style="display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; background: var(--gray-200); color: var(--gray-700);">${typeLabels[program.type] || program.type}</span>
+          <span style="display: inline-block; padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 600; background: var(--gray-100); color: var(--gray-600);">${program.duration}</span>
+        </div>
+      </div>
+      <button class="modal-close" onclick="closeProgramModal()">×</button>
+    </div>
+    <div class="modal-body">
+      ${program.framework ? `<p style="font-size: 14px; color: var(--gray-600); margin-bottom: 16px;"><strong>Framework:</strong> ${program.framework}</p>` : ''}
+
+      <div class="modal-section">
+        <h4>Competencies (${(program.competencies || []).length})</h4>
+        <ul style="margin: 12px 0 0 0; padding-left: 20px; color: var(--gray-700); font-size: 14px; line-height: 1.7;">
+          ${(program.competencies || []).map(c => `<li style="margin-bottom: 8px;">${c}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <h4>Mindsets (${(program.mindsets || []).length})</h4>
+        <ul style="margin: 12px 0 0 0; padding-left: 20px; color: var(--gray-700); font-size: 14px; line-height: 1.7;">
+          ${(program.mindsets || []).map(m => `<li style="margin-bottom: 8px;">${m}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div class="modal-section">
+        <h4>Tools & Frameworks (${(program.tools || []).length})</h4>
+        <ul style="margin: 12px 0 0 0; padding-left: 20px; color: var(--gray-700); font-size: 14px; line-height: 1.7;">
+          ${(program.tools || []).map(t => `<li style="margin-bottom: 8px;">${t}</li>`).join('')}
+        </ul>
+      </div>
+    </div>
+  `;
+
+  modal.classList.add('show');
+}
+
+function closeProgramModal() {
+  document.getElementById('program-modal').classList.remove('show');
+}
+
 // Close modal on overlay click
 document.addEventListener('click', function(e) {
   if (e.target.id === 'framework-modal') {
     closeFrameworkModal();
+  }
+  if (e.target.id === 'program-modal') {
+    closeProgramModal();
   }
 });
 
@@ -4757,7 +4829,24 @@ document.addEventListener('click', function(e) {
 document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') {
     closeFrameworkModal();
+    closeProgramModal();
   }
+});
+
+// Add click handlers to program items in explore pages
+document.addEventListener('DOMContentLoaded', function() {
+  document.querySelectorAll('.pillar-detail .program-item').forEach(item => {
+    item.addEventListener('click', function(e) {
+      // Don't trigger if clicking on the tooltip area
+      if (e.target.closest('.item-duration')) {
+        const parentText = this.textContent.replace(/\s*\([^)]*\)\s*$/, '').trim();
+        openProgramModal(parentText);
+        return;
+      }
+      const programText = this.childNodes[0].textContent.trim();
+      openProgramModal(programText);
+    });
+  });
 });
 
 </script>
@@ -4765,6 +4854,11 @@ document.addEventListener('keydown', function(e) {
 <!-- Framework Modal -->
 <div class="modal-overlay" id="framework-modal">
   <div class="modal-content" id="framework-modal-content"></div>
+</div>
+
+<!-- Program Modal -->
+<div class="modal-overlay" id="program-modal">
+  <div class="modal-content" id="program-modal-content"></div>
 </div>
 
 </body>
