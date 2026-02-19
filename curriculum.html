@@ -584,6 +584,15 @@
   .program-item.ai-case-item {
     cursor: pointer;
   }
+  .program-item.ba-item {
+    border-left: 3px solid var(--gold-500);
+  }
+  .program-item.tm-item {
+    border-left: 3px solid var(--blue-600);
+  }
+  .program-item.cf-item {
+    border-left: 3px solid var(--green-600);
+  }
   .program-item.ai-case-item::after {
     content: "Scores come from rubric";
     position: absolute;
@@ -3563,161 +3572,324 @@
 
 <!-- ============ RISING LEADER PROGRAM ============ -->
 <div class="view-panel" id="view-rising-leader">
-  <div class="journey-page">
-    <div class="journey-header">
-      <h1>Rising Leader Program</h1>
-      <p class="journey-subtitle">The sequencing and components of this program can be custom-tailored, including the integration of an organization's vision, mission, business metrics, and decision frameworks.</p>
+  <div class="pillar-header">
+    <div class="pillar-icon" style="background: linear-gradient(135deg, var(--blue-600), var(--gold-500), var(--green-600));">🚀</div>
+    <div>
+      <h2>Rising Leader Program</h2>
+      <div class="pillar-desc">A comprehensive leadership development journey combining Business Acumen, Cross-Functional Decision-Making, and Team Management</div>
     </div>
+  </div>
 
-    <div class="journey-diagram">
-      <!-- Program Kickoff -->
-      <div class="journey-kickoff">
-        <div class="kickoff-dot"></div>
-        <div class="kickoff-label">Program<br>Kickoff</div>
-      </div>
-
-      <!-- Team Management Track -->
-      <div class="journey-track tm-track">
-        <div class="track-label">Team Management</div>
-        <div class="track-line">
-          <div class="track-node small">
-            <div class="node-dot"></div>
-            <div class="node-label">Case Challenge:<br><strong>Enabling Peak<br>Performance</strong></div>
-          </div>
-          <div class="track-connector"></div>
-          <div class="track-node small">
-            <div class="node-dot"></div>
-            <div class="node-label">Case Challenge:<br><strong>Navigating Critical<br>Conversations</strong></div>
-          </div>
-          <div class="track-connector"></div>
-          <div class="track-node large">
-            <div class="node-dot"></div>
-            <div class="node-label">Simulation:<br><strong>Management<br>Challenge</strong></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Business Acumen Track -->
-      <div class="journey-track ba-track">
-        <div class="track-label">Business Acumen</div>
-        <div class="track-line">
-          <div class="track-node small">
-            <div class="node-dot"></div>
-            <div class="node-label">Case Challenge:<br><strong>Managing<br>Profitability</strong></div>
-          </div>
-          <div class="track-connector"></div>
-          <div class="track-node small">
-            <div class="node-dot"></div>
-            <div class="node-label">Case Challenge:<br><strong>Analyzing Profit<br>Drivers</strong></div>
-          </div>
-          <div class="track-connector"></div>
-          <div class="track-node large">
-            <div class="node-dot"></div>
-            <div class="node-label">Simulation:<br><strong>Income<br>Challenge</strong></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cross-Functional Track -->
-      <div class="journey-track cf-track">
-        <div class="track-label">Cross-Functional Decision-Making</div>
-        <div class="track-line">
-          <div class="track-node small">
-            <div class="node-dot"></div>
-            <div class="node-label">Case Challenge:<br><strong>Shifting Mindsets<br>and Behaviors</strong></div>
-          </div>
-          <div class="track-connector"></div>
-          <div class="track-node small">
-            <div class="node-dot"></div>
-            <div class="node-label">Case Challenge:<br><strong>Influencing Without<br>Authority</strong></div>
-          </div>
-          <div class="track-connector"></div>
-          <div class="track-node large">
-            <div class="node-dot"></div>
-            <div class="node-label">Simulation:<br><strong>Influence<br>Challenge</strong></div>
-          </div>
-        </div>
+  <div class="level-card expanded" id="rising-leader-card">
+    <div class="level-card-header">
+      <div class="left">
+        <span class="level-badge">Level 1</span>
+        <div><div class="level-title">Rising Leader</div><div class="level-subtitle">Income Challenge + Management Challenge + Influence Challenge</div></div>
       </div>
     </div>
+    <div class="level-card-body" style="display: block;">
+      <div class="level-card-content">
+        <div class="level-card-top">
+          <span class="audience-badge">Audience: Aspiring, new, and developing leaders</span>
+          <div class="doc-links">
+            <a href="https://www.notion.so/abilitie1/Business-Finance-Challenge-Manual-207d492187fc80aab40dd43d7b4b8267" target="_blank" class="doc-link">📄 BA Manual</a>
+            <a href="https://www.notion.so/abilitie1/Influence-Challenge-Manual-247d492187fc80b29c5ee995ae9f0b86" target="_blank" class="doc-link">📄 CF Manual</a>
+            <a href="https://www.notion.so/abilitie1/Management-Director-Challenge-Manual-208d492187fc804cb509c656d28c6cce" target="_blank" class="doc-link">📄 TM Manual</a>
+            <a href="https://www.notion.so/abilitie1/Arrow-AIC-Manual-299d492187fc80acb885e46020182f44" target="_blank" class="doc-link">📄 AI Cases</a>
+          </div>
+        </div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sims</span>
+            <div class="program-type-items">
+              <span class="program-item ba-item">Income Challenge <span class="item-duration">(4–6 hrs)</span></span>
+              <span class="program-item tm-item">Management Challenge <span class="item-duration">(6–8 hrs)</span></span>
+              <span class="program-item cf-item">Influence Challenge <span class="item-duration">(4–8 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row cases-row">
+            <span class="program-type-label">Cases</span>
+            <div class="program-type-items">
+              <span class="program-item ba-item">Analyzing Profit Drivers <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item ba-item">Managing Profitability <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item tm-item">Enabling Peak Performance <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item tm-item">Navigating Critical Conversations <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item cf-item">Shifting Mindsets &amp; Behaviors <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item cf-item">Influencing Without Authority <span class="item-duration">(2 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row async-row">
+            <span class="program-type-label">Async</span>
+            <div class="program-type-items">
+              <span class="program-item">FiF Ch. 1-2: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
+              <span class="program-item">FiF Ch. 3: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 4: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 5-6: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item ai-case-item">AI Case Challenges (14 available) <span class="item-duration">(15–20 min each)</span></span>
+            </div>
+          </div>
+        </div>
 
-    <div class="journey-footer">
-      <div class="footer-item"><strong>Flexible delivery options:</strong> in-person or virtual.</div>
-      <div class="footer-divider"></div>
-      <div class="footer-item"><strong>Live Sessions:</strong> ~ 40 Hours</div>
+        <h3 style="margin: 32px 0 16px; font-family: var(--font-heading); color: var(--navy);">Business Acumen</h3>
+        <div class="section-grid">
+          <div class="section-block ba-accent">
+            <h4>Competencies</h4>
+            <ul>
+              <li>Read and interpret income statements and basic financial statements</li>
+              <li>Decode the profit model of a business — revenue, cost of sales, gross profit, operating expenses</li>
+              <li>Conduct breakeven analysis to understand the impact of pricing and cost decisions</li>
+              <li>Evaluate market opportunities holistically using demand and cost structure data</li>
+              <li>Analyze profit drivers: pricing, volume, cost structure, and margin</li>
+              <li>Articulate financial insights using business language to defend strategic recommendations</li>
+            </ul>
+          </div>
+          <div class="section-block ba-accent">
+            <h4>Mindsets</h4>
+            <ul>
+              <li><strong>Value creation thinking:</strong> Every decision either creates or destroys value for stakeholders</li>
+              <li><strong>Tradeoff awareness:</strong> Growth, profitability, and risk are always in tension — managing the balance is the job</li>
+              <li><strong>Financial curiosity:</strong> Numbers tell a story; learning to read that story empowers better decisions</li>
+              <li><strong>Long-term orientation:</strong> Short-term wins shouldn't come at the expense of sustainable performance</li>
+            </ul>
+          </div>
+          <div class="section-block ba-accent">
+            <h4>Tools &amp; Frameworks</h4>
+            <ul>
+              <li><strong>The Levers of Value:</strong> Growth × Profitability × Risk = Shareholder Value</li>
+              <li><strong>Income Statement / P&amp;L:</strong> Sales → Cost of Sales → Gross Profit → Net Profit</li>
+              <li><strong>Breakeven Analysis:</strong> Fixed costs ÷ (Price − Variable Cost) = Breakeven volume</li>
+              <li><strong>Cost Structure Comparison:</strong> Built facility vs. Contract facility tradeoff analysis</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin: 32px 0 16px; font-family: var(--font-heading); color: var(--navy);">Team Management</h3>
+        <div class="section-grid">
+          <div class="section-block tm-accent">
+            <h4>Competencies</h4>
+            <ul>
+              <li>Set clear, explicit expectations collaboratively (Say → Ask → Create)</li>
+              <li>Evaluate both capabilities and confidence levels for each team member</li>
+              <li>Identify and enable individual motivators for each direct report</li>
+              <li>Deliver structured feedback using the SBI framework (Situation-Behavior-Impact)</li>
+              <li>Coach for growth — guiding development conversations that connect to motivators</li>
+              <li>Navigate critical and difficult conversations with empathy and clarity</li>
+            </ul>
+          </div>
+          <div class="section-block tm-accent">
+            <h4>Mindsets</h4>
+            <ul>
+              <li><strong>Trust as foundation:</strong> Everything — expectations, feedback, coaching, presence — is built on a foundation of trust</li>
+              <li><strong>Everyone is different:</strong> Your employees are unlikely to be motivated by the same things that drive you</li>
+              <li><strong>Coaching over compliance:</strong> "In our offices we have way too much compliance and way too little engagement"</li>
+              <li><strong>Feedback is a gift:</strong> People value self-improvement more than self-esteem — don't avoid hard conversations</li>
+            </ul>
+          </div>
+          <div class="section-block tm-accent">
+            <h4>Tools &amp; Frameworks</h4>
+            <ul>
+              <li><strong>The Pillars of Trust:</strong> Set Clear Expectations → Enable Motivators → Provide Feedback → Be Present</li>
+              <li><strong>SBI + Intent Framework:</strong> Situation → Behavior → Impact → Intent</li>
+              <li><strong>8 Motivators Model:</strong> Achievement, Security, Recognition, Mastery, Companionship, Position, Autonomy, Purpose</li>
+              <li><strong>GROW Coaching Model:</strong> Goal → Reality → Options → Way Forward</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin: 32px 0 16px; font-family: var(--font-heading); color: var(--navy);">Cross-Functional Decision-Making</h3>
+        <div class="section-grid">
+          <div class="section-block cf-accent">
+            <h4>Competencies</h4>
+            <ul>
+              <li>Identify stakeholder interests and separate surface positions from underlying motivations</li>
+              <li>Map stakeholders strategically across internal and external networks</li>
+              <li>Build alignment through influence without relying on formal authority</li>
+              <li>Design and execute an influence strategy using both expressive and receptive tactics</li>
+              <li>Diagnose power dynamics and leverage reciprocity in professional relationships</li>
+              <li>Translate concerns, resistance, and skepticism into shared messaging and alignment</li>
+            </ul>
+          </div>
+          <div class="section-block cf-accent">
+            <h4>Mindsets</h4>
+            <ul>
+              <li><strong>The Platinum Rule:</strong> Influence others as they want to be influenced, not as you would want to be</li>
+              <li><strong>Positions vs. interests:</strong> What people say they want often masks what they truly need</li>
+              <li><strong>Influence as investment:</strong> Influence is built over time through trust and reciprocity</li>
+              <li><strong>WIIFM:</strong> Frame your ask in terms of what the other person values, not what you need</li>
+            </ul>
+          </div>
+          <div class="section-block cf-accent">
+            <h4>Tools &amp; Frameworks</h4>
+            <ul>
+              <li><strong>From Idea to Action:</strong> Interests → Relationships → Approach (the three pillars of influence)</li>
+              <li><strong>Stakeholder Universe Map:</strong> Internal (boss, peers, direct reports) and External mapping</li>
+              <li><strong>Expressive vs. Receptive Tactics:</strong> Tell, Sell, Negotiate, Inspire vs. Inquire, Listen, Empathize, Facilitate</li>
+              <li><strong>Reciprocity Matrix:</strong> Proactive (Gift, Appeal) vs. Reactive (Return the Favor, Tit-for-Tat)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
 
 <!-- ============ EXPERIENCED LEADER PROGRAM ============ -->
 <div class="view-panel" id="view-exp-leader">
-  <div class="journey-page">
-    <div class="journey-header">
-      <h1>Experienced Leader Program</h1>
-      <p class="journey-subtitle">The sequencing and components of this program can be custom-tailored, including the integration of an organization's vision, mission, business metrics, and decision frameworks.</p>
+  <div class="pillar-header">
+    <div class="pillar-icon" style="background: linear-gradient(135deg, var(--blue-600), var(--gold-500), var(--green-600));">⭐</div>
+    <div>
+      <h2>Experienced Leader Program</h2>
+      <div class="pillar-desc">An advanced leadership development journey combining Business Acumen, Cross-Functional Decision-Making, and Team Management for senior leaders</div>
     </div>
+  </div>
 
-    <div class="journey-diagram">
-      <!-- Program Kickoff -->
-      <div class="journey-kickoff">
-        <div class="kickoff-dot"></div>
-        <div class="kickoff-label">Program<br>Kickoff</div>
-      </div>
-
-      <!-- Team Management Track -->
-      <div class="journey-track tm-track exp-track">
-        <div class="track-label">Team Management</div>
-        <div class="track-line">
-          <div class="track-node small">
-            <div class="node-dot"></div>
-            <div class="node-label">Case Challenge:<br><strong>Leading in Times of<br>Change</strong></div>
-          </div>
-          <div class="track-connector"></div>
-          <div class="track-node large">
-            <div class="node-dot"></div>
-            <div class="node-label">Simulation:<br><strong>Director<br>Challenge</strong></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Business Acumen Track -->
-      <div class="journey-track ba-track exp-track">
-        <div class="track-label">Business Acumen</div>
-        <div class="track-line">
-          <div class="track-node small">
-            <div class="node-dot"></div>
-            <div class="node-label">Case Challenge:<br><strong>Balancing<br>Growth and Risk</strong></div>
-          </div>
-          <div class="track-connector"></div>
-          <div class="track-node large">
-            <div class="node-dot"></div>
-            <div class="node-label">Simulation:<br><strong>Business<br>Challenge</strong></div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Cross-Functional Track -->
-      <div class="journey-track cf-track exp-track">
-        <div class="track-label">Cross-Functional Decision-Making</div>
-        <div class="track-line">
-          <div class="track-node small">
-            <div class="node-dot"></div>
-            <div class="node-label">Case Challenge:<br><strong>Creating Strategic<br>Alignment</strong></div>
-          </div>
-          <div class="track-connector"></div>
-          <div class="track-node large">
-            <div class="node-dot"></div>
-            <div class="node-label">Simulation:<br><strong>Enterprise<br>Challenge</strong></div>
-          </div>
-        </div>
+  <div class="level-card expanded" id="exp-leader-card">
+    <div class="level-card-header">
+      <div class="left">
+        <span class="level-badge">Level 2</span>
+        <div><div class="level-title">Experienced Leader</div><div class="level-subtitle">Business Challenge + Director Challenge + Enterprise Challenge</div></div>
       </div>
     </div>
+    <div class="level-card-body" style="display: block;">
+      <div class="level-card-content">
+        <div class="level-card-top">
+          <span class="audience-badge">Audience: Directors, senior managers, and functional leaders</span>
+          <div class="doc-links">
+            <a href="https://www.notion.so/abilitie1/Business-Finance-Challenge-Manual-207d492187fc80aab40dd43d7b4b8267" target="_blank" class="doc-link">📄 BA Manual</a>
+            <a href="https://www.notion.so/abilitie1/Enterprise-Executive-Challenge-Manual-206d492187fc80f7bd9ee5d8cb9bb15d" target="_blank" class="doc-link">📄 CF Manual</a>
+            <a href="https://www.notion.so/abilitie1/Management-Director-Challenge-Manual-208d492187fc804cb509c656d28c6cce" target="_blank" class="doc-link">📄 TM Manual</a>
+            <a href="https://www.notion.so/abilitie1/Arrow-AIC-Manual-299d492187fc80acb885e46020182f44" target="_blank" class="doc-link">📄 AI Cases</a>
+          </div>
+        </div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sims</span>
+            <div class="program-type-items">
+              <span class="program-item ba-item">Business Challenge <span class="item-duration">(6–8 hrs)</span></span>
+              <span class="program-item tm-item">Director Challenge <span class="item-duration">(6–8 hrs)</span></span>
+              <span class="program-item cf-item">Enterprise Challenge <span class="item-duration">(6–8 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row cases-row">
+            <span class="program-type-label">Cases</span>
+            <div class="program-type-items">
+              <span class="program-item ba-item">Balancing Growth &amp; Risk <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item tm-item">Leading in Times of Change <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item cf-item">Creating Strategic Alignment <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item cf-item">Strategic Problem Solving <span class="item-duration">(2 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row async-row">
+            <span class="program-type-label">Async</span>
+            <div class="program-type-items">
+              <span class="program-item">FiF Ch. 1-2: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
+              <span class="program-item">FiF Ch. 3: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 4: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 5-6: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item ai-case-item">AI Case Challenges (14 available) <span class="item-duration">(15–20 min each)</span></span>
+            </div>
+          </div>
+        </div>
 
-    <div class="journey-footer">
-      <div class="footer-item"><strong>Flexible delivery options:</strong> in-person or virtual.</div>
-      <div class="footer-divider"></div>
-      <div class="footer-item"><strong>Live Sessions:</strong> ~ 40 Hours</div>
-      <div class="footer-divider"></div>
-      <div class="footer-item"><strong>Fluent in Finance - self study:</strong> 2 - 14 hours</div>
+        <h3 style="margin: 32px 0 16px; font-family: var(--font-heading); color: var(--navy);">Business Acumen</h3>
+        <div class="section-grid">
+          <div class="section-block ba-accent">
+            <h4>Competencies</h4>
+            <ul>
+              <li>Analyze growth and performance using key financial indicators (revenue growth, margins, profitability trends)</li>
+              <li>Evaluate resource allocation and long-term tradeoffs using data-driven analysis</li>
+              <li>Project the impact of strategic decisions over multiple time periods</li>
+              <li>Communicate financial recommendations using business language and financial logic</li>
+              <li>Conduct strategic planning across multiple business units and expansion opportunities</li>
+              <li>Model cash flows over time and apply time value of money (NPV) to investment decisions</li>
+            </ul>
+          </div>
+          <div class="section-block ba-accent">
+            <h4>Mindsets</h4>
+            <ul>
+              <li><strong>Enterprise value lens:</strong> Every function contributes to the total value equation — think beyond your silo</li>
+              <li><strong>Risk as a value lever:</strong> De-risking a business is a hidden but powerful way to create value</li>
+              <li><strong>Cash flow discipline:</strong> Profits don't equal cash — managing working capital and cash conversion is critical</li>
+              <li><strong>Growth with guardrails:</strong> Growth above expectations drives value, but only when paired with profitability</li>
+            </ul>
+          </div>
+          <div class="section-block ba-accent">
+            <h4>Tools &amp; Frameworks</h4>
+            <ul>
+              <li><strong>The Levers of Value (Advanced):</strong> Growth + Profitability + Risk → Future Cash Flows → Value</li>
+              <li><strong>Three Financial Statements:</strong> Income Statement, Cash Flow Statement, Balance Sheet</li>
+              <li><strong>Net Present Value (NPV):</strong> Discounting future cash flows to evaluate investment decisions</li>
+              <li><strong>Cash Flow Modeling:</strong> Cash from operations vs. investing vs. financing</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin: 32px 0 16px; font-family: var(--font-heading); color: var(--navy);">Team Management</h3>
+        <div class="section-grid">
+          <div class="section-block tm-accent">
+            <h4>Competencies</h4>
+            <ul>
+              <li>Empower managers to drive performance — lead through people, not around them</li>
+              <li>Align multiple teams across competing priorities, constraints, and incentive structures</li>
+              <li>Build leadership culture and strengthen the organizational talent pipeline</li>
+              <li>Navigate organizational change with deliberate people and team decisions</li>
+              <li>Make tough organizational calls — assess fit holistically and lead change with intent</li>
+              <li>Diagnose and develop managers with varying growth areas</li>
+            </ul>
+          </div>
+          <div class="section-block tm-accent">
+            <h4>Mindsets</h4>
+            <ul>
+              <li><strong>Force multiplier:</strong> Your job is no longer to do the work — it's to multiply the capability of your leaders</li>
+              <li><strong>Leader-of-leaders identity:</strong> Managing managers requires a fundamentally different approach</li>
+              <li><strong>First Team thinking:</strong> Your first team is your peer group of leaders, not the team that reports to you</li>
+              <li><strong>Culture is a lever:</strong> Culture isn't a byproduct — it's a strategic lever that can be intentionally shaped</li>
+            </ul>
+          </div>
+          <div class="section-block tm-accent">
+            <h4>Tools &amp; Frameworks</h4>
+            <ul>
+              <li><strong>Levers of Leadership:</strong> Results Multiplier + Culture Multiplier + Alignment Multiplier</li>
+              <li><strong>Blake Mouton Grid:</strong> Mapping leadership style across Concern for Results vs. Concern for People</li>
+              <li><strong>First Team Concept:</strong> Prioritizing peer leadership alignment before cascading</li>
+              <li><strong>Change Leadership Model:</strong> Assess fit → Communicate with intent → Manage resistance → Sustain momentum</li>
+            </ul>
+          </div>
+        </div>
+
+        <h3 style="margin: 32px 0 16px; font-family: var(--font-heading); color: var(--navy);">Cross-Functional Decision-Making</h3>
+        <div class="section-grid">
+          <div class="section-block cf-accent">
+            <h4>Competencies</h4>
+            <ul>
+              <li>Translate strategy into cross-functional action across multiple departments</li>
+              <li>Make strategic decisions under conditions of ambiguity and uncertainty</li>
+              <li>Communicate and collaborate across functional silos to influence outcomes</li>
+              <li>Identify leadership blind spots that affect execution quality</li>
+              <li>Conduct root cause analysis and assess risk systematically under pressure</li>
+              <li>Design decision-making processes that mitigate bias and improve outcomes</li>
+            </ul>
+          </div>
+          <div class="section-block cf-accent">
+            <h4>Mindsets</h4>
+            <ul>
+              <li><strong>Process over content:</strong> The quality of HOW you decide (53%) matters more than WHAT you decide (8%)</li>
+              <li><strong>Bias awareness:</strong> Pattern-recognition, action-oriented, stability, interest, social, and hierarchy biases distort decisions</li>
+              <li><strong>Enterprise thinking:</strong> Function-level optimization often sub-optimizes the enterprise</li>
+              <li><strong>VUCA readiness:</strong> Build slack, experiment, delegate, and treat failure as learning</li>
+            </ul>
+          </div>
+          <div class="section-block cf-accent">
+            <h4>Tools &amp; Frameworks</h4>
+            <ul>
+              <li><strong>Decision-Making Framework:</strong> Define → Deliberate → Deliver with intentional process design</li>
+              <li><strong>Decision Models Spectrum:</strong> Sole Decider → Majority Vote → Consensus → Delegate</li>
+              <li><strong>VUCA Framework:</strong> Volatility, Uncertainty, Complexity, Ambiguity with tailored responses</li>
+              <li><strong>Risk Assessment Matrix:</strong> Likelihood × Impact scoring to prioritize risks</li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </div>
