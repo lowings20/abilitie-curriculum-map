@@ -4114,8 +4114,15 @@ function toggleInlineDropdown(prog, type, btn, e) {
         <div style="font-size:11px;color:var(--gray-500);">${p.duration}</div>
       </div>`
     );
-  } else if (type === 'ai') {
+  } else if (type === 'async') {
     items = PROGRAMS.filter(p => p.type === 'ai-case').map(p =>
+      `<div class="dropdown-item" onclick="addItem('${p.id}', '${prog}')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--gray-100);font-size:13px;">
+        <div style="font-weight:600;color:var(--navy);">${p.name}</div>
+        <div style="font-size:11px;color:var(--gray-500);">${p.duration}</div>
+      </div>`
+    );
+  } else if (type === 'course') {
+    items = PROGRAMS.filter(p => p.type === 'course').map(p =>
       `<div class="dropdown-item" onclick="addItem('${p.id}', '${prog}')" style="padding:10px 14px;cursor:pointer;border-bottom:1px solid var(--gray-100);font-size:13px;">
         <div style="font-weight:600;color:var(--navy);">${p.name}</div>
         <div style="font-size:11px;color:var(--gray-500);">${p.duration}</div>
@@ -4227,6 +4234,7 @@ function renderColumn(prog, items) {
   function typeBadge(type) {
     if (type === 'sim') return '<span class="type-badge sim">SIM</span>';
     if (type === 'case') return '<span class="type-badge case">CASE</span>';
+    if (type === 'course') return '<span class="type-badge course">COURSE</span>';
     return '<span class="type-badge ai">ASYNC</span>';
   }
 
@@ -4271,7 +4279,8 @@ function renderColumn(prog, items) {
     <div class="add-buttons-row">
       <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'sim', this, event)">+ Sim</button>
       <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'case', this, event)">+ Case</button>
-      <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'ai', this, event)">+ AI</button>
+      <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'async', this, event)">+ Async</button>
+      <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'course', this, event)">+ Course</button>
     </div>
   `;
 
@@ -4285,11 +4294,21 @@ function renderColumn(prog, items) {
 
   statsEl.style.display = 'block';
 
-  // Stats
+  // Stats - calculate seat time, handling both hours and minutes
   let minHrs = 0, maxHrs = 0;
   pItems.forEach(p => {
-    const m = p.duration.match(/(\d+)(?:[–-](\d+))?/);
-    if (m) { minHrs += +m[1]; maxHrs += +(m[2]||m[1]); }
+    const m = p.duration.match(/(\d+)(?:[–-](\d+))?\s*(min|hrs?)?/i);
+    if (m) {
+      let minVal = +m[1];
+      let maxVal = +(m[2] || m[1]);
+      // Check if duration is in minutes
+      if (m[3] && m[3].toLowerCase() === 'min') {
+        minVal = minVal / 60;
+        maxVal = maxVal / 60;
+      }
+      minHrs += minVal;
+      maxHrs += maxVal;
+    }
   });
 
   // Build maps of items to their source programs
