@@ -820,61 +820,84 @@
     gap: 20px;
     min-height: 500px;
   }
-  .category-row {
-    display: flex;
-    align-items: flex-start;
-    gap: 8px;
-    padding: 10px 12px;
-    border-radius: 8px;
-    margin-bottom: 8px;
+  /* Level-based grouping */
+  .level-group {
+    margin-bottom: 12px;
   }
-  .category-row.sims { background: rgba(0,150,183,0.08); }
-  .category-row.cases { background: rgba(244,162,97,0.08); }
-  .category-row.ai-cases { background: rgba(139,92,246,0.08); }
-  .category-label {
+  .level-group-header {
     font-size: 10px;
     font-weight: 700;
     text-transform: uppercase;
-    letter-spacing: 0.5px;
-    padding: 4px 8px;
-    border-radius: 4px;
-    white-space: nowrap;
-    flex-shrink: 0;
+    letter-spacing: 1px;
+    color: var(--gray-400);
+    margin-bottom: 6px;
+    padding-left: 2px;
   }
-  .category-row.sims .category-label { background: var(--pill-ba); color: white; }
-  .category-row.cases .category-label { background: var(--gold); color: white; }
-  .category-row.ai-cases .category-label { background: var(--pill-ts); color: white; }
-  .category-items {
+  .level-group.executive .level-group-header { color: var(--coral); }
+  .level-group.experienced .level-group-header { color: var(--gold); }
+  .level-group.rising .level-group-header { color: var(--teal); }
+  .level-group-items {
     display: flex;
     flex-wrap: wrap;
     gap: 6px;
-    flex: 1;
   }
-  .compact-item {
+
+  /* Program chips with type badges */
+  .program-chip {
     display: inline-flex;
     align-items: center;
-    gap: 4px;
-    padding: 4px 8px;
+    gap: 6px;
+    padding: 5px 8px 5px 5px;
     background: var(--white);
-    border-radius: 4px;
-    font-size: 11px;
-    color: var(--gray-700);
+    border-radius: 6px;
+    font-size: 12px;
     border: 1px solid var(--gray-200);
+    transition: all 0.2s;
   }
-  .compact-item .item-name {
-    font-weight: 500;
+  .program-chip:hover {
+    border-color: var(--gray-300);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
   }
-  .compact-item .remove-item {
+  .type-badge {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 3px 6px;
+    border-radius: 4px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+  }
+  .type-badge.sim { background: var(--navy); color: white; }
+  .type-badge.case { background: var(--navy); color: white; opacity: 0.8; }
+  .type-badge.ai { background: var(--coral); color: white; }
+  .chip-name {
+    font-weight: 600;
+    color: var(--gray-700);
+  }
+  .chip-duration {
+    font-size: 10px;
+    color: var(--gray-400);
+  }
+  .chip-remove {
     background: none;
     border: none;
-    color: var(--gray-400);
+    color: var(--gray-300);
     cursor: pointer;
-    font-size: 12px;
-    padding: 0;
+    font-size: 14px;
+    padding: 0 0 0 4px;
     line-height: 1;
+    transition: color 0.2s;
   }
-  .compact-item .remove-item:hover {
+  .chip-remove:hover {
     color: var(--coral);
+  }
+
+  /* Add buttons row */
+  .add-buttons-row {
+    display: flex;
+    gap: 8px;
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--gray-100);
   }
   .add-inline-btn {
     padding: 4px 10px;
@@ -3631,12 +3654,25 @@ function renderColumn(prog, items) {
   if (!itemsEl) return;
 
   const pItems = items.map(id => PROGRAMS.find(x => x.id === id)).filter(Boolean);
-  const sims = pItems.filter(p => p.type === 'sim');
-  const cases = pItems.filter(p => p.type === 'case');
-  const aiCases = pItems.filter(p => p.type === 'ai-case');
   const hasItems = items.length > 0;
 
-  // Build category rows HTML
+  // Group by level: Executive at top, Experienced in middle, Rising at bottom
+  const levelOrder = ['executive', 'experienced', 'rising'];
+  const levelNames = { executive: 'Executive', experienced: 'Experienced', rising: 'Rising' };
+  const byLevel = {};
+  levelOrder.forEach(l => byLevel[l] = []);
+  pItems.forEach(p => {
+    if (byLevel[p.level]) byLevel[p.level].push(p);
+  });
+
+  // Type badge helper
+  function typeBadge(type) {
+    if (type === 'sim') return '<span class="type-badge sim">SIM</span>';
+    if (type === 'case') return '<span class="type-badge case">CASE</span>';
+    return '<span class="type-badge ai">AI</span>';
+  }
+
+  // Build HTML
   let html = '';
 
   // Add Program button (only when empty)
@@ -3652,51 +3688,32 @@ function renderColumn(prog, items) {
     `;
   }
 
-  // Simulations row
-  html += `
-    <div class="category-row sims">
-      <span class="category-label">Sims</span>
-      <div class="category-items">
-        ${sims.map(p => `
-          <span class="compact-item">
-            <span class="item-name">${p.name}</span>
-            <button class="remove-item" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
-          </span>
-        `).join('')}
-        <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'sim', this, event)">+ Add Sim</button>
-      </div>
-    </div>
-  `;
+  // Render items grouped by level
+  levelOrder.forEach(level => {
+    const levelItems = byLevel[level];
+    if (levelItems.length === 0 && !hasItems) return;
 
-  // Case Challenges row
-  html += `
-    <div class="category-row cases">
-      <span class="category-label">Cases</span>
-      <div class="category-items">
-        ${cases.map(p => `
-          <span class="compact-item">
-            <span class="item-name">${p.name}</span>
-            <button class="remove-item" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
+    html += `<div class="level-group ${level}">
+      <div class="level-group-header">${levelNames[level]}</div>
+      <div class="level-group-items">
+        ${levelItems.map(p => `
+          <span class="program-chip ${p.type}">
+            ${typeBadge(p.type)}
+            <span class="chip-name">${p.name}</span>
+            <span class="chip-duration">${p.duration}</span>
+            <button class="chip-remove" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
           </span>
         `).join('')}
-        <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'case', this, event)">+ Add Case</button>
       </div>
-    </div>
-  `;
+    </div>`;
+  });
 
-  // AI Cases row
+  // Add buttons row
   html += `
-    <div class="category-row ai-cases">
-      <span class="category-label">AI Cases</span>
-      <div class="category-items">
-        ${aiCases.map(p => `
-          <span class="compact-item">
-            <span class="item-name">${p.name}</span>
-            <button class="remove-item" onclick="removeItem('${prog}', '${p.id}', event)">×</button>
-          </span>
-        `).join('')}
-        <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'ai', this, event)">+ Add AIC</button>
-      </div>
+    <div class="add-buttons-row">
+      <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'sim', this, event)">+ Sim</button>
+      <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'case', this, event)">+ Case</button>
+      <button class="add-inline-btn" onclick="toggleInlineDropdown('${prog}', 'ai', this, event)">+ AI</button>
     </div>
   `;
 
