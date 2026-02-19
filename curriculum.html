@@ -1113,6 +1113,14 @@
     font-size: 10px;
     color: var(--gray-400);
   }
+  /* SIM chips need light text on dark background */
+  .program-chip.sim .chip-name,
+  .program-chip.sim .chip-duration {
+    color: white;
+  }
+  .program-chip.sim .chip-duration {
+    opacity: 0.8;
+  }
   .chip-remove {
     background: none;
     border: none;
@@ -1122,6 +1130,12 @@
     padding: 0 0 0 4px;
     line-height: 1;
     transition: color 0.2s;
+  }
+  .program-chip.sim .chip-remove {
+    color: rgba(255,255,255,0.5);
+  }
+  .program-chip.sim .chip-remove:hover {
+    color: white;
   }
   .chip-remove:hover {
     color: var(--coral);
@@ -2584,10 +2598,10 @@
           <div class="program-type-row async-row">
             <span class="program-type-label">Async</span>
             <div class="program-type-items">
-              <span class="program-item">FiF: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
-              <span class="program-item">FiF: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
-              <span class="program-item">FiF: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
-              <span class="program-item">FiF: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 1-2: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
+              <span class="program-item">FiF Ch. 3: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 4: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 5-6: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
             </div>
           </div>
         </div>
@@ -2660,10 +2674,10 @@
           <div class="program-type-row async-row">
             <span class="program-type-label">Async</span>
             <div class="program-type-items">
-              <span class="program-item">FiF: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
-              <span class="program-item">FiF: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
-              <span class="program-item">FiF: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
-              <span class="program-item">FiF: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 1-2: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
+              <span class="program-item">FiF Ch. 3: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 4: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 5-6: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
             </div>
           </div>
         </div>
@@ -2738,10 +2752,10 @@
           <div class="program-type-row async-row">
             <span class="program-type-label">Async</span>
             <div class="program-type-items">
-              <span class="program-item">FiF: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
-              <span class="program-item">FiF: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
-              <span class="program-item">FiF: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
-              <span class="program-item">FiF: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 1-2: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
+              <span class="program-item">FiF Ch. 3: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 4: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF Ch. 5-6: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
             </div>
           </div>
         </div>
@@ -3770,19 +3784,19 @@ const PROGRAMS = [
       {category:"Positioning for High Performance Teams", points:20, criteria:["Think beyond the hire to attracting, integrating, and developing talent (10 pts)","Address how company can position itself as employer of choice for external talent (10 pts)"]}
     ]},
   /* ---- BA COURSES (FLUENT IN FINANCE) ---- */
-  { id:"fif-business-basics", name:"FiF: Back to Business Basics", type:"course", pillar:"ba", level:"rising", duration:"1–2 hrs", framework:"Unit Economics",
+  { id:"fif-business-basics", name:"FiF Ch. 1-2: Back to Business Basics", type:"course", pillar:"ba", level:"rising", duration:"1–2 hrs", framework:"Unit Economics",
     competencies:["Understand unit economics and how individual transactions drive business profitability","Calculate and interpret breakeven points for business decisions","Distinguish between fixed and variable costs in cost structures","Apply cost accounting principles to allocate costs appropriately","Analyze contribution margin and its impact on profitability","Evaluate pricing decisions using unit-level financial analysis"],
     mindsets:["Unit-level thinking: Every transaction either creates or destroys value","Cost consciousness: Understanding cost behavior is foundational to good decisions","Breakeven awareness: Knowing your breakeven point informs pricing, volume, and investment decisions","Simplify to understand: Complex business models can be broken into understandable units"],
     tools:["Unit Economics Model: Revenue per unit − Variable cost per unit = Contribution margin","Breakeven Analysis: Fixed Costs ÷ Contribution Margin = Breakeven Volume","Cost Classification: Fixed vs. Variable, Direct vs. Indirect","Cost Accounting Methods: Job costing, process costing, activity-based costing","Contribution Margin Analysis: Evaluating product and service profitability"]},
-  { id:"fif-financial-statements", name:"FiF: Reading Financial Statements", type:"course", pillar:"ba", level:"rising", duration:"2–3 hrs", framework:"Three Financial Statements",
+  { id:"fif-financial-statements", name:"FiF Ch. 3: Reading Financial Statements", type:"course", pillar:"ba", level:"rising", duration:"2–3 hrs", framework:"Three Financial Statements",
     competencies:["Distinguish between cash-based and accrual accounting methods","Read and interpret income statements to assess profitability","Analyze balance sheets to understand financial position and leverage","Interpret cash flow statements to evaluate liquidity and cash generation","Understand how depreciation affects financial statements","Connect the three financial statements to see the complete financial picture"],
     mindsets:["Accrual thinking: Revenue and expenses are recognized when earned/incurred, not when cash moves","Balance sheet awareness: Assets = Liabilities + Equity tells the ownership story","Cash is king: Profits don't equal cash — cash flow tells the survival story","Holistic financial view: The three statements together tell the complete story"],
     tools:["Income Statement Structure: Revenue → COGS → Gross Profit → Operating Expenses → Net Income","Balance Sheet Framework: Assets = Liabilities + Shareholders' Equity","Cash Flow Statement: Operating Activities + Investing Activities + Financing Activities","Depreciation Methods: Straight-line, declining balance, and their P&L/cash impacts","Financial Statement Linkages: How changes flow between the three statements","Terminology Decoder: EBITDA, Working Capital, Retained Earnings, Accounts Receivable/Payable"]},
-  { id:"fif-business-idea-to-budget", name:"FiF: From Business Idea to Budget", type:"course", pillar:"ba", level:"rising", duration:"2–3 hrs", framework:"Financial Modeling & Time Value of Money",
+  { id:"fif-business-idea-to-budget", name:"FiF Ch. 4: From Business Idea to Budget", type:"course", pillar:"ba", level:"rising", duration:"2–3 hrs", framework:"Financial Modeling & Time Value of Money",
     competencies:["Build basic financial models to project business performance","Create cash flow projections in spreadsheet tools","Apply the time value of money concept to evaluate future cash flows","Assess risk and its impact on the value of future cash flows","Understand the cost of capital and its role in investment decisions","Calculate present value to compare cash flows across different time periods"],
     mindsets:["Future dollars are worth less: Time value of money is fundamental to all financial decisions","Risk requires return: Higher risk demands higher expected returns","Model to learn: Financial models are thinking tools, not crystal balls","Opportunity cost awareness: Capital has alternative uses that define its cost"],
     tools:["Financial Model Framework: Assumptions → Projections → Outputs","Cash Flow Projection Template: Period-by-period cash inflows and outflows","Time Value of Money: PV = FV ÷ (1 + r)^n","Risk-Return Relationship: Higher uncertainty = higher required discount rate","Cost of Capital Calculation: Weighted average of debt and equity costs (WACC)","Present Value Formula: Discounting future cash flows to today's dollars"]},
-  { id:"fif-dcf-analysis", name:"FiF: Discounted Cash Flow Analysis", type:"course", pillar:"ba", level:"rising", duration:"2–3 hrs", framework:"NPV & IRR",
+  { id:"fif-dcf-analysis", name:"FiF Ch. 5-6: Discounted Cash Flow Analysis", type:"course", pillar:"ba", level:"rising", duration:"2–3 hrs", framework:"NPV & IRR",
     competencies:["Calculate and interpret the payback period for investment decisions","Compute Net Present Value (NPV) to evaluate project viability","Calculate Internal Rate of Return (IRR) and compare to cost of capital","Perform NPV and IRR analysis using spreadsheet functions","Apply DCF analysis to real business investment decisions","Communicate investment recommendations from an executive perspective"],
     mindsets:["NPV is the gold standard: Positive NPV means value creation","IRR context matters: IRR must exceed cost of capital to create value","Payback has limits: Simple but ignores time value and cash flows beyond payback","Executive framing: Financial analysis must connect to strategic priorities"],
     tools:["Payback Period: Time to recover initial investment","NPV Formula: Sum of discounted cash flows minus initial investment","IRR Calculation: Discount rate that makes NPV equal to zero","NPV Function in Excel: =NPV(rate, cash flows) + initial investment","IRR Function in Excel: =IRR(cash flows)","Investment Decision Rules: Accept if NPV > 0 or IRR > Cost of Capital"]}
