@@ -3418,13 +3418,20 @@ function generateAIResponse(question) {
   }
 
   if (q.includes('business acumen') || q.includes('30 person')) {
-    return `For a 30-person Business Acumen program, you have several great options:<br><br>
-    <strong>For Rising Leaders:</strong><br>
-    • <strong>Income Challenge</strong> (6-8 hrs) + case challenges = comprehensive financial foundations<br><br>
-    <strong>For Experienced Leaders:</strong><br>
-    • <strong>Business Challenge</strong> (6-8 hrs) - deeper dive into multi-period financial strategy<br><br>
-    <strong>For a shorter engagement:</strong><br>
-    • <strong>Analyzing Profit Drivers</strong> (2 hrs) or <strong>Managing Profitability</strong> (2 hrs) as standalone case challenges<br><br>
+    return `For a 30-person Business Acumen program, here are your program options:<br><br>
+    <strong>PROGRAMS:</strong><br><br>
+    <strong>Income Accelerator</strong> (Rising Leaders)<br>
+    • Income Challenge simulation (4-6 hrs)<br>
+    • Analyzing Profit Drivers case (2 hrs)<br>
+    • Managing Profitability case (2 hrs)<br>
+    • FiF Ch. 1-3 async courses<br><br>
+    <strong>Business Accelerator</strong> (Experienced Leaders)<br>
+    • Business Challenge simulation (6-8 hrs)<br>
+    • Balancing Growth & Risk case (2 hrs)<br>
+    • FiF Ch. 1-6 async courses<br><br>
+    <strong>For shorter engagements</strong>, you can run individual components:<br>
+    • Any case challenge as a standalone 2-hour session<br>
+    • Fluent in Finance chapters as pre-work or follow-up<br><br>
     All programs work well with 30 participants in teams of 4-5.`;
   }
 
@@ -3441,11 +3448,18 @@ function generateAIResponse(question) {
   }
 
   if (q.includes('cross-functional') || q.includes('collaboration')) {
-    return `Our <strong>Cross-Functional Decision-Making</strong> pillar is dedicated to this:<br><br>
-    <strong>Influence Challenge</strong> (Rising) - Building alignment through influence without authority<br>
-    <strong>Enterprise Challenge</strong> (Experienced) - Strategic decision-making across silos<br>
-    <strong>Executive Challenge</strong> (Executive) - C-suite level cross-functional leadership<br><br>
-    Case challenges like <strong>Creating Strategic Alignment</strong> and <strong>Shifting Mindsets & Behaviors</strong> also focus heavily on cross-functional collaboration skills.`;
+    return `Our <strong>Cross-Functional Decision-Making</strong> pillar offers these programs:<br><br>
+    <strong>PROGRAMS:</strong><br><br>
+    <strong>Influence Accelerator</strong> (Rising Leaders)<br>
+    • Influence Challenge simulation (4-8 hrs)<br>
+    • Shifting Mindsets & Behaviors case (2 hrs)<br>
+    • Influencing Without Authority case (2 hrs)<br><br>
+    <strong>Enterprise Accelerator</strong> (Experienced Leaders)<br>
+    • Enterprise Challenge simulation (6-8 hrs)<br>
+    • Creating Strategic Alignment case (2 hrs)<br><br>
+    <strong>Individual Components:</strong><br>
+    • <strong>Executive Challenge</strong> (6-8 hrs) - C-suite level cross-functional leadership<br>
+    • AI-powered async cases for practice between sessions`;
   }
 
   if (q.includes('management challenge') && q.includes('competenc')) {
@@ -3462,23 +3476,35 @@ function generateAIResponse(question) {
   }
 
   if (q.includes('half-day') || q.includes('half day') || q.includes('rising leader')) {
-    return `For a half-day (2-4 hour) Rising Leader program, I'd recommend:<br><br>
-    <strong>Option 1 - Business Acumen focus:</strong><br>
-    • Analyzing Profit Drivers (2 hrs) OR Managing Profitability (2 hrs)<br><br>
-    <strong>Option 2 - Influence focus:</strong><br>
-    • Shifting Mindsets & Behaviors (2 hrs) OR Influencing Without Authority (2 hrs)<br><br>
-    <strong>Option 3 - Team Management focus:</strong><br>
-    • Enabling Peak Performance (2 hrs) OR Navigating Critical Conversations (2 hrs)<br><br>
-    For a full half-day, you could combine any simulation with its paired case challenge.`;
+    return `For Rising Leaders, here are your program options:<br><br>
+    <strong>FULL PROGRAMS (Accelerators):</strong><br><br>
+    <strong>Income Accelerator</strong> - Business Acumen focus<br>
+    • Sim + 2 cases + FiF courses = comprehensive financial foundations<br><br>
+    <strong>Influence Accelerator</strong> - Cross-Functional focus<br>
+    • Sim + 2 cases = building alignment through influence<br><br>
+    <strong>Management Accelerator</strong> - Team Management focus<br>
+    • Sim + 2 cases = leading and developing people<br><br>
+    <strong>FOR HALF-DAY (2-4 hours):</strong><br>
+    You can run individual components from any Accelerator:<br>
+    • Any case challenge as a standalone 2-hour session<br>
+    • Combine 2 case challenges for a 4-hour half-day<br>
+    • Use Fluent in Finance chapters as pre-work or follow-up`;
   }
 
   // Default response
-  return `Thanks for your question! Based on your inquiry, I'd recommend exploring our curriculum map to find the best fit.<br><br>
-  Our programs span three pillars:<br>
-  • <strong>Business Acumen</strong> - Financial decision-making and value creation<br>
-  • <strong>Cross-Functional Decision-Making</strong> - Influence, strategy, and collaboration<br>
-  • <strong>Team Management</strong> - Leading and developing people<br><br>
-  Each pillar has programs for Rising Leaders, Experienced Leaders, and Executives. Click "Navigate Curriculum" to explore the full map, or ask me a more specific question!`;
+  return `Thanks for your question! Here's how our curriculum is organized:<br><br>
+  <strong>PROGRAMS:</strong><br>
+  We offer pre-packaged programs at two levels:<br><br>
+  <strong>Flagship Programs</strong> (comprehensive, multi-pillar):<br>
+  • Flagship Rising Leader - all 3 pillars for new leaders<br>
+  • Flagship Experienced Leader - all 3 pillars for senior managers<br><br>
+  <strong>Accelerators</strong> (single pillar focus):<br>
+  • Income Accelerator / Business Accelerator (Business Acumen)<br>
+  • Influence Accelerator / Enterprise Accelerator (Cross-Functional)<br>
+  • Management Accelerator / Director Accelerator (Team Management)<br><br>
+  <strong>INDIVIDUAL COMPONENTS:</strong><br>
+  Each program contains simulations, case challenges, and async courses that can also be run standalone.<br><br>
+  Click "Explore" to navigate the full curriculum, or ask me about a specific need!`;
 }
 
 function toggleCard(id) {
