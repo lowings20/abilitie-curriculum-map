@@ -557,6 +557,35 @@
     font-weight: 500;
     color: var(--gray-700);
     border: 1px solid var(--gray-200);
+    position: relative;
+  }
+  .program-item.ai-case-item {
+    cursor: help;
+  }
+  .program-item.ai-case-item::after {
+    content: "Scores come from rubric";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    margin-bottom: 6px;
+    padding: 6px 10px;
+    background: var(--navy);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s, visibility 0.15s;
+    pointer-events: none;
+  }
+  .program-item.ai-case-item:hover::after {
+    opacity: 1;
+    visibility: visible;
   }
   .program-item .item-duration {
     font-weight: 400;
@@ -2778,13 +2807,13 @@
           <div class="program-type-row async-row">
             <span class="program-type-label">Async</span>
             <div class="program-type-items">
-              <span class="program-item">Hold The Line? <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">A Change Will Do You Good. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">I'm Not Here To Make Friends. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Spread Your Wings and Fly. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">The Fault Line. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">I'm Not Convinced. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Scope Springs Eternal. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Hold The Line? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">A Change Will Do You Good. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">I'm Not Here To Make Friends. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Spread Your Wings and Fly. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">The Fault Line. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">I'm Not Convinced. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Scope Springs Eternal. <span class="item-duration">(15–20 min)</span></span>
             </div>
           </div>
         </div>
@@ -2860,13 +2889,13 @@
           <div class="program-type-row async-row">
             <span class="program-type-label">Async</span>
             <div class="program-type-items">
-              <span class="program-item">Hold The Line? <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">A Change Will Do You Good. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">I'm Not Here To Make Friends. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Spread Your Wings and Fly. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">The Fault Line. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">I'm Not Convinced. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Scope Springs Eternal. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Hold The Line? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">A Change Will Do You Good. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">I'm Not Here To Make Friends. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Spread Your Wings and Fly. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">The Fault Line. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">I'm Not Convinced. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Scope Springs Eternal. <span class="item-duration">(15–20 min)</span></span>
             </div>
           </div>
         </div>
@@ -3019,13 +3048,13 @@
           <div class="program-type-row async-row">
             <span class="program-type-label">Async</span>
             <div class="program-type-items">
-              <span class="program-item">Get the Message? <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Close the Door. Have a Seat. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">It's a Slippery Slope. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Welcome Aboard! <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">I've Got Good News! <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Blindsided. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Why Not Me? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Get the Message? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Close the Door. Have a Seat. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">It's a Slippery Slope. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Welcome Aboard! <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">I've Got Good News! <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Blindsided. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Why Not Me? <span class="item-duration">(15–20 min)</span></span>
             </div>
           </div>
         </div>
@@ -3102,13 +3131,13 @@
           <div class="program-type-row async-row">
             <span class="program-type-label">Async</span>
             <div class="program-type-items">
-              <span class="program-item">Get the Message? <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Close the Door. Have a Seat. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">It's a Slippery Slope. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Welcome Aboard! <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">I've Got Good News! <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Blindsided. <span class="item-duration">(15–20 min)</span></span>
-              <span class="program-item">Why Not Me? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Get the Message? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Close the Door. Have a Seat. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">It's a Slippery Slope. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Welcome Aboard! <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">I've Got Good News! <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Blindsided. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item ai-case-item">Why Not Me? <span class="item-duration">(15–20 min)</span></span>
             </div>
           </div>
         </div>
