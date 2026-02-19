@@ -558,6 +558,38 @@
   .section-block.tm-accent li::before { background: var(--pill-tm); }
   .section-block.ts-accent li::before { background: var(--pill-ts); }
 
+  /* Section block hover tooltips */
+  .section-block li {
+    cursor: default;
+  }
+  .section-block li[data-source] {
+    cursor: help;
+  }
+  .section-block li[data-source]::after {
+    content: attr(data-source);
+    position: absolute;
+    left: 0;
+    bottom: 100%;
+    margin-bottom: 4px;
+    padding: 6px 10px;
+    background: var(--navy);
+    color: white;
+    font-size: 11px;
+    font-weight: 500;
+    border-radius: 6px;
+    white-space: nowrap;
+    z-index: 100;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.15s, visibility 0.15s;
+    pointer-events: none;
+  }
+  .section-block li[data-source]:hover::after {
+    opacity: 1;
+    visibility: visible;
+  }
+
   /* LEARNING OBJECTIVES */
   .objectives-row {
     display: flex;
@@ -3179,6 +3211,81 @@ function openLevel(id) {
   }, 100);
 }
 
+// Add source tooltips to pillar explore pages
+function addSourceTooltips() {
+  // Map of level card IDs to their programs
+  const levelPrograms = {
+    'ba-rising': ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability'],
+    'ba-exp': ['business-challenge', 'balancing-growth-risk'],
+    'ba-exec': ['finance-challenge', 'generating-financial-insights'],
+    'cf-rising': ['influence-challenge', 'shifting-mindsets', 'influencing-without-authority'],
+    'cf-exp': ['enterprise-challenge', 'creating-strategic-alignment', 'strategic-problem-solving'],
+    'cf-exec': ['executive-challenge', 'board-strategy'],
+    'tm-rising': ['management-challenge', 'enabling-peak-performance', 'navigating-critical-conversations'],
+    'tm-exp': ['director-challenge', 'leading-in-times-of-change']
+  };
+
+  // Wait for PROGRAMS to be defined
+  setTimeout(() => {
+    Object.keys(levelPrograms).forEach(levelId => {
+      const levelCard = document.getElementById(levelId);
+      if (!levelCard) return;
+
+      const programIds = levelPrograms[levelId];
+      const programs = programIds.map(id => PROGRAMS.find(p => p.id === id)).filter(Boolean);
+
+      // Build lookup maps for this level
+      const compMap = {};
+      const mindMap = {};
+      const toolMap = {};
+
+      programs.forEach(p => {
+        (p.competencies || []).forEach(c => {
+          const key = c.toLowerCase().substring(0, 50);
+          if (!compMap[key]) compMap[key] = [];
+          compMap[key].push(p.name);
+        });
+        (p.mindsets || []).forEach(m => {
+          const key = m.toLowerCase().substring(0, 50);
+          if (!mindMap[key]) mindMap[key] = [];
+          mindMap[key].push(p.name);
+        });
+        (p.tools || []).forEach(t => {
+          const key = t.toLowerCase().substring(0, 50);
+          if (!toolMap[key]) toolMap[key] = [];
+          toolMap[key].push(p.name);
+        });
+      });
+
+      // Find all section blocks in this level card
+      const sectionBlocks = levelCard.querySelectorAll('.section-block');
+      sectionBlocks.forEach(block => {
+        const h4 = block.querySelector('h4');
+        if (!h4) return;
+        const title = h4.textContent.toLowerCase();
+
+        let map = {};
+        if (title.includes('competenc')) map = compMap;
+        else if (title.includes('mindset')) map = mindMap;
+        else if (title.includes('tool') || title.includes('framework')) map = toolMap;
+
+        const listItems = block.querySelectorAll('li');
+        listItems.forEach(li => {
+          const text = li.textContent.toLowerCase().substring(0, 50);
+          // Find a matching key
+          const matchKey = Object.keys(map).find(key => text.includes(key.substring(0, 30)) || key.includes(text.substring(0, 30)));
+          if (matchKey && map[matchKey]) {
+            li.setAttribute('data-source', 'From: ' + map[matchKey].join(', '));
+          }
+        });
+      });
+    });
+  }, 100);
+}
+
+// Run on page load
+document.addEventListener('DOMContentLoaded', addSourceTooltips);
+
 /* ========== PROGRAM EXPLORER DATA ========== */
 const PROGRAMS = [
   /* ---- BA SIMULATIONS ---- */
@@ -3448,18 +3555,13 @@ function renderPrograms() {
     let detailInner;
     if (p.rubric) {
       // AI Case rendering
-      const optionsHtml = p.options ? p.options.map(o => `<span class="ai-option-chip">${o}</span>`).join("") : "";
       const rubricHtml = p.rubric.map(r => `
         <div class="rubric-category ${accentClass[p.pillar] || 'ts-accent'}">
           <div class="rubric-header"><span class="rubric-cat-name">${r.category}</span><span class="rubric-pts">${r.points} pts</span></div>
           <ul>${r.criteria.map(c => `<li>${c}</li>`).join("")}</ul>
         </div>`).join("");
       detailInner = `
-        <div style="margin-bottom:12px;">
-          <span class="cell-framework ${p.pillar}" style="font-size:11px;padding:5px 12px;">${p.modality}</span>
-          ${p.subcategory ? `<span class="ai-subcategory">${p.subcategory}</span>` : ""}
-        </div>
-        ${p.options ? `<div class="ai-options-row"><span class="ai-options-label">Options:</span>${optionsHtml}</div>` : ""}
+        ${p.subcategory ? `<div style="margin-bottom:12px;"><span class="ai-subcategory">${p.subcategory}</span></div>` : ""}
         <div class="rubric-grid">${rubricHtml}</div>`;
     } else {
       // Original sim/case rendering
@@ -3882,10 +3984,10 @@ function renderColumn(prog, items) {
     `;
   }
 
-  // Render items grouped by level
+  // Render items grouped by level (only show levels that have items)
   levelOrder.forEach(level => {
     const levelItems = byLevel[level];
-    if (levelItems.length === 0 && !hasItems) return;
+    if (levelItems.length === 0) return; // Skip empty levels
 
     html += `<div class="level-group ${level}">
       <div class="level-group-header">${levelNames[level]}</div>
