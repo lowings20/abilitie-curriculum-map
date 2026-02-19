@@ -477,7 +477,58 @@
     padding: 0 28px 28px;
   }
 
-  /* PROGRAMS ROW */
+  /* PROGRAMS GRID - Organized by Type */
+  .programs-grid {
+    margin-bottom: 24px;
+  }
+  .program-type-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 10px 12px;
+    border-radius: 8px;
+    margin-bottom: 8px;
+  }
+  .program-type-row.sims-row { background: rgba(18,52,86,0.06); }
+  .program-type-row.cases-row { background: rgba(18,52,86,0.04); }
+  .program-type-row.ai-row { background: rgba(231,111,81,0.08); }
+  .program-type-label {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    color: white;
+  }
+  .sims-row .program-type-label { background: var(--navy); }
+  .cases-row .program-type-label { background: var(--navy-mid); }
+  .ai-row .program-type-label { background: var(--coral); }
+  .program-type-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex: 1;
+  }
+  .program-item {
+    padding: 6px 12px;
+    background: var(--white);
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--gray-700);
+    border: 1px solid var(--gray-200);
+  }
+  .program-item .item-duration {
+    font-weight: 400;
+    color: var(--gray-400);
+    font-size: 11px;
+    margin-left: 4px;
+  }
+
+  /* Legacy programs-row for backwards compatibility */
   .programs-row {
     display: flex;
     gap: 12px;
@@ -496,6 +547,7 @@
   }
   .program-chip.sim { background: var(--navy); }
   .program-chip.case-chip { background: var(--navy-mid); }
+  .program-chip.ai-chip { background: var(--coral); }
   .chip-tag {
     font-size: 9px;
     text-transform: uppercase;
@@ -2144,7 +2196,7 @@
 
         <div class="landing-card" onclick="enterApp('overview')">
           <div class="landing-card-icon">🗺️</div>
-          <h3>Navigate Curriculum</h3>
+          <h3>Explore Curriculum</h3>
           <p>Explore the competencies, mindsets, and behaviors of each simulation and case challenge across all three pillars.</p>
           <div class="card-arrow">Start exploring →</div>
         </div>
@@ -2177,8 +2229,8 @@
       <div class="nav-dropdown">
         <button class="nav-main-btn" onclick="toggleExploreMenu()">🗺️ Explore <span class="dropdown-arrow">▼</span></button>
         <div class="nav-dropdown-menu" id="explore-menu">
-          <div class="dropdown-item" onclick="showView('overview'); closeExploreMenu()">Overview</div>
-          <div class="dropdown-item" onclick="showView('programs'); closeExploreMenu()">By Program</div>
+          <div class="dropdown-item" onclick="showView('overview'); closeExploreMenu()">Abilitie's Leadership Academy</div>
+          <div class="dropdown-item" onclick="showView('programs'); closeExploreMenu()">Full List</div>
           <div class="dropdown-divider"></div>
           <div class="dropdown-item" onclick="showView('ba'); closeExploreMenu()"><span class="dot dot-ba"></span>Business Acumen</div>
           <div class="dropdown-item" onclick="showView('cf'); closeExploreMenu()"><span class="dot dot-cf"></span>Cross-Functional Decision-Making</div>
@@ -2443,10 +2495,20 @@
     <div class="level-card-body">
       <div class="level-card-content">
         <span class="audience-badge">Audience: Aspiring, new, and developing leaders</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Income Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Analyzing Profit Drivers (2 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Managing Profitability (2 hrs)</div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sim</span>
+            <div class="program-type-items">
+              <span class="program-item">Income Challenge <span class="item-duration">(6–8 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row cases-row">
+            <span class="program-type-label">Cases</span>
+            <div class="program-type-items">
+              <span class="program-item">Analyzing Profit Drivers <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item">Managing Profitability <span class="item-duration">(2 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2501,9 +2563,19 @@
     <div class="level-card-body">
       <div class="level-card-content">
         <span class="audience-badge">Audience: Non-financial directors and senior managers</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Business Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Balancing Growth &amp; Risk (2 hrs)</div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sim</span>
+            <div class="program-type-items">
+              <span class="program-item">Business Challenge <span class="item-duration">(6–8 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row cases-row">
+            <span class="program-type-label">Cases</span>
+            <div class="program-type-items">
+              <span class="program-item">Balancing Growth &amp; Risk <span class="item-duration">(2 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2560,8 +2632,13 @@
     <div class="level-card-body">
       <div class="level-card-content">
         <span class="audience-badge">Audience: Senior executives and financial decision-makers</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Finance Challenge (6–8 hrs)</div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sim</span>
+            <div class="program-type-items">
+              <span class="program-item">Finance Challenge <span class="item-duration">(6–8 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2630,17 +2707,32 @@
     <div class="level-card-body">
       <div class="level-card-content">
         <span class="audience-badge">Audience: Aspiring, new, and developing leaders</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Influence Challenge (4–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Shifting Mindsets &amp; Behaviors (2 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Influencing Without Authority (2 hrs)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Hold The Line? (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> A Change Will Do You Good. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> I'm Not Here To Make Friends. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Spread Your Wings and Fly. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> The Fault Line. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> I'm Not Convinced. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Scope Springs Eternal. (15–20 min)</div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sim</span>
+            <div class="program-type-items">
+              <span class="program-item">Influence Challenge <span class="item-duration">(4–8 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row cases-row">
+            <span class="program-type-label">Cases</span>
+            <div class="program-type-items">
+              <span class="program-item">Shifting Mindsets &amp; Behaviors <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item">Influencing Without Authority <span class="item-duration">(2 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row ai-row">
+            <span class="program-type-label">AI Cases</span>
+            <div class="program-type-items">
+              <span class="program-item">Hold The Line? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">A Change Will Do You Good. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">I'm Not Here To Make Friends. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Spread Your Wings and Fly. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">The Fault Line. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">I'm Not Convinced. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Scope Springs Eternal. <span class="item-duration">(15–20 min)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2698,9 +2790,19 @@
     <div class="level-card-body">
       <div class="level-card-content">
         <span class="audience-badge">Audience: Directors and senior managers</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Enterprise Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Creating Strategic Alignment (2 hrs)</div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sim</span>
+            <div class="program-type-items">
+              <span class="program-item">Enterprise Challenge <span class="item-duration">(6–8 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row cases-row">
+            <span class="program-type-label">Cases</span>
+            <div class="program-type-items">
+              <span class="program-item">Creating Strategic Alignment <span class="item-duration">(2 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2759,8 +2861,13 @@
     <div class="level-card-body">
       <div class="level-card-content">
         <span class="audience-badge">Audience: Senior executives and cross-functional leaders</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Executive Challenge (6–8 hrs)</div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sim</span>
+            <div class="program-type-items">
+              <span class="program-item">Executive Challenge <span class="item-duration">(6–8 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2829,17 +2936,32 @@
     <div class="level-card-body">
       <div class="level-card-content">
         <span class="audience-badge">Audience: Aspiring, new, and developing people managers</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Management Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Enabling Peak Performance (2 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Navigating Critical Conversations (2 hrs)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Get the Message? (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Close the Door. Have a Seat. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> It's a Slippery Slope. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Welcome Aboard! (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> I've Got Good News! (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Blindsided. (15–20 min)</div>
-          <div class="program-chip ai-chip"><span class="chip-tag">AI</span> Why Not Me? (15–20 min)</div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sim</span>
+            <div class="program-type-items">
+              <span class="program-item">Management Challenge <span class="item-duration">(6–8 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row cases-row">
+            <span class="program-type-label">Cases</span>
+            <div class="program-type-items">
+              <span class="program-item">Enabling Peak Performance <span class="item-duration">(2 hrs)</span></span>
+              <span class="program-item">Navigating Critical Conversations <span class="item-duration">(2 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row ai-row">
+            <span class="program-type-label">AI Cases</span>
+            <div class="program-type-items">
+              <span class="program-item">Get the Message? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Close the Door. Have a Seat. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">It's a Slippery Slope. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Welcome Aboard! <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">I've Got Good News! <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Blindsided. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Why Not Me? <span class="item-duration">(15–20 min)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2898,9 +3020,19 @@
     <div class="level-card-body">
       <div class="level-card-content">
         <span class="audience-badge">Audience: Leaders of multiple teams; functional or department heads</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Director Challenge (6–8 hrs)</div>
-          <div class="program-chip case-chip"><span class="chip-tag">Case</span> Leading in Times of Change (2 hrs)</div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sim</span>
+            <div class="program-type-items">
+              <span class="program-item">Director Challenge <span class="item-duration">(6–8 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row cases-row">
+            <span class="program-type-label">Cases</span>
+            <div class="program-type-items">
+              <span class="program-item">Leading in Times of Change <span class="item-duration">(2 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2958,8 +3090,13 @@
     <div class="level-card-body">
       <div class="level-card-content">
         <span class="audience-badge">Audience: VPs, C-Suite, and enterprise leaders</span>
-        <div class="programs-row">
-          <div class="program-chip sim"><span class="chip-tag">Simulation</span> Executive Challenge — Talent Track (6–8 hrs)</div>
+        <div class="programs-grid">
+          <div class="program-type-row sims-row">
+            <span class="program-type-label">Sim</span>
+            <div class="program-type-items">
+              <span class="program-item">Executive Challenge — Talent Track <span class="item-duration">(6–8 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
