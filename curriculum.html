@@ -707,38 +707,6 @@
   .section-block.tm-accent li::before { background: var(--pill-tm); }
   .section-block.ts-accent li::before { background: var(--pill-ts); }
 
-  /* Section block hover tooltips */
-  .section-block li {
-    cursor: default;
-  }
-  .section-block li[data-source] {
-    cursor: help;
-  }
-  .section-block li[data-source]::after {
-    content: attr(data-source);
-    position: absolute;
-    left: 0;
-    bottom: 100%;
-    margin-bottom: 4px;
-    padding: 6px 10px;
-    background: var(--navy);
-    color: white;
-    font-size: 11px;
-    font-weight: 500;
-    border-radius: 6px;
-    white-space: nowrap;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.15s, visibility 0.15s;
-    pointer-events: none;
-  }
-  .section-block li[data-source]:hover::after {
-    opacity: 1;
-    visibility: visible;
-  }
-
   /* LEARNING OBJECTIVES */
   .objectives-row {
     display: flex;
@@ -1744,39 +1712,6 @@
     font-size: 11px;
     color: var(--gray-400);
     font-weight: 600;
-  }
-
-  /* Hover tooltip for competency/mindset/tool source */
-  .hoverable-item {
-    position: relative;
-    cursor: pointer;
-  }
-  .source-tooltip {
-    display: none;
-    position: absolute;
-    left: 0;
-    bottom: 100%;
-    margin-bottom: 6px;
-    padding: 6px 10px;
-    background: var(--navy);
-    color: white;
-    font-size: 11px;
-    font-weight: 500;
-    border-radius: 6px;
-    white-space: nowrap;
-    z-index: 100;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  }
-  .source-tooltip::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: 16px;
-    border: 6px solid transparent;
-    border-top-color: var(--navy);
-  }
-  .hoverable-item:hover .source-tooltip {
-    display: block;
   }
 
   /* Compare Programs Button & Modal */
@@ -4082,81 +4017,6 @@ function openLevel(id) {
   }, 100);
 }
 
-// Add source tooltips to pillar explore pages
-function addSourceTooltips() {
-  // Map of level card IDs to their programs
-  const levelPrograms = {
-    'ba-rising': ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability', 'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis'],
-    'ba-exp': ['business-challenge', 'balancing-growth-risk', 'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis'],
-    'ba-exec': ['finance-challenge', 'generating-financial-insights', 'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis'],
-    'cf-rising': ['influence-challenge', 'shifting-mindsets', 'influencing-without-authority', 'ai-hold-the-line', 'ai-change-will-do-you-good', 'ai-not-here-to-make-friends', 'ai-spread-your-wings', 'ai-fault-line', 'ai-not-convinced', 'ai-scope-springs-eternal'],
-    'cf-exp': ['enterprise-challenge', 'creating-strategic-alignment', 'strategic-problem-solving', 'ai-hold-the-line', 'ai-change-will-do-you-good', 'ai-not-here-to-make-friends', 'ai-spread-your-wings', 'ai-fault-line', 'ai-not-convinced', 'ai-scope-springs-eternal'],
-    'cf-exec': ['executive-challenge', 'board-strategy'],
-    'tm-rising': ['management-challenge', 'enabling-peak-performance', 'navigating-critical-conversations', 'ai-get-the-message', 'ai-close-the-door', 'ai-slippery-slope', 'ai-welcome-aboard', 'ai-good-news', 'ai-blindsided', 'ai-why-not-me'],
-    'tm-exp': ['director-challenge', 'leading-in-times-of-change', 'ai-get-the-message', 'ai-close-the-door', 'ai-slippery-slope', 'ai-welcome-aboard', 'ai-good-news', 'ai-blindsided', 'ai-why-not-me']
-  };
-
-  // Wait for PROGRAMS to be defined
-  setTimeout(() => {
-    Object.keys(levelPrograms).forEach(levelId => {
-      const levelCard = document.getElementById(levelId);
-      if (!levelCard) return;
-
-      const programIds = levelPrograms[levelId];
-      const programs = programIds.map(id => PROGRAMS.find(p => p.id === id)).filter(Boolean);
-
-      // Build lookup maps for this level
-      const compMap = {};
-      const mindMap = {};
-      const toolMap = {};
-
-      programs.forEach(p => {
-        (p.competencies || []).forEach(c => {
-          const key = c.toLowerCase().substring(0, 50);
-          if (!compMap[key]) compMap[key] = [];
-          compMap[key].push(p.name);
-        });
-        (p.mindsets || []).forEach(m => {
-          const key = m.toLowerCase().substring(0, 50);
-          if (!mindMap[key]) mindMap[key] = [];
-          mindMap[key].push(p.name);
-        });
-        (p.tools || []).forEach(t => {
-          const key = t.toLowerCase().substring(0, 50);
-          if (!toolMap[key]) toolMap[key] = [];
-          toolMap[key].push(p.name);
-        });
-      });
-
-      // Find all section blocks in this level card
-      const sectionBlocks = levelCard.querySelectorAll('.section-block');
-      sectionBlocks.forEach(block => {
-        const h4 = block.querySelector('h4');
-        if (!h4) return;
-        const title = h4.textContent.toLowerCase();
-
-        let map = {};
-        if (title.includes('competenc')) map = compMap;
-        else if (title.includes('mindset')) map = mindMap;
-        else if (title.includes('tool') || title.includes('framework')) map = toolMap;
-
-        const listItems = block.querySelectorAll('li');
-        listItems.forEach(li => {
-          const text = li.textContent.toLowerCase().substring(0, 50);
-          // Find a matching key
-          const matchKey = Object.keys(map).find(key => text.includes(key.substring(0, 30)) || key.includes(text.substring(0, 30)));
-          if (matchKey && map[matchKey]) {
-            li.setAttribute('data-source', 'From: ' + map[matchKey].join(', '));
-          }
-        });
-      });
-    });
-  }, 100);
-}
-
-// Run on page load
-document.addEventListener('DOMContentLoaded', addSourceTooltips);
-
 /* ========== DOCUMENT LINKS ========== */
 const DOC_LINKS = {
   // Business Acumen Sims (BC/FC Manual)
@@ -5056,8 +4916,7 @@ function renderColumn(prog, items) {
   const frameworks = Object.keys(toolMap);
 
   function makeListItem(text, sources) {
-    const sourceText = sources.join(', ');
-    return `<li class="hoverable-item" data-sources="${sourceText.replace(/"/g, '&quot;')}">${text}<span class="source-tooltip">From: ${sourceText}</span></li>`;
+    return `<li>${text}</li>`;
   }
 
   statsEl.innerHTML = `
