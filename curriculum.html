@@ -5,46 +5,82 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Abilitie Leadership Academy — Curriculum Map</title>
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Battambang:wght@400;700&family=Public+Sans:wght@300;400;500;600;700;800&display=swap');
 
   :root {
-    --navy: #1a2332;
-    --navy-light: #243044;
-    --navy-mid: #2c3e56;
-    --teal: #00b4d8;
-    --teal-dark: #0096b7;
-    --teal-glow: rgba(0,180,216,0.15);
-    --gold: #f4a261;
-    --gold-dark: #e08a3a;
-    --coral: #e76f51;
-    --sage: #2a9d8f;
-    --sage-light: #40b8a8;
+    /* Abilitie Primary Blues */
+    --navy: #0e0039;
+    --navy-light: #12004a;
+    --navy-mid: #151d60;
+    --teal: #3b33d0;
+    --teal-dark: #4a4fcc;
+    --teal-glow: rgba(74,79,204,0.15);
+
+    /* Abilitie Primary Gold */
+    --gold: #f6cb4d;
+    --gold-dark: #b48c18;
+    --coral: #fb5a51;
+
+    /* Abilitie Secondary Green */
+    --sage: #1e7e49;
+    --sage-light: #56ca8a;
+
+    /* Abilitie Grays */
     --white: #ffffff;
-    --off-white: #f0f4f8;
-    --gray-100: #e8edf2;
-    --gray-200: #d1d9e0;
-    --gray-400: #8b99a8;
-    --gray-600: #5a6b7d;
-    --gray-800: #2d3748;
-    --pill-ba: #0096b7;
-    --pill-cf: #e08a3a;
-    --pill-tm: #2a9d8f;
-    --pill-ts: #8b5cf6;
-    --shadow: 0 4px 24px rgba(0,0,0,0.08);
-    --shadow-lg: 0 8px 40px rgba(0,0,0,0.12);
+    --off-white: #f4f6f8;
+    --gray-100: #f9fafb;
+    --gray-200: #dfe3e8;
+    --gray-300: #c4cdd5;
+    --gray-400: #919eab;
+    --gray-500: #637381;
+    --gray-600: #454f5b;
+    --gray-700: #212b36;
+    --gray-800: #212b36;
+
+    /* Pillar Colors - Abilitie aligned */
+    --pill-ba: #3b33d0;
+    --pill-cf: #b48c18;
+    --pill-tm: #1e7e49;
+    --pill-ts: #586bc8;
+
+    /* Shadows & Radius */
+    --shadow: 0 4px 24px rgba(14,0,57,0.08);
+    --shadow-lg: 0 8px 40px rgba(14,0,57,0.12);
     --radius: 12px;
     --radius-sm: 8px;
     --transition: 0.3s cubic-bezier(0.4,0,0.2,1);
+
+    /* Transparent Blues */
+    --blue-48: rgba(74,79,204,0.48);
+    --blue-24: rgba(74,79,204,0.24);
+    --blue-12: rgba(74,79,204,0.12);
+    --blue-8: rgba(74,79,204,0.08);
+
+    /* Transparent Gold */
+    --gold-24: rgba(246,203,77,0.24);
+    --gold-12: rgba(246,203,77,0.12);
+
+    /* Transparent Green */
+    --green-12: rgba(30,126,73,0.12);
+    --green-8: rgba(30,126,73,0.08);
+
+    /* Transparent Red/Coral */
+    --red-12: rgba(251,90,81,0.12);
+    --red-8: rgba(251,90,81,0.08);
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
 
   body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-family: 'Public Sans', -apple-system, BlinkMacSystemFont, sans-serif;
     background: var(--off-white);
-    color: var(--gray-800);
+    color: var(--gray-700);
     line-height: 1.6;
     overflow-x: hidden;
+  }
+
+  h1, h2, h3 {
+    font-family: 'Battambang', 'Public Sans', sans-serif;
   }
 
   /* HERO */
@@ -63,8 +99,8 @@
     left: -25%;
     width: 150%;
     height: 200%;
-    background: radial-gradient(ellipse at 30% 50%, rgba(0,180,216,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 30%, rgba(244,162,97,0.06) 0%, transparent 50%);
+    background: radial-gradient(ellipse at 30% 50%, rgba(59,51,208,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(246,203,77,0.08) 0%, transparent 50%);
     pointer-events: none;
   }
   .hero-badge {
@@ -72,23 +108,24 @@
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--teal);
+    color: var(--gold);
     font-weight: 600;
     margin-bottom: 16px;
   }
   .hero h1 {
-    font-size: 42px;
-    font-weight: 800;
-    letter-spacing: -1px;
+    font-family: 'Battambang', 'Public Sans', sans-serif;
+    font-size: 40px;
+    font-weight: 700;
+    letter-spacing: -0.5px;
     margin-bottom: 12px;
     position: relative;
   }
   .hero p {
-    font-size: 17px;
-    color: var(--gray-200);
+    font-size: 16px;
+    color: var(--gray-300);
     max-width: 680px;
     margin: 0 auto 28px;
-    font-weight: 300;
+    font-weight: 400;
     line-height: 1.7;
   }
   .hero-meta {
@@ -102,8 +139,8 @@
   }
   .hero-stat .num {
     font-size: 28px;
-    font-weight: 800;
-    color: var(--teal);
+    font-weight: 700;
+    color: var(--gold);
   }
   .hero-stat .label {
     font-size: 11px;
@@ -116,12 +153,12 @@
   /* NAV TABS */
   .nav-bar {
     background: var(--white);
-    border-bottom: 1px solid var(--gray-100);
+    border-bottom: 1px solid var(--gray-200);
     padding: 0 40px;
     position: sticky;
     top: 0;
     z-index: 100;
-    box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+    box-shadow: 0 2px 12px rgba(14,0,57,0.04);
   }
   .nav-inner {
     max-width: 1320px;
@@ -193,7 +230,7 @@
   }
   .nav-main-btn.active {
     border-color: var(--teal);
-    background: rgba(0,180,216,0.08);
+    background: var(--blue-8);
     color: var(--teal-dark);
   }
   .nav-dropdown {
@@ -367,9 +404,9 @@
     border-radius: 20px;
     margin-top: 4px;
   }
-  .cell-framework.ba { background: rgba(0,150,183,0.1); color: var(--pill-ba); }
-  .cell-framework.cf { background: rgba(224,138,58,0.1); color: var(--pill-cf); }
-  .cell-framework.tm { background: rgba(42,157,143,0.1); color: var(--pill-tm); }
+  .cell-framework.ba { background: var(--blue-12); color: var(--pill-ba); }
+  .cell-framework.cf { background: var(--gold-12); color: var(--pill-cf); }
+  .cell-framework.tm { background: var(--green-12); color: var(--pill-tm); }
   .cell-click-hint {
     font-size: 10px;
     color: var(--gray-400);
@@ -489,9 +526,9 @@
     border-radius: 8px;
     margin-bottom: 8px;
   }
-  .program-type-row.sims-row { background: rgba(18,52,86,0.06); }
-  .program-type-row.cases-row { background: rgba(18,52,86,0.04); }
-  .program-type-row.ai-row { background: rgba(231,111,81,0.08); }
+  .program-type-row.sims-row { background: var(--blue-8); }
+  .program-type-row.cases-row { background: rgba(14,0,57,0.04); }
+  .program-type-row.async-row { background: var(--red-8); }
   .program-type-label {
     font-size: 10px;
     font-weight: 700;
@@ -505,7 +542,7 @@
   }
   .sims-row .program-type-label { background: var(--navy); }
   .cases-row .program-type-label { background: var(--navy-mid); }
-  .ai-row .program-type-label { background: var(--coral); }
+  .async-row .program-type-label { background: var(--coral); }
   .program-type-items {
     display: flex;
     flex-wrap: wrap;
@@ -722,7 +759,7 @@
   .session-search-input:focus {
     outline: none;
     border-color: var(--teal);
-    box-shadow: 0 0 0 3px rgba(0,180,216,0.1);
+    box-shadow: 0 0 0 3px var(--blue-12);
   }
   .session-search-input::placeholder {
     color: var(--gray-400);
@@ -849,7 +886,8 @@
   }
   .prog-meta-tag.type-sim { background: var(--navy); color: var(--white); }
   .prog-meta-tag.type-case { background: var(--navy-mid); color: var(--white); }
-  .prog-meta-tag.type-ai-case { background: #dc2626; color: var(--white); }
+  .prog-meta-tag.type-ai-case { background: var(--coral); color: var(--white); }
+  .prog-meta-tag.type-course { background: var(--teal); color: var(--white); }
   .prog-meta-tag.level-tag { background: var(--gray-100); color: var(--gray-600); }
   .prog-card-toggle {
     font-size: 18px;
@@ -907,8 +945,8 @@
     padding: 4px 10px;
     margin-left: 8px;
     border-radius: 4px;
-    background: rgba(220,38,38,0.08);
-    color: #dc2626;
+    background: var(--red-8);
+    color: var(--coral);
     font-weight: 600;
   }
   .rubric-grid {
@@ -970,7 +1008,7 @@
   .ts-accent .rubric-pts { background: var(--pill-ts); }
 
   /* AI Chip styling for pillar sections */
-  .ai-chip { background: #b91c1c; }
+  .ai-chip { background: var(--coral); }
   .ai-chip .chip-tag { background: rgba(255,255,255,0.2); }
 
 
@@ -1030,6 +1068,7 @@
   .type-badge.sim { background: var(--navy); color: white; }
   .type-badge.case { background: var(--navy); color: white; opacity: 0.8; }
   .type-badge.ai { background: var(--coral); color: white; }
+  .type-badge.course { background: var(--teal); color: white; }
   .chip-name {
     font-weight: 600;
     color: var(--gray-700);
@@ -1075,7 +1114,7 @@
   .add-inline-btn:hover {
     border-color: var(--teal);
     color: var(--teal);
-    background: rgba(0,180,216,0.05);
+    background: var(--blue-8);
   }
   .add-program-top {
     margin-bottom: 12px;
@@ -1180,7 +1219,7 @@
   }
   .add-btn:hover {
     border-color: var(--teal);
-    background: rgba(0,180,216,0.05);
+    background: var(--blue-8);
   }
   .add-btn .arrow {
     font-size: 10px;
@@ -1218,7 +1257,7 @@
     border-bottom: none;
   }
   .add-dropdown-item:hover {
-    background: rgba(0,180,216,0.06);
+    background: var(--blue-8);
   }
   .add-dropdown-item .item-name {
     font-weight: 600;
@@ -1437,12 +1476,12 @@
     border: none;
     border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 4px 15px rgba(0,150,183,0.3);
+    box-shadow: 0 4px 15px var(--blue-24);
     transition: all 0.3s ease;
   }
   .compare-btn:hover {
     transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(0,150,183,0.4);
+    box-shadow: 0 6px 20px var(--blue-48);
   }
   .compare-btn:disabled {
     background: var(--gray-300);
@@ -1697,8 +1736,8 @@
     left: -25%;
     width: 150%;
     height: 200%;
-    background: radial-gradient(ellipse at 30% 50%, rgba(0,180,216,0.08) 0%, transparent 60%),
-                radial-gradient(ellipse at 70% 30%, rgba(244,162,97,0.06) 0%, transparent 50%);
+    background: radial-gradient(ellipse at 30% 50%, rgba(59,51,208,0.12) 0%, transparent 60%),
+                radial-gradient(ellipse at 70% 30%, rgba(246,203,77,0.08) 0%, transparent 50%);
     pointer-events: none;
   }
   .landing-content {
@@ -1714,7 +1753,7 @@
     font-size: 11px;
     letter-spacing: 3px;
     text-transform: uppercase;
-    color: var(--teal);
+    color: var(--gold);
     font-weight: 600;
     margin-bottom: 16px;
   }
@@ -1740,7 +1779,7 @@
   .landing-stat .num {
     font-size: 36px;
     font-weight: 800;
-    color: var(--teal);
+    color: var(--gold);
   }
   .landing-stat .label {
     font-size: 11px;
@@ -1843,7 +1882,7 @@
     padding: 12px 8px;
     font-size: 11px;
     font-weight: 700;
-    color: var(--teal);
+    color: var(--gold);
     text-align: right;
     display: flex;
     align-items: center;
@@ -2002,7 +2041,7 @@
     border-bottom: none;
   }
   .ai-suggestion:hover {
-    background: rgba(0,180,216,0.06);
+    background: var(--blue-8);
     color: var(--teal-dark);
   }
   .ai-suggestion::before {
@@ -2150,14 +2189,11 @@
     font-size: 13px;
     color: var(--gray-600);
   }
+  /* Framework links removed - no longer styled as links */
   .framework-link {
-    color: var(--teal-dark);
-    cursor: pointer;
-    text-decoration: underline;
-    text-decoration-style: dotted;
-  }
-  .framework-link:hover {
-    color: var(--teal);
+    color: inherit;
+    cursor: text;
+    text-decoration: none;
   }
 </style>
 </head>
@@ -2187,13 +2223,6 @@
       <p>Choose how you'd like to explore the Abilitie curriculum</p>
 
       <div class="landing-cards">
-        <div class="landing-card" onclick="enterApp('ai')">
-          <div class="landing-card-icon">💬</div>
-          <h3>Ask Questions</h3>
-          <p>Ask questions about our curriculum using AI-powered search and get instant answers about competencies, programs, and more.</p>
-          <div class="card-arrow">Start asking →</div>
-        </div>
-
         <div class="landing-card" onclick="enterApp('overview')">
           <div class="landing-card-icon">🗺️</div>
           <h3>Explore Curriculum</h3>
@@ -2206,6 +2235,13 @@
           <h3>Compare Programs</h3>
           <p>Build and compare programs side-by-side to see total seat time, competency coverage, and learning outcomes.</p>
           <div class="card-arrow">Start comparing →</div>
+        </div>
+
+        <div class="landing-card" onclick="enterApp('ai')">
+          <div class="landing-card-icon">💬</div>
+          <h3>Ask Questions</h3>
+          <p>Ask questions about our curriculum using AI-powered search and get instant answers about competencies, programs, and more.</p>
+          <div class="card-arrow">Start asking →</div>
         </div>
       </div>
     </div>
@@ -2225,7 +2261,6 @@
   <div class="nav-inner nav-simple">
     <div class="nav-tab" onclick="showLanding()" style="font-weight:700;">← Home</div>
     <div class="nav-main-buttons">
-      <button class="nav-main-btn" onclick="showView('ai')">💬 Ask</button>
       <div class="nav-dropdown">
         <button class="nav-main-btn" onclick="toggleExploreMenu()">🗺️ Explore <span class="dropdown-arrow">▼</span></button>
         <div class="nav-dropdown-menu" id="explore-menu">
@@ -2238,6 +2273,7 @@
         </div>
       </div>
       <button class="nav-main-btn" onclick="showView('compare')">⚖️ Compare</button>
+      <button class="nav-main-btn" onclick="showView('ai')">💬 Ask</button>
     </div>
   </div>
 </div>
@@ -2462,14 +2498,14 @@
     <div class="session-section-content" id="grid-cases"></div>
   </div>
 
-  <!-- AI Cases Section -->
-  <div class="session-section" id="section-ai">
-    <div class="session-section-header" onclick="toggleSessionSection('ai')">
-      <h3>AI Cases</h3>
-      <span class="session-section-count" id="count-ai"></span>
+  <!-- Async Section (AI Cases + Courses) -->
+  <div class="session-section" id="section-async">
+    <div class="session-section-header" onclick="toggleSessionSection('async')">
+      <h3>Async</h3>
+      <span class="session-section-count" id="count-async"></span>
       <span class="session-section-toggle">▾</span>
     </div>
-    <div class="session-section-content" id="grid-ai"></div>
+    <div class="session-section-content" id="grid-async"></div>
   </div>
 </div>
 
@@ -2509,6 +2545,15 @@
               <span class="program-item">Managing Profitability <span class="item-duration">(2 hrs)</span></span>
             </div>
           </div>
+          <div class="program-type-row async-row">
+            <span class="program-type-label">Async</span>
+            <div class="program-type-items">
+              <span class="program-item">FiF: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
+              <span class="program-item">FiF: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2537,7 +2582,7 @@
           <div class="section-block ba-accent">
             <h4>Tools &amp; Frameworks</h4>
             <ul>
-              <li><strong><span class="framework-link" onclick="showFrameworkModal('levers-of-value')">The Levers of Value:</span></strong> Growth × Profitability × Risk = Shareholder Value</li>
+              <li><strong>The Levers of Value:</strong> Growth × Profitability × Risk = Shareholder Value</li>
               <li><strong>Income Statement / P&amp;L:</strong> Sales → Cost of Sales → Gross Profit → Operating Expenses → Net Profit</li>
               <li><strong>Breakeven Analysis:</strong> Fixed costs ÷ (Price − Variable Cost) = Breakeven volume</li>
               <li><strong>Cost Structure Comparison:</strong> Built facility vs. Contract facility tradeoff analysis</li>
@@ -2576,6 +2621,15 @@
               <span class="program-item">Balancing Growth &amp; Risk <span class="item-duration">(2 hrs)</span></span>
             </div>
           </div>
+          <div class="program-type-row async-row">
+            <span class="program-type-label">Async</span>
+            <div class="program-type-items">
+              <span class="program-item">FiF: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
+              <span class="program-item">FiF: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2606,7 +2660,7 @@
           <div class="section-block ba-accent">
             <h4>Tools &amp; Frameworks</h4>
             <ul>
-              <li><strong><span class="framework-link" onclick="showFrameworkModal('levers-of-value-advanced')">The Levers of Value (Advanced):</span></strong> Growth + Profitability + Risk → Future Cash Flows → Value</li>
+              <li><strong>The Levers of Value (Advanced):</strong> Growth + Profitability + Risk → Future Cash Flows → Value</li>
               <li><strong>Three Financial Statements:</strong> Income Statement, Cash Flow Statement, Balance Sheet — and how they interrelate</li>
               <li><strong>Net Present Value (NPV):</strong> Discounting future cash flows to evaluate investment decisions</li>
               <li><strong>Cost Structure Analysis:</strong> Fixed vs. variable costs, facility investment decisions, operational leverage</li>
@@ -2669,7 +2723,7 @@
           <div class="section-block ba-accent">
             <h4>Tools &amp; Frameworks</h4>
             <ul>
-              <li><strong><span class="framework-link" onclick="showFrameworkModal('roic-capital-efficiency')">ROIC (Return on Invested Capital):</span></strong> NOPAT ÷ Invested Capital (Fixed Assets + Working Capital)</li>
+              <li><strong>ROIC (Return on Invested Capital):</strong> NOPAT ÷ Invested Capital (Fixed Assets + Working Capital)</li>
               <li><strong>The ROIC Tree:</strong> Decomposing returns into Gross Margin, OpEx/Sales, Capital Turnover, Working Capital/Sales</li>
               <li><strong>Cost of Capital:</strong> Time value of money, present value of future cash flows, discount rate analysis</li>
               <li><strong>ROIC vs. Cost of Capital:</strong> Value is created only when ROIC exceeds the cost of capital</li>
@@ -2721,8 +2775,8 @@
               <span class="program-item">Influencing Without Authority <span class="item-duration">(2 hrs)</span></span>
             </div>
           </div>
-          <div class="program-type-row ai-row">
-            <span class="program-type-label">AI Cases</span>
+          <div class="program-type-row async-row">
+            <span class="program-type-label">Async</span>
             <div class="program-type-items">
               <span class="program-item">Hold The Line? <span class="item-duration">(15–20 min)</span></span>
               <span class="program-item">A Change Will Do You Good. <span class="item-duration">(15–20 min)</span></span>
@@ -2763,7 +2817,7 @@
           <div class="section-block cf-accent">
             <h4>Tools &amp; Frameworks</h4>
             <ul>
-              <li><strong><span class="framework-link" onclick="showFrameworkModal('from-idea-to-action')">From Idea to Action:</span></strong> Interests → Relationships → Approach (the three pillars of influence)</li>
+              <li><strong>From Idea to Action:</strong> Interests → Relationships → Approach (the three pillars of influence)</li>
               <li><strong>Positions vs. Interests Analysis:</strong> Questions to surface deeper motivations behind stated positions</li>
               <li><strong>Stakeholder Universe Map:</strong> Internal (boss, peers, direct reports) and External (partners, vendors, regulators, public)</li>
               <li><strong>Expressive vs. Receptive Tactics:</strong> Tell, Sell, Negotiate, Inspire (expressive) vs. Inquire, Listen, Empathize, Facilitate (receptive)</li>
@@ -2803,6 +2857,18 @@
               <span class="program-item">Creating Strategic Alignment <span class="item-duration">(2 hrs)</span></span>
             </div>
           </div>
+          <div class="program-type-row async-row">
+            <span class="program-type-label">Async</span>
+            <div class="program-type-items">
+              <span class="program-item">Hold The Line? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">A Change Will Do You Good. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">I'm Not Here To Make Friends. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Spread Your Wings and Fly. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">The Fault Line. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">I'm Not Convinced. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Scope Springs Eternal. <span class="item-duration">(15–20 min)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -2833,7 +2899,7 @@
           <div class="section-block cf-accent">
             <h4>Tools &amp; Frameworks</h4>
             <ul>
-              <li><strong><span class="framework-link" onclick="showFrameworkModal('decision-making')">Decision-Making Framework:</span></strong> Define (Identify Decision Points) → Deliberate (Gather Info, Identify Options) → Deliver (Execute Aligned Decisions)</li>
+              <li><strong>Decision-Making Framework:</strong> Define (Identify Decision Points) → Deliberate (Gather Info, Identify Options) → Deliver (Execute Aligned Decisions)</li>
               <li><strong>Decision Models Spectrum:</strong> Sole Decider → Majority Vote → Consensus → Delegate/Empower (tradeoffs: speed, legitimacy, accountability)</li>
               <li><strong>VUCA Framework:</strong> Volatility, Uncertainty, Complexity, Ambiguity — with tailored responses for each</li>
               <li><strong>Risk Assessment Matrix:</strong> Likelihood × Impact scoring to prioritize risks and opportunities</li>
@@ -2898,7 +2964,7 @@
           <div class="section-block cf-accent">
             <h4>Tools &amp; Frameworks</h4>
             <ul>
-              <li><strong><span class="framework-link" onclick="showFrameworkModal('cynefin')">Cynefin Framework:</span></strong> Simple (best practices) → Complicated (analysis) → Complex (experiments) → Chaotic (act fast)</li>
+              <li><strong>Cynefin Framework:</strong> Simple (best practices) → Complicated (analysis) → Complex (experiments) → Chaotic (act fast)</li>
               <li><strong>Executive Decision Process:</strong> Define → Deliberate → Deliver with intentional process design and role clarity</li>
               <li><strong>Bias Recognition Toolkit:</strong> Pattern-recognition, action-oriented, stability, interest, social, expertise, and hierarchy biases</li>
               <li><strong>Structured Decision Roles:</strong> Idea generator, Decider, Facilitator, Timekeeper, Agenda setter, Implementer</li>
@@ -2950,8 +3016,8 @@
               <span class="program-item">Navigating Critical Conversations <span class="item-duration">(2 hrs)</span></span>
             </div>
           </div>
-          <div class="program-type-row ai-row">
-            <span class="program-type-label">AI Cases</span>
+          <div class="program-type-row async-row">
+            <span class="program-type-label">Async</span>
             <div class="program-type-items">
               <span class="program-item">Get the Message? <span class="item-duration">(15–20 min)</span></span>
               <span class="program-item">Close the Door. Have a Seat. <span class="item-duration">(15–20 min)</span></span>
@@ -2993,7 +3059,7 @@
           <div class="section-block tm-accent">
             <h4>Tools &amp; Frameworks</h4>
             <ul>
-              <li><strong><span class="framework-link" onclick="showFrameworkModal('pillars-of-trust')">The Pillars of Trust:</span></strong> Set Clear Expectations → Enable Motivators → Provide Feedback &amp; Coach → Be Present</li>
+              <li><strong>The Pillars of Trust:</strong> Set Clear Expectations → Enable Motivators → Provide Feedback &amp; Coach → Be Present</li>
               <li><strong>SBI + Intent Framework:</strong> Situation → Behavior → Impact → Intent (structured feedback model)</li>
               <li><strong>8 Motivators Model:</strong> Achievement, Security, Recognition, Mastery, Companionship, Position/Status, Autonomy, Purpose</li>
               <li><strong>GROW Coaching Model:</strong> Goal → Reality → Options → Way Forward</li>
@@ -3033,6 +3099,18 @@
               <span class="program-item">Leading in Times of Change <span class="item-duration">(2 hrs)</span></span>
             </div>
           </div>
+          <div class="program-type-row async-row">
+            <span class="program-type-label">Async</span>
+            <div class="program-type-items">
+              <span class="program-item">Get the Message? <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Close the Door. Have a Seat. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">It's a Slippery Slope. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Welcome Aboard! <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">I've Got Good News! <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Blindsided. <span class="item-duration">(15–20 min)</span></span>
+              <span class="program-item">Why Not Me? <span class="item-duration">(15–20 min)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -3063,7 +3141,7 @@
           <div class="section-block tm-accent">
             <h4>Tools &amp; Frameworks</h4>
             <ul>
-              <li><strong><span class="framework-link" onclick="showFrameworkModal('levers-of-leadership')">Levers of Leadership:</span></strong> Results Multiplier + Culture Multiplier + Alignment Multiplier</li>
+              <li><strong>Levers of Leadership:</strong> Results Multiplier + Culture Multiplier + Alignment Multiplier</li>
               <li><strong>Blake Mouton Grid:</strong> Mapping leadership style across Concern for Results vs. Concern for People</li>
               <li><strong>First Team Concept:</strong> Prioritizing peer leadership alignment before cascading to your own teams</li>
               <li><strong>Delegation &amp; Prioritization Framework:</strong> Strategic time allocation across coaching, aligning, and driving execution</li>
@@ -3150,8 +3228,8 @@ function checkGate() {
 
   if (answer === 'abi') {
     document.getElementById('gate-screen').style.display = 'none';
-    // Store in session so they don't have to re-enter
-    sessionStorage.setItem('gateUnlocked', 'true');
+    // Store in localStorage so it persists across browser sessions
+    localStorage.setItem('gateUnlocked', 'true');
   } else {
     error.classList.add('show');
     input.value = '';
@@ -3160,18 +3238,18 @@ function checkGate() {
   }
 }
 
-// Check if already unlocked
-if (sessionStorage.getItem('gateUnlocked') === 'true') {
+// Check if already unlocked (persisted in localStorage)
+if (localStorage.getItem('gateUnlocked') === 'true') {
   document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('gate-screen').style.display = 'none';
   });
 }
 
-// Map views to nav button indices (0=Ask, 1=Explore, 2=Compare)
+// Map views to nav button indices (0=Explore, 1=Compare, 2=Ask)
 const NAV_BTN_MAP = {
-  ai: 0,
-  overview: 1, programs: 1, ba: 1, cf: 1, tm: 1,  // All explore views
-  compare: 2
+  overview: 0, programs: 0, ba: 0, cf: 0, tm: 0,  // All explore views
+  compare: 1,
+  ai: 2
 };
 
 // Landing page functions
@@ -3352,14 +3430,14 @@ function openLevel(id) {
 function addSourceTooltips() {
   // Map of level card IDs to their programs
   const levelPrograms = {
-    'ba-rising': ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability'],
-    'ba-exp': ['business-challenge', 'balancing-growth-risk'],
+    'ba-rising': ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability', 'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis'],
+    'ba-exp': ['business-challenge', 'balancing-growth-risk', 'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis'],
     'ba-exec': ['finance-challenge', 'generating-financial-insights'],
-    'cf-rising': ['influence-challenge', 'shifting-mindsets', 'influencing-without-authority'],
-    'cf-exp': ['enterprise-challenge', 'creating-strategic-alignment', 'strategic-problem-solving'],
+    'cf-rising': ['influence-challenge', 'shifting-mindsets', 'influencing-without-authority', 'ai-hold-the-line', 'ai-change-will-do-you-good', 'ai-not-here-to-make-friends', 'ai-spread-your-wings', 'ai-fault-line', 'ai-not-convinced', 'ai-scope-springs-eternal'],
+    'cf-exp': ['enterprise-challenge', 'creating-strategic-alignment', 'strategic-problem-solving', 'ai-hold-the-line', 'ai-change-will-do-you-good', 'ai-not-here-to-make-friends', 'ai-spread-your-wings', 'ai-fault-line', 'ai-not-convinced', 'ai-scope-springs-eternal'],
     'cf-exec': ['executive-challenge', 'board-strategy'],
-    'tm-rising': ['management-challenge', 'enabling-peak-performance', 'navigating-critical-conversations'],
-    'tm-exp': ['director-challenge', 'leading-in-times-of-change']
+    'tm-rising': ['management-challenge', 'enabling-peak-performance', 'navigating-critical-conversations', 'ai-get-the-message', 'ai-close-the-door', 'ai-slippery-slope', 'ai-welcome-aboard', 'ai-good-news', 'ai-blindsided', 'ai-why-not-me'],
+    'tm-exp': ['director-challenge', 'leading-in-times-of-change', 'ai-get-the-message', 'ai-close-the-door', 'ai-slippery-slope', 'ai-welcome-aboard', 'ai-good-news', 'ai-blindsided', 'ai-why-not-me']
   };
 
   // Wait for PROGRAMS to be defined
@@ -3639,7 +3717,24 @@ const PROGRAMS = [
       {category:"Managing Today for Tomorrow", points:50, criteria:["Address balancing short-term needs against building a sustainable Insights function (25 pts)","Discuss tradeoffs of hiring one candidate versus the others (25 pts)"]},
       {category:"Growth Mindset", points:30, criteria:["Consider which candidate promotes curiosity, adaptability, and continuous learning (10 pts)","Explore which candidate cultivates a culture of experimentation and iteration (10 pts)","Assess which candidate strengthens team through diverse skills and perspectives (10 pts)"]},
       {category:"Positioning for High Performance Teams", points:20, criteria:["Think beyond the hire to attracting, integrating, and developing talent (10 pts)","Address how company can position itself as employer of choice for external talent (10 pts)"]}
-    ]}
+    ]},
+  /* ---- BA COURSES (FLUENT IN FINANCE) ---- */
+  { id:"fif-business-basics", name:"FiF: Back to Business Basics", type:"course", pillar:"ba", level:"rising", duration:"1–2 hrs", framework:"Unit Economics",
+    competencies:["Understand unit economics and how individual transactions drive business profitability","Calculate and interpret breakeven points for business decisions","Distinguish between fixed and variable costs in cost structures","Apply cost accounting principles to allocate costs appropriately","Analyze contribution margin and its impact on profitability","Evaluate pricing decisions using unit-level financial analysis"],
+    mindsets:["Unit-level thinking: Every transaction either creates or destroys value","Cost consciousness: Understanding cost behavior is foundational to good decisions","Breakeven awareness: Knowing your breakeven point informs pricing, volume, and investment decisions","Simplify to understand: Complex business models can be broken into understandable units"],
+    tools:["Unit Economics Model: Revenue per unit − Variable cost per unit = Contribution margin","Breakeven Analysis: Fixed Costs ÷ Contribution Margin = Breakeven Volume","Cost Classification: Fixed vs. Variable, Direct vs. Indirect","Cost Accounting Methods: Job costing, process costing, activity-based costing","Contribution Margin Analysis: Evaluating product and service profitability"]},
+  { id:"fif-financial-statements", name:"FiF: Reading Financial Statements", type:"course", pillar:"ba", level:"rising", duration:"2–3 hrs", framework:"Three Financial Statements",
+    competencies:["Distinguish between cash-based and accrual accounting methods","Read and interpret income statements to assess profitability","Analyze balance sheets to understand financial position and leverage","Interpret cash flow statements to evaluate liquidity and cash generation","Understand how depreciation affects financial statements","Connect the three financial statements to see the complete financial picture"],
+    mindsets:["Accrual thinking: Revenue and expenses are recognized when earned/incurred, not when cash moves","Balance sheet awareness: Assets = Liabilities + Equity tells the ownership story","Cash is king: Profits don't equal cash — cash flow tells the survival story","Holistic financial view: The three statements together tell the complete story"],
+    tools:["Income Statement Structure: Revenue → COGS → Gross Profit → Operating Expenses → Net Income","Balance Sheet Framework: Assets = Liabilities + Shareholders' Equity","Cash Flow Statement: Operating Activities + Investing Activities + Financing Activities","Depreciation Methods: Straight-line, declining balance, and their P&L/cash impacts","Financial Statement Linkages: How changes flow between the three statements","Terminology Decoder: EBITDA, Working Capital, Retained Earnings, Accounts Receivable/Payable"]},
+  { id:"fif-business-idea-to-budget", name:"FiF: From Business Idea to Budget", type:"course", pillar:"ba", level:"rising", duration:"2–3 hrs", framework:"Financial Modeling & Time Value of Money",
+    competencies:["Build basic financial models to project business performance","Create cash flow projections in spreadsheet tools","Apply the time value of money concept to evaluate future cash flows","Assess risk and its impact on the value of future cash flows","Understand the cost of capital and its role in investment decisions","Calculate present value to compare cash flows across different time periods"],
+    mindsets:["Future dollars are worth less: Time value of money is fundamental to all financial decisions","Risk requires return: Higher risk demands higher expected returns","Model to learn: Financial models are thinking tools, not crystal balls","Opportunity cost awareness: Capital has alternative uses that define its cost"],
+    tools:["Financial Model Framework: Assumptions → Projections → Outputs","Cash Flow Projection Template: Period-by-period cash inflows and outflows","Time Value of Money: PV = FV ÷ (1 + r)^n","Risk-Return Relationship: Higher uncertainty = higher required discount rate","Cost of Capital Calculation: Weighted average of debt and equity costs (WACC)","Present Value Formula: Discounting future cash flows to today's dollars"]},
+  { id:"fif-dcf-analysis", name:"FiF: Discounted Cash Flow Analysis", type:"course", pillar:"ba", level:"rising", duration:"2–3 hrs", framework:"NPV & IRR",
+    competencies:["Calculate and interpret the payback period for investment decisions","Compute Net Present Value (NPV) to evaluate project viability","Calculate Internal Rate of Return (IRR) and compare to cost of capital","Perform NPV and IRR analysis using spreadsheet functions","Apply DCF analysis to real business investment decisions","Communicate investment recommendations from an executive perspective"],
+    mindsets:["NPV is the gold standard: Positive NPV means value creation","IRR context matters: IRR must exceed cost of capital to create value","Payback has limits: Simple but ignores time value and cash flows beyond payback","Executive framing: Financial analysis must connect to strategic priorities"],
+    tools:["Payback Period: Time to recover initial investment","NPV Formula: Sum of discounted cash flows minus initial investment","IRR Calculation: Discount rate that makes NPV equal to zero","NPV Function in Excel: =NPV(rate, cash flows) + initial investment","IRR Function in Excel: =IRR(cash flows)","Investment Decision Rules: Accept if NPV > 0 or IRR > Cost of Capital"]}
 ];
 
 /* ========== RENDER PROGRAM CARDS ========== */
@@ -3650,15 +3745,15 @@ const accentClass = { ba: "ba-accent", cf: "cf-accent", tm: "tm-accent", ts: "ts
 function renderPrograms() {
   const gridSims = document.getElementById("grid-sims");
   const gridCases = document.getElementById("grid-cases");
-  const gridAI = document.getElementById("grid-ai");
+  const gridAsync = document.getElementById("grid-async");
 
   gridSims.innerHTML = "";
   gridCases.innerHTML = "";
-  gridAI.innerHTML = "";
+  gridAsync.innerHTML = "";
 
   const searchTerm = (document.getElementById("session-search")?.value || "").toLowerCase();
 
-  let countSims = 0, countCases = 0, countAI = 0;
+  let countSims = 0, countCases = 0, countAsync = 0;
 
   PROGRAMS.forEach(p => {
     // Search filter
@@ -3704,7 +3799,7 @@ function renderPrograms() {
       // Original sim/case rendering
       detailInner = `
         <div style="margin-bottom:8px;">
-          <span class="cell-framework ${p.pillar}" style="font-size:11px;padding:5px 12px;">Key Framework: <span class="framework-link" onclick="showFrameworkModal('${getFrameworkId(p.framework)}')">${p.framework}</span></span>
+          <span class="cell-framework ${p.pillar}" style="font-size:11px;padding:5px 12px;">Key Framework: ${p.framework}</span>
         </div>
         <div class="section-grid">
           <div class="section-block ${accentClass[p.pillar]}"><h4>Competencies</h4><ul>${listHtml(p.competencies)}</ul></div>
@@ -3713,7 +3808,7 @@ function renderPrograms() {
         </div>`;
     }
 
-    const typeLabel = p.type === "sim" ? "Simulation" : p.type === "case" ? "Case Challenge" : "AI Case";
+    const typeLabel = p.type === "sim" ? "Simulation" : p.type === "case" ? "Case Challenge" : "Async";
 
     card.innerHTML = `
       <div class="prog-card-top">
@@ -3742,24 +3837,25 @@ function renderPrograms() {
       gridCases.appendChild(card);
       countCases++;
     } else {
-      gridAI.appendChild(card);
-      countAI++;
+      // AI cases and courses go to Async section
+      gridAsync.appendChild(card);
+      countAsync++;
     }
   });
 
   // Update counts
   document.getElementById("count-sims").textContent = `(${countSims})`;
   document.getElementById("count-cases").textContent = `(${countCases})`;
-  document.getElementById("count-ai").textContent = `(${countAI})`;
+  document.getElementById("count-async").textContent = `(${countAsync})`;
 
   // Show/hide empty sections
   document.getElementById("section-sims").classList.toggle("empty", countSims === 0);
   document.getElementById("section-cases").classList.toggle("empty", countCases === 0);
-  document.getElementById("section-ai").classList.toggle("empty", countAI === 0);
+  document.getElementById("section-async").classList.toggle("empty", countAsync === 0);
 
   // Show empty state if all empty
   const emptyEl = document.getElementById("prog-empty");
-  emptyEl.style.display = (countSims + countCases + countAI === 0) ? "block" : "none";
+  emptyEl.style.display = (countSims + countCases + countAsync === 0) ? "block" : "none";
 
   // Apply pillar/level filters
   applyProgFilters();
@@ -3830,7 +3926,7 @@ function toggleProgFilter(category, value, btn) {
 function applyFilters() {
   const cards = document.querySelectorAll(".prog-card");
   let visible = 0;
-  let visibleSims = 0, visibleCases = 0, visibleAI = 0;
+  let visibleSims = 0, visibleCases = 0, visibleAsync = 0;
 
   cards.forEach(card => {
     const matchType = activeFilters.type === "all" || card.dataset.type === activeFilters.type;
@@ -3841,7 +3937,7 @@ function applyFilters() {
       visible++;
       if (card.dataset.type === 'sim') visibleSims++;
       else if (card.dataset.type === 'case') visibleCases++;
-      else visibleAI++;
+      else visibleAsync++;
     } else {
       card.classList.add("prog-hidden");
       card.classList.remove("prog-selected");
@@ -3851,19 +3947,19 @@ function applyFilters() {
   // Update section visibility
   const sectionSims = document.getElementById("section-sims");
   const sectionCases = document.getElementById("section-cases");
-  const sectionAI = document.getElementById("section-ai");
+  const sectionAsync = document.getElementById("section-async");
 
   if (sectionSims) sectionSims.classList.toggle("empty", visibleSims === 0);
   if (sectionCases) sectionCases.classList.toggle("empty", visibleCases === 0);
-  if (sectionAI) sectionAI.classList.toggle("empty", visibleAI === 0);
+  if (sectionAsync) sectionAsync.classList.toggle("empty", visibleAsync === 0);
 
   // Update counts to show filtered
   const countSims = document.getElementById("count-sims");
   const countCases = document.getElementById("count-cases");
-  const countAI = document.getElementById("count-ai");
+  const countAsync = document.getElementById("count-async");
   if (countSims) countSims.textContent = `(${visibleSims})`;
   if (countCases) countCases.textContent = `(${visibleCases})`;
-  if (countAI) countAI.textContent = `(${visibleAI})`;
+  if (countAsync) countAsync.textContent = `(${visibleAsync})`;
 
   document.getElementById("prog-empty").style.display = visible === 0 ? "block" : "none";
 }
@@ -4102,7 +4198,7 @@ function renderColumn(prog, items) {
   function typeBadge(type) {
     if (type === 'sim') return '<span class="type-badge sim">SIM</span>';
     if (type === 'case') return '<span class="type-badge case">CASE</span>';
-    return '<span class="type-badge ai">AI</span>';
+    return '<span class="type-badge ai">ASYNC</span>';
   }
 
   // Build HTML
