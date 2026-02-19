@@ -622,6 +622,83 @@
   .prog-filter-btn.active-filter.tm-filter { border-color: var(--pill-tm); background: var(--pill-tm); }
   .prog-filter-btn.active-filter.ts-filter { border-color: var(--pill-ts); background: var(--pill-ts); }
 
+  /* Session Search Bar */
+  .session-search-bar {
+    margin-bottom: 20px;
+  }
+  .session-search-input {
+    width: 100%;
+    padding: 14px 20px;
+    font-size: 15px;
+    border: 2px solid var(--gray-200);
+    border-radius: 10px;
+    background: var(--white);
+    transition: all 0.2s;
+  }
+  .session-search-input:focus {
+    outline: none;
+    border-color: var(--teal);
+    box-shadow: 0 0 0 3px rgba(0,180,216,0.1);
+  }
+  .session-search-input::placeholder {
+    color: var(--gray-400);
+  }
+
+  /* Collapsible Session Sections */
+  .session-section {
+    margin-bottom: 24px;
+    background: var(--white);
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+    overflow: hidden;
+  }
+  .session-section-header {
+    display: flex;
+    align-items: center;
+    padding: 16px 20px;
+    background: var(--gray-50);
+    cursor: pointer;
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--gray-100);
+  }
+  .session-section-header:hover {
+    background: var(--gray-100);
+  }
+  .session-section-header h3 {
+    font-size: 16px;
+    font-weight: 700;
+    color: var(--navy);
+    margin: 0;
+  }
+  .session-section-count {
+    margin-left: 10px;
+    font-size: 13px;
+    color: var(--gray-400);
+    font-weight: 600;
+  }
+  .session-section-toggle {
+    margin-left: auto;
+    font-size: 14px;
+    color: var(--gray-400);
+    transition: transform 0.2s;
+  }
+  .session-section.collapsed .session-section-toggle {
+    transform: rotate(-90deg);
+  }
+  .session-section-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    padding: 20px;
+    transition: all 0.3s ease;
+  }
+  .session-section.collapsed .session-section-content {
+    display: none;
+  }
+  .session-section.empty {
+    display: none;
+  }
+
   .prog-grid {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
@@ -2254,20 +2331,19 @@
   </div>
 </div>
 
-<!-- ============ BY PROGRAM ============ -->
+<!-- ============ LIST OF ALL SESSIONS ============ -->
 <div class="view-panel" id="view-programs">
   <div class="overview-intro" style="margin-bottom:24px;">
-    <h2>Explore by Program</h2>
-    <p>Toggle any simulation or case challenge to see its competencies, mindsets, and tools &amp; frameworks.</p>
+    <h2>List of All Sessions</h2>
+    <p>Search and browse all simulations, case challenges, and AI cases. Click any session to see details.</p>
+  </div>
+
+  <div class="session-search-bar">
+    <input type="text" id="session-search" class="session-search-input" placeholder="Search sessions by name, competency, or keyword..." oninput="filterSessions()">
   </div>
 
   <div class="prog-filters">
-    <span class="prog-filter-label">Type:</span>
-    <div class="prog-filter-btn active-filter" onclick="toggleProgFilter('type','all',this)">All</div>
-    <div class="prog-filter-btn" onclick="toggleProgFilter('type','sim',this)">Simulations</div>
-    <div class="prog-filter-btn" onclick="toggleProgFilter('type','case',this)">Case Challenges</div>
-    <div class="prog-filter-btn" onclick="toggleProgFilter('type','ai-case',this)">AI Cases</div>
-    <span class="prog-filter-label" style="margin-left:16px;">Pillar:</span>
+    <span class="prog-filter-label">Pillar:</span>
     <div class="prog-filter-btn active-filter" onclick="toggleProgFilter('pillar','all',this)">All</div>
     <div class="prog-filter-btn ba-filter" onclick="toggleProgFilter('pillar','ba',this)">Business Acumen</div>
     <div class="prog-filter-btn cf-filter" onclick="toggleProgFilter('pillar','cf',this)">Cross-Functional</div>
@@ -2280,8 +2356,37 @@
     <div class="prog-filter-btn" onclick="toggleProgFilter('level','executive',this)">Executive</div>
   </div>
 
-  <div class="prog-empty-state" id="prog-empty">No programs match your current filters.</div>
-  <div class="prog-grid" id="prog-grid"></div>
+  <div class="prog-empty-state" id="prog-empty">No sessions match your search.</div>
+
+  <!-- Simulations Section -->
+  <div class="session-section" id="section-sims">
+    <div class="session-section-header" onclick="toggleSessionSection('sims')">
+      <h3>Simulations</h3>
+      <span class="session-section-count" id="count-sims"></span>
+      <span class="session-section-toggle">▾</span>
+    </div>
+    <div class="session-section-content" id="grid-sims"></div>
+  </div>
+
+  <!-- Case Challenges Section -->
+  <div class="session-section" id="section-cases">
+    <div class="session-section-header" onclick="toggleSessionSection('cases')">
+      <h3>Case Challenges</h3>
+      <span class="session-section-count" id="count-cases"></span>
+      <span class="session-section-toggle">▾</span>
+    </div>
+    <div class="session-section-content" id="grid-cases"></div>
+  </div>
+
+  <!-- AI Cases Section -->
+  <div class="session-section" id="section-ai">
+    <div class="session-section-header" onclick="toggleSessionSection('ai')">
+      <h3>AI Cases</h3>
+      <span class="session-section-count" id="count-ai"></span>
+      <span class="session-section-toggle">▾</span>
+    </div>
+    <div class="session-section-content" id="grid-ai"></div>
+  </div>
 </div>
 
 <!-- ============ BUSINESS ACUMEN ============ -->
@@ -3299,9 +3404,33 @@ const levelLabels = { rising: "Rising Leader", experienced: "Experienced Leader"
 const accentClass = { ba: "ba-accent", cf: "cf-accent", tm: "tm-accent", ts: "ts-accent" };
 
 function renderPrograms() {
-  const grid = document.getElementById("prog-grid");
-  grid.innerHTML = "";
+  const gridSims = document.getElementById("grid-sims");
+  const gridCases = document.getElementById("grid-cases");
+  const gridAI = document.getElementById("grid-ai");
+
+  gridSims.innerHTML = "";
+  gridCases.innerHTML = "";
+  gridAI.innerHTML = "";
+
+  const searchTerm = (document.getElementById("session-search")?.value || "").toLowerCase();
+
+  let countSims = 0, countCases = 0, countAI = 0;
+
   PROGRAMS.forEach(p => {
+    // Search filter
+    if (searchTerm) {
+      const searchFields = [
+        p.name,
+        p.framework || '',
+        ...(p.competencies || []),
+        ...(p.mindsets || []),
+        ...(p.tools || [])
+      ].join(' ').toLowerCase();
+      if (!searchFields.includes(searchTerm)) {
+        return; // Skip this program
+      }
+    }
+
     const card = document.createElement("div");
     card.className = `prog-card ${p.pillar}-prog`;
     card.dataset.type = p.type;
@@ -3365,8 +3494,45 @@ function renderPrograms() {
           ${detailInner}
         </div>
       </div>`;
-    grid.appendChild(card);
+
+    // Add to appropriate section
+    if (p.type === 'sim') {
+      gridSims.appendChild(card);
+      countSims++;
+    } else if (p.type === 'case') {
+      gridCases.appendChild(card);
+      countCases++;
+    } else {
+      gridAI.appendChild(card);
+      countAI++;
+    }
   });
+
+  // Update counts
+  document.getElementById("count-sims").textContent = `(${countSims})`;
+  document.getElementById("count-cases").textContent = `(${countCases})`;
+  document.getElementById("count-ai").textContent = `(${countAI})`;
+
+  // Show/hide empty sections
+  document.getElementById("section-sims").classList.toggle("empty", countSims === 0);
+  document.getElementById("section-cases").classList.toggle("empty", countCases === 0);
+  document.getElementById("section-ai").classList.toggle("empty", countAI === 0);
+
+  // Show empty state if all empty
+  const emptyEl = document.getElementById("prog-empty");
+  emptyEl.style.display = (countSims + countCases + countAI === 0) ? "block" : "none";
+
+  // Apply pillar/level filters
+  applyProgFilters();
+}
+
+function toggleSessionSection(section) {
+  const el = document.getElementById("section-" + section);
+  if (el) el.classList.toggle("collapsed");
+}
+
+function filterSessions() {
+  renderPrograms();
 }
 
 function toggleProgCard(id) {
@@ -3425,6 +3591,8 @@ function toggleProgFilter(category, value, btn) {
 function applyFilters() {
   const cards = document.querySelectorAll(".prog-card");
   let visible = 0;
+  let visibleSims = 0, visibleCases = 0, visibleAI = 0;
+
   cards.forEach(card => {
     const matchType = activeFilters.type === "all" || card.dataset.type === activeFilters.type;
     const matchPillar = activeFilters.pillar === "all" || card.dataset.pillar === activeFilters.pillar;
@@ -3432,12 +3600,38 @@ function applyFilters() {
     if (matchType && matchPillar && matchLevel) {
       card.classList.remove("prog-hidden");
       visible++;
+      if (card.dataset.type === 'sim') visibleSims++;
+      else if (card.dataset.type === 'case') visibleCases++;
+      else visibleAI++;
     } else {
       card.classList.add("prog-hidden");
       card.classList.remove("prog-selected");
     }
   });
+
+  // Update section visibility
+  const sectionSims = document.getElementById("section-sims");
+  const sectionCases = document.getElementById("section-cases");
+  const sectionAI = document.getElementById("section-ai");
+
+  if (sectionSims) sectionSims.classList.toggle("empty", visibleSims === 0);
+  if (sectionCases) sectionCases.classList.toggle("empty", visibleCases === 0);
+  if (sectionAI) sectionAI.classList.toggle("empty", visibleAI === 0);
+
+  // Update counts to show filtered
+  const countSims = document.getElementById("count-sims");
+  const countCases = document.getElementById("count-cases");
+  const countAI = document.getElementById("count-ai");
+  if (countSims) countSims.textContent = `(${visibleSims})`;
+  if (countCases) countCases.textContent = `(${visibleCases})`;
+  if (countAI) countAI.textContent = `(${visibleAI})`;
+
   document.getElementById("prog-empty").style.display = visible === 0 ? "block" : "none";
+}
+
+// Alias for renderPrograms
+function applyProgFilters() {
+  applyFilters();
 }
 
 // Map framework names to framework IDs (needed before renderPrograms)
