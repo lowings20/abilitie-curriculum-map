@@ -380,6 +380,21 @@
   .grid-cell.ba-cell:hover { border-color: var(--pill-ba); }
   .grid-cell.cf-cell:hover { border-color: var(--pill-cf); }
   .grid-cell.tm-cell:hover { border-color: var(--pill-tm); }
+  .grid-cell.empty-cell {
+    background: var(--gray-50);
+    cursor: default;
+    opacity: 0.5;
+  }
+  .grid-cell.empty-cell:hover {
+    transform: none;
+    box-shadow: var(--shadow);
+    border-color: transparent;
+  }
+  .cell-empty {
+    color: var(--gray-400);
+    font-size: 20px;
+    text-align: center;
+  }
 
   .cell-sim {
     font-size: 16px;
@@ -2391,9 +2406,8 @@
       <div class="cell-cases">+ Board Strategy &amp; Presentation</div>
       <div class="cell-click-hint">Click to explore →</div>
     </div>
-    <div class="grid-cell tm-cell" onclick="showView('tm'); openLevel('tm-exec');">
-      <div class="cell-sim">Executive Challenge — Talent Track</div>
-      <div class="cell-click-hint">Click to explore →</div>
+    <div class="grid-cell tm-cell empty-cell">
+      <div class="cell-empty">—</div>
     </div>
 
     <!-- EXPERIENCED LEADER ROW -->
@@ -3218,66 +3232,6 @@
               <li><strong>Change Leadership Model:</strong> Assess organizational fit → Communicate with intent → Manage resistance → Sustain momentum</li>
               <li><strong>Successor Planning:</strong> Identifying, developing, and selecting leaders for the organization's next chapter</li>
               <li><strong>Initiative Portfolio Management:</strong> Balancing "must-do" launches, steady-state operations, and innovation bets</li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-  <!-- EXECUTIVE -->
-  <div class="level-card" id="tm-exec">
-    <div class="level-card-header" onclick="toggleCard('tm-exec')">
-      <div class="left">
-        <span class="level-badge">Level 3</span>
-        <div><div class="level-title">Executive Leader</div><div class="level-subtitle">Executive Summit — Enterprise Talent &amp; Organizational Strategy</div></div>
-      </div>
-      <span class="expand-icon">▾</span>
-    </div>
-    <div class="level-card-body">
-      <div class="level-card-content">
-        <span class="audience-badge">Audience: VPs, C-Suite, and enterprise leaders</span>
-        <div class="programs-grid">
-          <div class="program-type-row sims-row">
-            <span class="program-type-label">Sim</span>
-            <div class="program-type-items">
-              <span class="program-item">Executive Challenge — Talent Track <span class="item-duration">(6–8 hrs)</span></span>
-            </div>
-          </div>
-        </div>
-
-        <div class="section-grid">
-          <div class="section-block tm-accent">
-            <h4>Competencies</h4>
-            <ul>
-              <li>Manage talent as a strategic asset — hiring, developing, and retaining key people in a competitive market where talent can be "hired away"</li>
-              <li>Design and sustain high-performance organizational culture across multiple functions and geographies</li>
-              <li>Balance people investment against financial constraints — headcount, compensation, and development as strategic levers</li>
-              <li>Develop cross-functional team capability by rotating talent through diverse roles and functions</li>
-              <li>Navigate executive-level people decisions: restructuring, role design, and leadership transitions</li>
-              <li>Build organizational resilience through bench strength, succession planning, and knowledge management</li>
-              <li>Cascade strategic vision through leadership layers — ensuring alignment from board room to front line</li>
-            </ul>
-          </div>
-          <div class="section-block tm-accent">
-            <h4>Mindsets</h4>
-            <ul>
-              <li><strong>Talent as competitive advantage:</strong> In the Executive Challenge, virtual employees can be hired away by competitors — talent management is make-or-break</li>
-              <li><strong>Organizational architect:</strong> At the executive level, you design the system in which others lead — structure, incentives, and culture are your tools</li>
-              <li><strong>Legacy thinking:</strong> The leaders you develop and the culture you build are your lasting contribution — outliving any single strategy</li>
-              <li><strong>Enterprise stewardship:</strong> You are a steward of the organization's human capital, not just its financial capital</li>
-              <li><strong>Systems over heroics:</strong> Sustainable performance comes from building great systems, not from individual heroic efforts</li>
-            </ul>
-          </div>
-          <div class="section-block tm-accent">
-            <h4>Tools &amp; Frameworks</h4>
-            <ul>
-              <li><strong>Enterprise Leadership Model:</strong> Integration of talent, strategy, and execution at the C-suite level</li>
-              <li><strong>Strategic Talent Management:</strong> Talent as a competitive asset — hiring, development, retention, and succession as executive priorities</li>
-              <li><strong>Role Rotation Strategy:</strong> Cross-functional role assignments to build broad enterprise perspective in emerging leaders</li>
-              <li><strong>Organizational Culture Levers:</strong> Intentional culture design through structure, incentives, rituals, and leadership behavior</li>
-              <li><strong>Executive Presentation &amp; Influence:</strong> Storytelling, data-driven slides, and board-level communication for people strategy</li>
-              <li><strong>Stakeholder Value Model:</strong> Balancing value for shareholders, employees, customers, society, and environment</li>
             </ul>
           </div>
         </div>
