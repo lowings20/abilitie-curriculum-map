@@ -2729,6 +2729,21 @@
               <span class="program-item">Finance Challenge <span class="item-duration">(6–8 hrs)</span></span>
             </div>
           </div>
+          <div class="program-type-row cases-row">
+            <span class="program-type-label">Cases</span>
+            <div class="program-type-items">
+              <span class="program-item">Generating Financial Insights <span class="item-duration">(2 hrs)</span></span>
+            </div>
+          </div>
+          <div class="program-type-row async-row">
+            <span class="program-type-label">Async</span>
+            <div class="program-type-items">
+              <span class="program-item">FiF: Back to Business Basics <span class="item-duration">(1–2 hrs)</span></span>
+              <span class="program-item">FiF: Reading Financial Statements <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF: From Business Idea to Budget <span class="item-duration">(2–3 hrs)</span></span>
+              <span class="program-item">FiF: Discounted Cash Flow Analysis <span class="item-duration">(2–3 hrs)</span></span>
+            </div>
+          </div>
         </div>
 
         <div class="section-grid">
@@ -3468,7 +3483,7 @@ function addSourceTooltips() {
   const levelPrograms = {
     'ba-rising': ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability', 'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis'],
     'ba-exp': ['business-challenge', 'balancing-growth-risk', 'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis'],
-    'ba-exec': ['finance-challenge', 'generating-financial-insights'],
+    'ba-exec': ['finance-challenge', 'generating-financial-insights', 'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis'],
     'cf-rising': ['influence-challenge', 'shifting-mindsets', 'influencing-without-authority', 'ai-hold-the-line', 'ai-change-will-do-you-good', 'ai-not-here-to-make-friends', 'ai-spread-your-wings', 'ai-fault-line', 'ai-not-convinced', 'ai-scope-springs-eternal'],
     'cf-exp': ['enterprise-challenge', 'creating-strategic-alignment', 'strategic-problem-solving', 'ai-hold-the-line', 'ai-change-will-do-you-good', 'ai-not-here-to-make-friends', 'ai-spread-your-wings', 'ai-fault-line', 'ai-not-convinced', 'ai-scope-springs-eternal'],
     'cf-exec': ['executive-challenge', 'board-strategy'],
@@ -4035,22 +4050,26 @@ const PRESETS = {
   'flagship-rising': {
     name: 'Flagship Rising Leader',
     items: ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability',
+            'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis',
             'influence-challenge', 'shifting-mindsets', 'influencing-without-authority',
             'management-challenge', 'enabling-peak-performance', 'navigating-critical-conversations']
   },
   'flagship-experienced': {
     name: 'Flagship Experienced Leader',
     items: ['business-challenge', 'balancing-growth-risk',
+            'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis',
             'enterprise-challenge', 'creating-strategic-alignment',
             'director-challenge', 'leading-in-times-of-change']
   },
   'accelerator-income': {
     name: 'Income Accelerator',
-    items: ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability']
+    items: ['income-challenge', 'analyzing-profit-drivers', 'managing-profitability',
+            'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis']
   },
   'accelerator-business': {
     name: 'Business Accelerator',
-    items: ['business-challenge', 'balancing-growth-risk']
+    items: ['business-challenge', 'balancing-growth-risk',
+            'fif-business-basics', 'fif-financial-statements', 'fif-business-idea-to-budget', 'fif-dcf-analysis']
   },
   'accelerator-influence': {
     name: 'Influence Accelerator',
